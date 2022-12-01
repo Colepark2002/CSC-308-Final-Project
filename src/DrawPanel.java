@@ -10,18 +10,19 @@ import java.util.Stack;
 public class DrawPanel extends JPanel implements Observer, MouseListener, MouseMotionListener
 {
     Stack<ClassBox> stack = new Stack<ClassBox>();
+
     public DrawPanel(){
         this.setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
+        ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
+        connectionHandler.setDrawPanel(this);
     }
     /**
      * Draws the various images stored on the stack.
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        for(ClassBox box: stack){
-        }
     }
     @Override
     public void update(Observable o, Object arg) {
@@ -30,6 +31,7 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
     }
 
     @Override
@@ -62,6 +64,10 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
     @Override
     public void mouseMoved(MouseEvent e) {
 
+    }
+
+    public Stack<ClassBox> getStack(){
+        return stack;
     }
 
 }
