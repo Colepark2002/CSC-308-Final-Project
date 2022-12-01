@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class TextPanel extends JPanel
+public class TextPanel extends JPanel implements Observer
 {
     public TextPanel()
     {
@@ -13,5 +15,12 @@ public class TextPanel extends JPanel
 
         add(scroll);
         setVisible (true);
+
+        Blackboard.getInstance().setText(textArea);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }
