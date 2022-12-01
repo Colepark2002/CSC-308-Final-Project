@@ -4,7 +4,11 @@ import java.util.List;
 
 public class FileHandler {
 
-
+    /**
+     * Serializes given list of boxes to given file name.
+     * @param o
+     * @param fileName
+     */
     void save(Object o, String fileName) {
         try {
             File f = new File(fileName);
@@ -19,6 +23,11 @@ public class FileHandler {
         }
     }
 
+    /**
+     * Deserializes the given file and loads data to list.
+     * @param fileName
+     * @return List
+     */
     List<Object> load(String fileName) {
         List<Object> list = null;
         try {
@@ -35,6 +44,10 @@ public class FileHandler {
 
     }
 
+    /**
+     * Creates a new project file.
+     * @param fileName
+     */
     void newProject (String fileName) {
         File f = new File(fileName);
     }
