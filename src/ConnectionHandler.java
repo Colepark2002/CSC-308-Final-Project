@@ -44,21 +44,21 @@ public class ConnectionHandler {
     }
     public void drawConnections(){
         for(connectionRelationship c: connections){
-            if(c.getConnection().equals("ASSOCIATION")){
+            if(c.getconnecType().equals("ASSOCIATION")){
             }
-            else if(c.getConnection().equals("INHERITANCE")){
+            else if(c.getconnecType().equals("INHERITANCE")){
 
             }
-            else if(c.getConnection().equals("IMPLIMENTATION")){
+            else if(c.getconnecType().equals("IMPLIMENTATION")){
 
             }
-            else if(c.getConnection().equals("DEPENDANCY")){
+            else if(c.getconnecType().equals("DEPENDANCY")){
 
             }
-            else if(c.getConnection().equals("AGGREGATION")){
+            else if(c.getconnecType().equals("AGGREGATION")){
 
             }
-            else if(c.getConnection().equals("COMPOSITION")){
+            else if(c.getconnecType().equals("COMPOSITION")){
 
             }
         }

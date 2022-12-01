@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Represents a class box to be placed on the DrawPanel
@@ -12,6 +14,7 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
     int width = 100;
     int height = 50;
     int topLeftX, topLeftY;
+    ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
     public ClassBox(int mouseClickX, int mouseClickY){
         GridLayout grid = new GridLayout(2, 1);
         this.setLayout(grid);
@@ -33,7 +36,7 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        connectionHandler.beginConnection(this);
     }
 
     @Override
@@ -67,6 +70,7 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
     public void mouseMoved(MouseEvent e) {
 
     }
+
 }
 
 

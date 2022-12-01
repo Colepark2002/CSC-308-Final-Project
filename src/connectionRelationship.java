@@ -1,11 +1,11 @@
 public class connectionRelationship {
     ClassBox box1;
     ClassBox box2;
-    String connecTYpe;
+    String connecType;
     public connectionRelationship(ClassBox firstBox, ClassBox secondBox, String connectionType){
         box1 = firstBox;
         box2 = secondBox;
-        connecTYpe = connectionType;
+        connecType = connectionType;
     }
     public ClassBox getFirstBox(){
         return box1;
@@ -13,7 +13,7 @@ public class connectionRelationship {
     public ClassBox getSecondBox(){
         return box2;
     }
-    public String getConnection(){
-        return connecTYpe;
+    public String getconnecType(){
+        return connecType;
     }
 }
