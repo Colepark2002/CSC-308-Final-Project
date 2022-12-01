@@ -57,7 +57,7 @@ public class FinalProject extends JFrame
         TextPanel tp = new TextPanel();
         DrawPanel dp = new DrawPanel();
         tp.setBackground(Color.DARK_GRAY);
-        dp.setBackground(Color.pink);
+        dp.setBackground(new Color(40, 100, 40));
         add(tp);
         add(dp);
     }
