@@ -16,6 +16,49 @@ public class FinalProject extends JFrame
         this.setLayout(grid);
 
         JMenuBar mb = new JMenuBar();
-        JMenu menu = new JMenu();
+
+        JMenu File = new JMenu("File");
+        JMenu Help = new JMenu("Help");
+        JMenu connection = new JMenu("Connections");
+
+        JMenuItem Load = new JMenuItem("Load");
+        JMenuItem Save = new JMenuItem("Save");
+        JMenuItem New = new JMenuItem("New");
+
+        JMenuItem A1 = new JMenuItem("Cole P.");
+        JMenuItem A2 = new JMenuItem("Van P.");
+        JMenuItem A3 = new JMenuItem("Bret C.");
+        JMenuItem A4 = new JMenuItem("Lauren A.");
+        JMenuItem A5 = new JMenuItem("Jacob S.");
+
+        JMenuItem C1 = new JMenuItem("Association");
+        JMenuItem C2 = new JMenuItem("Inheritance");
+        JMenuItem C3 = new JMenuItem("Composition");
+
+        File.add(New);
+        File.add(Save);
+        File.add(Load);
+
+        Help.add(A1);
+        Help.add(A2);
+        Help.add(A3);
+        Help.add(A4);
+        Help.add(A5);
+
+        connection.add(C1);
+        connection.add(C2);
+        connection.add(C3);
+
+        mb.add(File);
+        mb.add(Help);
+        mb.add(connection);
+        setJMenuBar(mb);
+
+        TextPanel tp = new TextPanel();
+        DrawPanel dp = new DrawPanel();
+        tp.setBackground(Color.DARK_GRAY);
+        dp.setBackground(Color.pink);
+        add(tp);
+        add(dp);
     }
 }
