@@ -44,12 +44,4 @@ public class FileHandler {
 
     }
 
-    /**
-     * Creates a new project file.
-     * @param fileName
-     */
-    void newProject (String fileName) {
-        File f = new File(fileName);
-    }
-
 }
