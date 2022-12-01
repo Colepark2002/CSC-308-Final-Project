@@ -12,16 +12,20 @@ public class Connections {
         if (-85 < xdif && xdif < 85){
             if (ydif > 0){
                 side = "Up";
+                System.out.println(side);
             }
             if (ydif < 0){
                 side = "Down";
+                System.out.println(side);
             }
         }
         else if (xdif < -85){
             side = "Right";
+            System.out.println(side);
         }
         else{
             side = "Left";
+            System.out.println(side);
             }
         return side;
     }
