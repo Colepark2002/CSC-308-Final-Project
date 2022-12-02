@@ -21,15 +21,15 @@ public class MenuController implements ActionListener
                 break;
 
             case "Association":
-                // Set Association flag
+                Blackboard.getInstance().setConnection("Association");
                 break;
 
             case "Inheritance":
-                // Set Inheritance flag
+                Blackboard.getInstance().setConnection("Inheritance");
                 break;
 
             case "Composition":
-                // Set Composition flag
+                Blackboard.getInstance().setConnection("Composition");
                 break;
 
 
