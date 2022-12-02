@@ -160,6 +160,7 @@ public class ConnectionHandler {
                 arrowhead.addPoint(x2 + 55, y2 - 10);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 + 50, y2 - 10);
+                break;
             }
             case "Down": {
                 arrowhead.addPoint(x2 + 50, y2 + 50);
@@ -167,6 +168,7 @@ public class ConnectionHandler {
                 arrowhead.addPoint(x2 + 55, y2 + 60);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 + 50, y2 + 60);
+                break;
             }
             case "Left": {
                 arrowhead.addPoint(x2, y2 + 25);
@@ -174,6 +176,7 @@ public class ConnectionHandler {
                 arrowhead.addPoint(x2 - 10, y2 + 30);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 - 10, y2 + 25);
+                break;
             }
             case "Right": {
                 arrowhead.addPoint(x2 + 100, y2 + 25);
@@ -181,6 +184,7 @@ public class ConnectionHandler {
                 arrowhead.addPoint(x2 + 110, y2 + 30);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 + 100, y2 + 25);
+                break;
             }
         }
     }
