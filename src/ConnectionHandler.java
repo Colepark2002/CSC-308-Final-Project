@@ -20,20 +20,20 @@ public class ConnectionHandler {
         if (-85 < xdif && xdif < 85){
             if (ydif > 0){
                 side = "Up";
-                System.out.println(side);
+                System.out.println(box1.getClassName() + " " + side);
             }
             if (ydif < 0){
                 side = "Down";
-                System.out.println(side);
+                System.out.println(box1.getClassName() + " " + side);
             }
         }
         else if (xdif < -85){
             side = "Right";
-            System.out.println(side);
+            System.out.println(box1.getClassName() + " " + side);
         }
         else{
             side = "Left";
-            System.out.println(side);
+            System.out.println(box1.getClassName() + " " + side);
         }
         return side;
     }
@@ -63,7 +63,7 @@ public class ConnectionHandler {
             String side = getSide(connectionBox1, connectionBox2);
             connections.add(new connectionRelationship(connectionBox1, connectionBox2, connectType, side));
             for (connectionRelationship c : connections){
-                System.out.print(c.getFirstBox().name + " is connected to " + c.getSecondBox().name + ", ");
+                System.out.print(c.getFirstBox().getClassName() + " is connected to " + c.getSecondBox().getClassName() + ", ");
             }
             System.out.println();
             connectionBox1 = null;
@@ -166,7 +166,7 @@ public class ConnectionHandler {
                 diamond.addPoint(x1, y1 + 16);
                 g.drawPolygon(diamond);
                 g.drawLine(x1, y1 + 16, x2 + 50, y2);
-                break;
+
             case "Down":
                 diamond.addPoint(x1 - 5, y1 - 8);
                 diamond.addPoint(x1, y1);
@@ -174,15 +174,15 @@ public class ConnectionHandler {
                 diamond.addPoint(x1, y1 - 16);
                 g.drawPolygon(diamond);
                 g.drawLine(x1, y1 - 16, x2 + 50, y2 + 50);
-                break;
+
             case "Left":
                 diamond.addPoint(x1 + 8, y1 - 5);
                 diamond.addPoint(x1, y1);
                 diamond.addPoint(x1 + 8, y1 + 5);
-                diamond.addPoint(x1  + 16, y1);
+                diamond.addPoint(x1 + 16, y1);
                 g.drawPolygon(diamond);
                 g.drawLine(x1 + 16, y1, x2, y2 + 25);
-                break;
+
             case "Right":
                 diamond.addPoint(x1 - 8, y1 - 5);
                 diamond.addPoint(x1, y1);
@@ -190,7 +190,6 @@ public class ConnectionHandler {
                 diamond.addPoint(x1 - 16, y1);
                 g.drawPolygon(diamond);
                 g.drawLine(x1 - 16, y1, x2 + 100, y2 + 25);
-                break;
         }
     }
     public void drawConnections(Graphics g){
@@ -204,61 +203,55 @@ public class ConnectionHandler {
             int x2 = c.getSecondBox().topLeftX;
             int y2 = c.getSecondBox().topLeftY;
             switch (selfSide) {
-                case "Up": {
+                case "Up":
                     switch (connectType) {
-                        case "Association" -> {
+                        case "Association":
                             drawArrowHead(g, x1 + 50, x2, y1, y2, otherSide);
                             break;
-                        }
-                        case "Inheritance" -> {
+                        case "Inheritance" :
                             drawTriangleHead(g, x1 + 50, x2, y1, y2, otherSide);
                             break;
-                        }
-                        case "Composition" -> drawDiamond(g, x1 + 50, x2, y1, y2, otherSide);
+                        case "Composition": drawDiamond(g, x1 + 50, x2, y1, y2, otherSide);
                     }
-                }
-                case "Down": {
+                    break;
+
+                case "Down":
                     switch (connectType) {
-                        case "Association" -> {
+                        case "Association":
                             drawArrowHead(g, x1 + 50, x2, y1 + 50, y2, otherSide);
                             break;
-                        }
-                        case "Inheritance" -> {
+                        case "Inheritance":
                             drawTriangleHead(g, x1 + 50, x2, y1 + 50, y2, otherSide);
                             break;
-                        }
-                        case "Composition" -> drawDiamond(g, x1 + 50, x2, y1 + 50, y2, otherSide);
+                        case "Composition": drawDiamond(g, x1 + 50, x2, y1 + 50, y2, otherSide);
                     }
+                    break;
 
-                }
-                case "Left": {
+                case "Left":
                     switch (connectType) {
-                        case "Association" -> {
+                        case "Association":
                             drawArrowHead(g, x1, x2, y1 + 25, y2, otherSide);
                             break;
-                        }
-                        case "Inheritance" -> {
+                        case "Inheritance":
                             drawTriangleHead(g, x1, x2, y1 + 25, y2, otherSide);
                             break;
-                        }
-                        case "Composition" -> drawDiamond(g, x1, x2, y1 + 25, y2, otherSide);
+                        case "Composition": drawDiamond(g, x1, x2, y1 + 25, y2, otherSide);
                     }
+                    break;
 
-                }
-                case "Right": {
+                case "Right":
                     switch (connectType) {
-                        case "Association" -> {
+                        case "Association":
                             drawArrowHead(g, x1 + 100, x2, y1 + 25, y2, otherSide);
                             break;
-                        }
-                        case "Inheritance" -> {
+                        case "Inheritance":
                             drawTriangleHead(g, x1 + 50, x2, y1 + 25, y2, otherSide);
                             break;
-                        }
-                        case "Composition" -> drawDiamond(g, x1 + 100, x2, y1 + 25, y2, otherSide);
+                        case "Composition": drawDiamond(g, x1 + 100, x2, y1 + 25, y2, otherSide);
                     }
+                    break;
 
-                }
+
             }
         }
     }
