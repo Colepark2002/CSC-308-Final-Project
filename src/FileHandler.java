@@ -9,7 +9,7 @@ public class FileHandler {
      * @param o
      * @param fileName
      */
-    void save(Object o, String fileName) {
+     static void save(Object o, String fileName) {
         try {
             File f = new File(fileName);
             FileOutputStream fileOut = new FileOutputStream(fileName);
@@ -28,7 +28,7 @@ public class FileHandler {
      * @param fileName
      * @return List
      */
-    List<Object> load(String fileName) {
+    static List<Object> load(String fileName) {
         List<Object> list = null;
         try {
             FileInputStream fileIn = new FileInputStream(fileName);
