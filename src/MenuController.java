@@ -1,6 +1,10 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ * @author Cole Park
+ */
 public class MenuController implements ActionListener
 {
     @Override

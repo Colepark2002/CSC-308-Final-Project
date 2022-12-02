@@ -16,6 +16,7 @@ public class FinalProject extends JFrame
         this.setLayout(grid);
 
         JMenuBar mb = new JMenuBar();
+        MenuController mc = new MenuController();
 
         JMenu File = new JMenu("File");
         JMenu Help = new JMenu("Help");
@@ -24,6 +25,9 @@ public class FinalProject extends JFrame
         JMenuItem Load = new JMenuItem("Load");
         JMenuItem Save = new JMenuItem("Save");
         JMenuItem New = new JMenuItem("New");
+        Load.addActionListener(mc);
+        Save.addActionListener(mc);
+        New.addActionListener(mc);
 
         JMenuItem A1 = new JMenuItem("Cole P.");
         JMenuItem A2 = new JMenuItem("Van P.");
@@ -34,6 +38,9 @@ public class FinalProject extends JFrame
         JMenuItem C1 = new JMenuItem("Association");
         JMenuItem C2 = new JMenuItem("Inheritance");
         JMenuItem C3 = new JMenuItem("Composition");
+        C1.addActionListener(mc);
+        C2.addActionListener(mc);
+        C3.addActionListener(mc);
 
         File.add(New);
         File.add(Save);
