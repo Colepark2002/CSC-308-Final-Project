@@ -4,6 +4,7 @@ import java.util.Observable;
 public class Blackboard extends Observable
 {
     JTextArea text;
+    DrawPanel dp;
     private static Blackboard instance = null;
     private Blackboard()
     {
@@ -20,5 +21,16 @@ public class Blackboard extends Observable
     public void setText(JTextArea t)
     {
         text = t;
+    }
+
+    public JTextArea getText() {
+        return text;
+    }
+
+    public DrawPanel getDp() {
+        return dp;
+    }
+    public void setDp(DrawPanel dp) {
+        this.dp = dp;
     }
 }
