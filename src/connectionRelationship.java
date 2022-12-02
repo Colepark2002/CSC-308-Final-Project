@@ -1,3 +1,9 @@
+/**
+ * The format for the relationship between connected classes.
+ * @author Van Park
+ * @version 1.0
+ */
+
 public class connectionRelationship {
     ClassBox box1;
     ClassBox box2;
