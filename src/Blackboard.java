@@ -46,4 +46,5 @@ public class Blackboard extends Observable
         this.connection = connection;
         System.out.println(connection);
     }
+
 }
