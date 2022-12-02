@@ -17,7 +17,7 @@ public class ConnectionHandler {
         String side = "";
         int xdif = box1.getX() - box2.getX();
         int ydif = box1.getY() - box2.getY();
-        if (-85 < xdif && xdif < 85){
+        if (-100 < xdif && xdif < 100){
             if (ydif > 0){
                 side = "Up";
                 System.out.println(box1.getClassName() + " " + side);
@@ -27,7 +27,7 @@ public class ConnectionHandler {
                 System.out.println(box1.getClassName() + " " + side);
             }
         }
-        else if (xdif < -85){
+        else if (xdif < -100){
             side = "Right";
             System.out.println(box1.getClassName() + " " + side);
         }
@@ -94,7 +94,7 @@ public class ConnectionHandler {
                 Point p3 = new Point(x2 + 55, y2 + 60);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1, y1, x2 + 50, y2);
+                g.drawLine(x1, y1, x2 + 50, y2 + 50);
 
                 break;
             }
@@ -114,7 +114,7 @@ public class ConnectionHandler {
                 Point p3 = new Point(x2 + 105, y2 + 30);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1, y1, x2, y2 + 25);
+                g.drawLine(x1, y1, x2 + 100, y2 + 25);
 
                 break;
             }
