@@ -30,13 +30,21 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
         addMouseListener(this);
         addMouseMotionListener(this);
     }
+
+    public void paintComponent(Graphics g){
+
+        super.paintComponent(g);
+        connectionHandler.drawConnections(g);
+    }
     public String getClassName(){
         return classname.getText();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        connectionHandler.beginConnection(this);
+        String connectType = "Association";
+        connectionHandler.beginConnection(this, connectType);
+        repaint();
     }
 
     @Override
