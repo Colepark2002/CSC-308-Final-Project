@@ -62,95 +62,201 @@ public class ConnectionHandler {
             connectionBox2 = box;
             String side = getSide(connectionBox1, connectionBox2);
             connections.add(new connectionRelationship(connectionBox1, connectionBox2, connectType, side));
-            System.out.println(connections);
+            for (connectionRelationship c : connections){
+                System.out.print(c.getFirstBox().name + " is connected to " + c.getSecondBox().name + ", ");
+            }
+            System.out.println();
             connectionBox1 = null;
             connectionBox2 = null;
         }
     }
 
-    public void drawArrowHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
-        Polygon arrowhead = new Polygon();
-        arrowhead.addPoint(x2 + 50, y2);
-        arrowhead.addPoint(x2 + 45, y2 - 10);
-        arrowhead.addPoint(x2 + 55, y2 - 10);
-        g.setColor(Color.BLACK);
-        g.fillPolygon(arrowhead);
-        if (otherSide.equals("Up")){
-
-        }
-        else if (otherSide.equals("Down")){
-
-        }
-        else if (otherSide.equals("Left")){
-
-        }
-        else if (otherSide.equals("Right")){
-
+    public void updateSides(){
+        for (connectionRelationship c : connections){
+            c.setSide(getSide(c.getFirstBox(), c.getSecondBox()));
         }
     }
 
+    public void drawArrowHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
+        switch (otherSide) {
+            case "Up" -> {
+                Point p1 = new Point(x2 + 50, y2);
+                Point p2 = new Point(x2 + 45, y2 - 10);
+                Point p3 = new Point(x2 + 55, y2 - 10);
+                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+                g.drawLine(p1.x, p1.y, p3.x, p3.y);
+                g.drawLine(x1, y1, x2 + 50, y2);
+                break;
+            }
+            case "Down" -> {
+                Point p1 = new Point(x2 + 50, y2 + 50);
+                Point p2 = new Point(x2 + 45, y2 + 60);
+                Point p3 = new Point(x2 + 55, y2 + 60);
+                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+                g.drawLine(p1.x, p1.y, p3.x, p3.y);
+                g.drawLine(x1, y1, x2 + 50, y2);
+
+                break;
+            }
+            case "Left" -> {
+                Point p1 = new Point(x2, y2 + 25);
+                Point p2 = new Point(x2 - 5, y2 + 20);
+                Point p3 = new Point(x2 - 5, y2 + 30);
+                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+                g.drawLine(p1.x, p1.y, p3.x, p3.y);
+                g.drawLine(x1, y1, x2, y2 + 25);
+
+                break;
+            }
+            case "Right" -> {
+                Point p1 = new Point(x2 + 100, y2 + 25);
+                Point p2 = new Point(x2 + 105, y2 + 20);
+                Point p3 = new Point(x2 + 105, y2 + 30);
+                g.drawLine(p1.x, p1.y, p2.x, p2.y);
+                g.drawLine(p1.x, p1.y, p3.x, p3.y);
+                g.drawLine(x1, y1, x2, y2 + 25);
+
+                break;
+            }
+        }
+
+    }
+
     public void drawTriangleHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
-        if (otherSide.equals("Up")){
-
-        }
-        else if (otherSide.equals("Down")){
-
-        }
-        else if (otherSide.equals("Left")){
-
-        }
-        else if (otherSide.equals("Right")){
-
+        Polygon arrowhead = new Polygon();
+        switch (otherSide) {
+            case "Up" -> {
+                arrowhead.addPoint(x2 + 50, y2);
+                arrowhead.addPoint(x2 + 45, y2 - 10);
+                arrowhead.addPoint(x2 + 55, y2 - 10);
+                g.fillPolygon(arrowhead);
+                g.drawLine(x1, y1, x2 + 50, y2 - 10);
+            }
+            case "Down" -> {
+                arrowhead.addPoint(x2 + 50, y2 + 50);
+                arrowhead.addPoint(x2 + 45, y2 + 60);
+                arrowhead.addPoint(x2 + 55, y2 + 60);
+                g.fillPolygon(arrowhead);
+                g.drawLine(x1, y1, x2 + 50, y2 + 60);
+            }
+            case "Left" -> {
+                arrowhead.addPoint(x2, y2 + 25);
+                arrowhead.addPoint(x2 - 10, y2 + 20);
+                arrowhead.addPoint(x2 - 10, y2 + 30);
+                g.fillPolygon(arrowhead);
+                g.drawLine(x1, y1, x2 - 10, y2 + 25);
+            }
+            case "Right" -> {
+                arrowhead.addPoint(x2 + 100, y2 + 25);
+                arrowhead.addPoint(x2 + 105, y2 + 20);
+                arrowhead.addPoint(x2 + 105, y2 + 30);
+                g.fillPolygon(arrowhead);
+                g.drawLine(x1, y1, x2 + 100, y2 + 25);
+            }
         }
     }
 
     public void drawDiamond(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
-        if (otherSide.equals("Up")){
-
-        }
-        else if (otherSide.equals("Down")){
-
-        }
-        else if (otherSide.equals("Left")){
-
-        }
-        else if (otherSide.equals("Right")){
-
+        Polygon diamond = new Polygon();
+        switch (otherSide) {
+            case "Up":
+                diamond.addPoint(x1 - 5, y1 + 8);
+                diamond.addPoint(x1, y1);
+                diamond.addPoint(x1 + 5, y1 + 8);
+                diamond.addPoint(x1, y1 + 16);
+                g.drawPolygon(diamond);
+                g.drawLine(x1, y1 + 16, x2 + 50, y2);
+                break;
+            case "Down":
+                diamond.addPoint(x1 - 5, y1 - 8);
+                diamond.addPoint(x1, y1);
+                diamond.addPoint(x1 + 5, y1 - 8);
+                diamond.addPoint(x1, y1 - 16);
+                g.drawPolygon(diamond);
+                g.drawLine(x1, y1 - 16, x2 + 50, y2 + 50);
+                break;
+            case "Left":
+                diamond.addPoint(x1 + 8, y1 - 5);
+                diamond.addPoint(x1, y1);
+                diamond.addPoint(x1 + 8, y1 + 5);
+                diamond.addPoint(x1  + 16, y1);
+                g.drawPolygon(diamond);
+                g.drawLine(x1 + 16, y1, x2, y2 + 25);
+                break;
+            case "Right":
+                diamond.addPoint(x1 - 8, y1 - 5);
+                diamond.addPoint(x1, y1);
+                diamond.addPoint(x1 + 8, y1 + 5);
+                diamond.addPoint(x1 - 16, y1);
+                g.drawPolygon(diamond);
+                g.drawLine(x1 - 16, y1, x2 + 100, y2 + 25);
+                break;
         }
     }
     public void drawConnections(Graphics g){
+        g.setColor(Color.BLACK);
         for(connectionRelationship c: connections){
             String connectType = c.getconnecType();
             String selfSide = c.getSide();
-            String otherSide = "";
+            String otherSide = getSide(c.getSecondBox(), c.getFirstBox());
+            int x1 = c.getFirstBox().topLeftX;
+            int y1 = c.getFirstBox().topLeftY;
+            int x2 = c.getSecondBox().topLeftX;
+            int y2 = c.getSecondBox().topLeftY;
             switch (selfSide) {
                 case "Up": {
-                    if (connectType.equals("Association")){
-
-                    }
-                    else if (connectType.equals("Inheritance")){
-
-                    }
-                    else if (connectType.equals("Composition")){
-
+                    switch (connectType) {
+                        case "Association" -> {
+                            drawArrowHead(g, x1 + 50, x2, y1, y2, otherSide);
+                            break;
+                        }
+                        case "Inheritance" -> {
+                            drawTriangleHead(g, x1 + 50, x2, y1, y2, otherSide);
+                            break;
+                        }
+                        case "Composition" -> drawDiamond(g, x1 + 50, x2, y1, y2, otherSide);
                     }
                 }
                 case "Down": {
-                    if (connectType.equals("Association")){
-                        drawArrowHead(g, 0, 0, 0, 40, otherSide );
-                    }
-                    else if (connectType.equals("Inheritance")){
-
-                    }
-                    else if (connectType.equals("Composition")){
-
+                    switch (connectType) {
+                        case "Association" -> {
+                            drawArrowHead(g, x1 + 50, x2, y1 + 50, y2, otherSide);
+                            break;
+                        }
+                        case "Inheritance" -> {
+                            drawTriangleHead(g, x1 + 50, x2, y1 + 50, y2, otherSide);
+                            break;
+                        }
+                        case "Composition" -> drawDiamond(g, x1 + 50, x2, y1 + 50, y2, otherSide);
                     }
 
                 }
                 case "Left": {
+                    switch (connectType) {
+                        case "Association" -> {
+                            drawArrowHead(g, x1, x2, y1 + 25, y2, otherSide);
+                            break;
+                        }
+                        case "Inheritance" -> {
+                            drawTriangleHead(g, x1, x2, y1 + 25, y2, otherSide);
+                            break;
+                        }
+                        case "Composition" -> drawDiamond(g, x1, x2, y1 + 25, y2, otherSide);
+                    }
 
                 }
                 case "Right": {
+                    switch (connectType) {
+                        case "Association" -> {
+                            drawArrowHead(g, x1 + 100, x2, y1 + 25, y2, otherSide);
+                            break;
+                        }
+                        case "Inheritance" -> {
+                            drawTriangleHead(g, x1 + 50, x2, y1 + 25, y2, otherSide);
+                            break;
+                        }
+                        case "Composition" -> drawDiamond(g, x1 + 100, x2, y1 + 25, y2, otherSide);
+                    }
 
                 }
             }

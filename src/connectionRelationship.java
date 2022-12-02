@@ -19,4 +19,5 @@ public class connectionRelationship {
         return connecType;
     }
     public String getSide() { return side;}
+    public void setSide(String s){side = s;}
 }

@@ -36,7 +36,7 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
 
     @Override
     public void mousePressed(MouseEvent e) {
-        ClassBox box = new ClassBox(e.getX(),e.getY());
+        ClassBox box = new ClassBox(e.getX(),e.getY(), this.getGraphics());
         stack.push(box);
         this.add(box);
         super.repaint();
