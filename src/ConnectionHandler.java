@@ -114,7 +114,7 @@ public class ConnectionHandler {
                 Point p3 = new Point(x2 + 55, y2 + 60);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1, y1, x2 + 50, y2);
+                g.drawLine(x1, y1, x2 + 50, y2 + 50);
 
                 break;
             }

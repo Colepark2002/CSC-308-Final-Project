@@ -27,6 +27,7 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
              box.connectionHandler.drawConnections(g);
         }
     }
+
     @Override
     public void update(Observable o, Object arg) {
 
