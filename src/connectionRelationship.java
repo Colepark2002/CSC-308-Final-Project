@@ -2,10 +2,12 @@ public class connectionRelationship {
     ClassBox box1;
     ClassBox box2;
     String connecType;
-    public connectionRelationship(ClassBox firstBox, ClassBox secondBox, String connectionType){
+    String side;
+    public connectionRelationship(ClassBox firstBox, ClassBox secondBox, String connectionType, String side){
         box1 = firstBox;
         box2 = secondBox;
         connecType = connectionType;
+        this.side = side;
     }
     public ClassBox getFirstBox(){
         return box1;
@@ -16,4 +18,6 @@ public class connectionRelationship {
     public String getconnecType(){
         return connecType;
     }
+    public String getSide() { return side;}
+    public void setSide(String s){side = s;}
 }
