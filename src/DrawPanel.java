@@ -22,10 +22,12 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
      * Draws the various images stored on the stack.
      */
     public void paintComponent(Graphics g){
+
         super.paintComponent(g);
         for (ClassBox box : stack){
-             box.connectionHandler.drawConnections(g);
+            box.connectionHandler.drawConnections(g);
         }
+        Blackboard.getInstance().setDp(this);
     }
 
     @Override
