@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Stack;
 
 /**
  *
@@ -23,7 +24,8 @@ public class MenuController implements ActionListener
                 break;
 
             case "Load":
-                FileHandler.load(JOptionPane.showInputDialog("Enter a FileName"));
+                Stack<ClassBox> s = FileHandler.load(JOptionPane.showInputDialog("Enter a FileName"));
+                Blackboard.getInstance().getDp().setStack(s);
                 break;
 
             case "Association":

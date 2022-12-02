@@ -73,5 +73,8 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
     public Stack<ClassBox> getStack(){
         return stack;
     }
+    public void setStack(Stack<ClassBox> stack) {
+        this.stack = stack;
+    }
 
 }

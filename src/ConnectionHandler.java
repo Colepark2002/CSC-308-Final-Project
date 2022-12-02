@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -9,7 +10,7 @@ import java.util.Stack;
  * @version 1.0
  */
 
-public class ConnectionHandler {
+public class ConnectionHandler implements Serializable{
 
     DrawPanel drawPanel;
     private static ConnectionHandler instance = null;

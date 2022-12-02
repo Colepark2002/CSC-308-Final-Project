@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -9,7 +10,7 @@ import java.util.Stack;
  * @author Jacob Shapero
  * @version 1.0
  */
-public class ClassBox extends JPanel implements MouseListener, MouseMotionListener {
+public class ClassBox extends JPanel implements MouseListener, MouseMotionListener, Serializable {
     JTextField classname;
     int width = 100;
     int height = 50;
