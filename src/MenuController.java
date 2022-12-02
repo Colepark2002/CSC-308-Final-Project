@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,21 +8,22 @@ import java.awt.event.ActionListener;
  */
 public class MenuController implements ActionListener
 {
+    int n = 1;
     @Override
     public void actionPerformed(ActionEvent e)
     {
         switch(e.getActionCommand())
         {
             case "New":
-                //call the New method
+
                 break;
 
             case "Save":
-                //call the Save method
+                FileHandler.save(Blackboard.getInstance().getDp().getStack(), "Save" + n++);
                 break;
 
             case "Load":
-                // call the Load method
+                FileHandler.load(JOptionPane.showInputDialog("Enter a FileName"));
                 break;
 
             case "Association":
