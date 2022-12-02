@@ -3,6 +3,12 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * The handler that deals with all of the connections made between classes.
+ * @author Van Park
+ * @version 1.0
+ */
+
 public class ConnectionHandler {
 
     DrawPanel drawPanel;
@@ -20,20 +26,16 @@ public class ConnectionHandler {
         if (-85 < xdif && xdif < 85){
             if (ydif > 0){
                 side = "Up";
-                System.out.println(box1.getClassName() + " " + side);
             }
             if (ydif < 0){
                 side = "Down";
-                System.out.println(box1.getClassName() + " " + side);
             }
         }
         else if (xdif < -85){
             side = "Right";
-            System.out.println(box1.getClassName() + " " + side);
         }
         else{
             side = "Left";
-            System.out.println(box1.getClassName() + " " + side);
         }
         return side;
     }
@@ -77,6 +79,15 @@ public class ConnectionHandler {
         }
     }
 
+    /**
+     * Draws the association connection between classes
+     * @param g the graphics necessary to draw on the panel
+     * @param x1 x coordinate of the first ClassBox
+     * @param x2 x coordinate of the second ClassBox
+     * @param y1 y coordinate of the first ClassBox
+     * @param y2 y coordinate of the second ClassBox
+     * @param otherSide the side in which the connection is made for the second ClassBox
+     */
     public void drawArrowHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
         switch (otherSide) {
             case "Up" -> {
@@ -122,6 +133,15 @@ public class ConnectionHandler {
 
     }
 
+    /**
+     * Draws the inheritance connection between classes
+     * @param g the graphics necessary to draw on the panel
+     * @param x1 x coordinate of the first ClassBox
+     * @param x2 x coordinate of the second ClassBox
+     * @param y1 y coordinate of the first ClassBox
+     * @param y2 y coordinate of the second ClassBox
+     * @param otherSide the side in which the connection is made for the second ClassBox
+     */
     public void drawTriangleHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
         Polygon arrowhead = new Polygon();
         switch (otherSide) {
@@ -156,6 +176,15 @@ public class ConnectionHandler {
         }
     }
 
+    /**
+     * Draws the composition connection between classes
+     * @param g the graphics necessary to draw on the panel
+     * @param x1 x coordinate of the first ClassBox
+     * @param x2 x coordinate of the second ClassBox
+     * @param y1 y coordinate of the first ClassBox
+     * @param y2 y coordinate of the second ClassBox
+     * @param otherSide the side in which the connection is made for the second ClassBox
+     */
     public void drawDiamond(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
         Polygon diamond = new Polygon();
         switch (otherSide) {
