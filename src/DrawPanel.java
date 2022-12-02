@@ -23,6 +23,9 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        for (ClassBox box : stack){
+             box.connectionHandler.drawConnections(g);
+        }
     }
     @Override
     public void update(Observable o, Object arg) {
@@ -36,7 +39,7 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
 
     @Override
     public void mousePressed(MouseEvent e) {
-        ClassBox box = new ClassBox(e.getX(),e.getY(), this.getGraphics());
+        ClassBox box = new ClassBox(e.getX(),e.getY());
         stack.push(box);
         this.add(box);
         super.repaint();

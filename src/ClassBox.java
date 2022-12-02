@@ -16,8 +16,7 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
     int topLeftX, topLeftY;
     ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
     String connectType = "Association";
-    Graphics panelGraphics;
-    public ClassBox(int mouseClickX, int mouseClickY, Graphics panelGraphics){
+    public ClassBox(int mouseClickX, int mouseClickY){
         GridLayout grid = new GridLayout(2, 1);
         this.setLayout(grid);
         topLeftX = mouseClickX-(width/2);
@@ -29,7 +28,6 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
         classname.setEditable(false);
         classname.setHorizontalAlignment(JTextField.CENTER);
         this.add(classname);
-        this.panelGraphics = panelGraphics;
         addMouseListener(this);
         addMouseMotionListener(this);
     }
@@ -45,7 +43,7 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
     public void mouseClicked(MouseEvent e) {
         repaint();
         connectionHandler.beginConnection(this, connectType);
-        connectionHandler.drawConnections(panelGraphics);
+        Blackboard.getInstance().getDp().repaint();
     }
 
     @Override
@@ -56,7 +54,7 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
     public void mouseReleased(MouseEvent e) {
         repaint();
         connectionHandler.updateSides();
-        connectionHandler.drawConnections(panelGraphics);
+        Blackboard.getInstance().getDp().repaint();
     }
 
     @Override

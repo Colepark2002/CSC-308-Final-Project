@@ -79,7 +79,7 @@ public class ConnectionHandler {
 
     public void drawArrowHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
         switch (otherSide) {
-            case "Up" -> {
+            case "Up": {
                 Point p1 = new Point(x2 + 50, y2);
                 Point p2 = new Point(x2 + 45, y2 - 10);
                 Point p3 = new Point(x2 + 55, y2 - 10);
@@ -88,7 +88,7 @@ public class ConnectionHandler {
                 g.drawLine(x1, y1, x2 + 50, y2);
                 break;
             }
-            case "Down" -> {
+            case "Down": {
                 Point p1 = new Point(x2 + 50, y2 + 50);
                 Point p2 = new Point(x2 + 45, y2 + 60);
                 Point p3 = new Point(x2 + 55, y2 + 60);
@@ -98,7 +98,7 @@ public class ConnectionHandler {
 
                 break;
             }
-            case "Left" -> {
+            case "Left": {
                 Point p1 = new Point(x2, y2 + 25);
                 Point p2 = new Point(x2 - 5, y2 + 20);
                 Point p3 = new Point(x2 - 5, y2 + 30);
@@ -108,7 +108,7 @@ public class ConnectionHandler {
 
                 break;
             }
-            case "Right" -> {
+            case "Right": {
                 Point p1 = new Point(x2 + 100, y2 + 25);
                 Point p2 = new Point(x2 + 105, y2 + 20);
                 Point p3 = new Point(x2 + 105, y2 + 30);
@@ -125,28 +125,28 @@ public class ConnectionHandler {
     public void drawTriangleHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
         Polygon arrowhead = new Polygon();
         switch (otherSide) {
-            case "Up" -> {
+            case "Up": {
                 arrowhead.addPoint(x2 + 50, y2);
                 arrowhead.addPoint(x2 + 45, y2 - 10);
                 arrowhead.addPoint(x2 + 55, y2 - 10);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 + 50, y2 - 10);
             }
-            case "Down" -> {
+            case "Down":  {
                 arrowhead.addPoint(x2 + 50, y2 + 50);
                 arrowhead.addPoint(x2 + 45, y2 + 60);
                 arrowhead.addPoint(x2 + 55, y2 + 60);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 + 50, y2 + 60);
             }
-            case "Left" -> {
+            case "Left":  {
                 arrowhead.addPoint(x2, y2 + 25);
                 arrowhead.addPoint(x2 - 10, y2 + 20);
                 arrowhead.addPoint(x2 - 10, y2 + 30);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 - 10, y2 + 25);
             }
-            case "Right" -> {
+            case "Right": {
                 arrowhead.addPoint(x2 + 100, y2 + 25);
                 arrowhead.addPoint(x2 + 105, y2 + 20);
                 arrowhead.addPoint(x2 + 105, y2 + 30);
