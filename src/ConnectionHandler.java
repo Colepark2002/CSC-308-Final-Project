@@ -19,6 +19,12 @@ public class ConnectionHandler {
     private ConnectionHandler() {
     }
 
+    /**
+     * Gets the appropriate side for the connection to come out of
+     * @param box1 the ClassBox that is making the connection
+     * @param box2 the ClassBox that is getting connected
+     * @return the appropriate side for the connection
+     */
     private String getSide(ClassBox box1, ClassBox box2){
         String side = "";
         int xdif = box1.getX() - box2.getX();
@@ -73,6 +79,9 @@ public class ConnectionHandler {
         }
     }
 
+    /**
+     * Updates the connections when a box is moved.
+     */
     public void updateSides(){
         for (connectionRelationship c : connections){
             c.setSide(getSide(c.getFirstBox(), c.getSecondBox()));
@@ -168,8 +177,8 @@ public class ConnectionHandler {
             }
             case "Right" -> {
                 arrowhead.addPoint(x2 + 100, y2 + 25);
-                arrowhead.addPoint(x2 + 105, y2 + 20);
-                arrowhead.addPoint(x2 + 105, y2 + 30);
+                arrowhead.addPoint(x2 + 110, y2 + 20);
+                arrowhead.addPoint(x2 + 110, y2 + 30);
                 g.fillPolygon(arrowhead);
                 g.drawLine(x1, y1, x2 + 100, y2 + 25);
             }
@@ -193,32 +202,36 @@ public class ConnectionHandler {
                 diamond.addPoint(x1, y1);
                 diamond.addPoint(x1 + 5, y1 + 8);
                 diamond.addPoint(x1, y1 + 16);
-                g.drawPolygon(diamond);
+                g.fillPolygon(diamond);
                 g.drawLine(x1, y1 + 16, x2 + 50, y2);
+                break;
 
             case "Down":
                 diamond.addPoint(x1 - 5, y1 - 8);
                 diamond.addPoint(x1, y1);
                 diamond.addPoint(x1 + 5, y1 - 8);
                 diamond.addPoint(x1, y1 - 16);
-                g.drawPolygon(diamond);
+                g.fillPolygon(diamond);
                 g.drawLine(x1, y1 - 16, x2 + 50, y2 + 50);
+                break;
 
             case "Left":
                 diamond.addPoint(x1 + 8, y1 - 5);
                 diamond.addPoint(x1, y1);
                 diamond.addPoint(x1 + 8, y1 + 5);
                 diamond.addPoint(x1 + 16, y1);
-                g.drawPolygon(diamond);
+                g.fillPolygon(diamond);
                 g.drawLine(x1 + 16, y1, x2, y2 + 25);
+                break;
 
             case "Right":
                 diamond.addPoint(x1 - 8, y1 - 5);
                 diamond.addPoint(x1, y1);
-                diamond.addPoint(x1 + 8, y1 + 5);
+                diamond.addPoint(x1 - 8, y1 + 5);
                 diamond.addPoint(x1 - 16, y1);
-                g.drawPolygon(diamond);
+                g.fillPolygon(diamond);
                 g.drawLine(x1 - 16, y1, x2 + 100, y2 + 25);
+                break;
         }
     }
     public void drawConnections(Graphics g){
