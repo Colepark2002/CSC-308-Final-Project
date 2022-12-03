@@ -47,4 +47,10 @@ public class Blackboard extends Observable
         System.out.println(connection);
     }
 
+    public void notifyObservers()
+    {
+        setChanged();
+        super.notifyObservers();
+    }
+
 }

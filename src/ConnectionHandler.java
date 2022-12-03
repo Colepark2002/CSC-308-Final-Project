@@ -71,6 +71,7 @@ public class ConnectionHandler implements Serializable {
             connectionBox2 = box;
             String side = getSide(connectionBox1, connectionBox2);
             connections.add(new connectionRelationship(connectionBox1, connectionBox2, connectType, side));
+            Blackboard.getInstance().hasChanged();
             Blackboard.getInstance().notifyObservers();
             for (connectionRelationship c : connections) {
                 System.out.print(
