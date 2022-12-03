@@ -106,7 +106,8 @@ public class ConnectionHandler implements Serializable{
                 Point p3 = new Point(x2 + 55, y2 - 10);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1, y1, x2 + 50, y2);
+                g.drawLine(x1, y1, x2 + 50, y2 - 20);
+                g.drawLine(x2 + 50, y2 - 20, x2 + 50, y2);
                 break;
             }
             case "Down": {
@@ -115,7 +116,8 @@ public class ConnectionHandler implements Serializable{
                 Point p3 = new Point(x2 + 55, y2 + 60);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1, y1, x2 + 50, y2 + 50);
+                g.drawLine(x1, y1, x2 + 50, y2 + 70);
+                g.drawLine(x2 + 50, y2 + 70, x2 + 50, y2 + 50);
 
                 break;
             }
@@ -125,7 +127,8 @@ public class ConnectionHandler implements Serializable{
                 Point p3 = new Point(x2 - 5, y2 + 30);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1, y1, x2, y2 + 25);
+                g.drawLine(x1, y1, x2 - 10, y2 + 25);
+                g.drawLine(x2 - 10, y2 + 25, x2, y2 + 25);
 
                 break;
             }
@@ -135,7 +138,8 @@ public class ConnectionHandler implements Serializable{
                 Point p3 = new Point(x2 + 105, y2 + 30);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1, y1, x2, y2 + 25);
+                g.drawLine(x1, y1, x2 + 110, y2 + 25);
+                g.drawLine(x2 + 110, y2 + 25, x2 + 100, y2 + 25);
 
                 break;
             }
@@ -157,26 +161,26 @@ public class ConnectionHandler implements Serializable{
         switch (otherSide) {
             case "Up": {
                 arrowhead.addPoint(x2 + 50, y2);
-                arrowhead.addPoint(x2 + 45, y2 - 10);
-                arrowhead.addPoint(x2 + 55, y2 - 10);
+                arrowhead.addPoint(x2 + 45, y2 - 15);
+                arrowhead.addPoint(x2 + 55, y2 - 15);
                 g.fillPolygon(arrowhead);
-                g.drawLine(x1, y1, x2 + 50, y2 - 10);
+                g.drawLine(x1, y1, x2 + 50, y2 - 15);
                 break;
             }
             case "Down": {
                 arrowhead.addPoint(x2 + 50, y2 + 50);
-                arrowhead.addPoint(x2 + 45, y2 + 60);
-                arrowhead.addPoint(x2 + 55, y2 + 60);
+                arrowhead.addPoint(x2 + 45, y2 + 65);
+                arrowhead.addPoint(x2 + 55, y2 + 65);
                 g.fillPolygon(arrowhead);
-                g.drawLine(x1, y1, x2 + 50, y2 + 60);
+                g.drawLine(x1, y1, x2 + 50, y2 + 65);
                 break;
             }
             case "Left": {
                 arrowhead.addPoint(x2, y2 + 25);
-                arrowhead.addPoint(x2 - 10, y2 + 20);
-                arrowhead.addPoint(x2 - 10, y2 + 30);
+                arrowhead.addPoint(x2 - 15, y2 + 20);
+                arrowhead.addPoint(x2 - 15, y2 + 30);
                 g.fillPolygon(arrowhead);
-                g.drawLine(x1, y1, x2 - 10, y2 + 25);
+                g.drawLine(x1, y1, x2 - 15, y2 + 25);
                 break;
             }
             case "Right": {
