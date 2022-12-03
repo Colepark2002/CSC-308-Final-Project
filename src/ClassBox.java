@@ -7,6 +7,7 @@ import java.util.Stack;
 
 /**
  * Represents a class box to be placed on the DrawPanel
+ * 
  * @author Jacob Shapero
  * @version 1.0
  */
@@ -17,11 +18,12 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
     int topLeftX, topLeftY;
     ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
     String connectType = "Association";
-    public ClassBox(int mouseClickX, int mouseClickY){
+
+    public ClassBox(int mouseClickX, int mouseClickY) {
         GridLayout grid = new GridLayout(2, 1);
         this.setLayout(grid);
-        topLeftX = mouseClickX-(width/2);
-        topLeftY = mouseClickY-(height/2);
+        topLeftX = mouseClickX - (width / 2);
+        topLeftY = mouseClickY - (height / 2);
         this.setBounds(topLeftX, topLeftY, width, height);
         this.setBackground(Color.YELLOW);
         classname = new JTextField(JOptionPane.showInputDialog("Enter a name"));
@@ -33,17 +35,18 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
         addMouseMotionListener(this);
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
     }
-    public String getClassName(){
+
+    public String getClassName() {
         return classname.getText();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         repaint();
-        connectType  = Blackboard.getInstance().getConnection();
+        connectType = Blackboard.getInstance().getConnection();
         System.out.println(connectType);
         connectionHandler.beginConnection(this, connectType);
         Blackboard.getInstance().getDp().repaint();
@@ -72,11 +75,11 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        int ex = e.getX()-50;
-        int ey = e.getY()-25;
-        this.setBounds(topLeftX+50+ex, topLeftY+25+ey,width,height);
-        topLeftX = topLeftX+ex + 50;
-        topLeftY = topLeftY+ey + 25;
+        int ex = e.getX() - 50;
+        int ey = e.getY() - 25;
+        this.setBounds(topLeftX + 50 + ex, topLeftY + 25 + ey, width, height);
+        topLeftX = topLeftX + ex + 50;
+        topLeftY = topLeftY + ey + 25;
         repaint();
     }
 
@@ -85,6 +88,32 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
 
     }
 
+    @Override
+    public String toString() {
+        ArrayList<connectionRelationship> connections = connectionHandler.getInstance().connections; // get
+                                                                                                     // connections????
+        String compString = "";
+        String assocString = "";
+        String inheritString = "";
+        for (connectionRelationship c : connections) {
+            if (c.getFirstBox().equals(this)) {
+                if (c.getconnecType().equals("Association")) {
+                    assocString += "\t" + "\t" + c.getSecondBox() + "\n";
+                } else if (c.getconnecType().equals("Inheritance")) {
+                    inheritString += "extends " + c.getSecondBox();
+                } else if (c.getconnecType().equals("Composition")) {
+                    compString += "\t" + c.getSecondBox() + "\n";
+                }
+            }
+        }
+        if (assocString != "") {
+            assocString = "\t" + "method() {" + assocString + "\t" + "}" + "\n";
+        }
+        String boxString = "Class " + classname.getText() + inheritString + "{" + "\n";
+        boxString += compString;
+        boxString += assocString;
+        boxString += "} \n";
+        return boxString;
+    }
+
 }
-
-
