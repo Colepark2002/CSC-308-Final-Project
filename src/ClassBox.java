@@ -90,29 +90,28 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
 
     @Override
     public String toString() {
-        ArrayList<connectionRelationship> connections = connectionHandler.getInstance().connections; // get
-                                                                                                     // connections????
+        ArrayList<connectionRelationship> connections = connectionHandler.getInstance().connections;
         String compString = "";
         String assocString = "";
         String inheritString = "";
         for (connectionRelationship c : connections) {
             if (c.getFirstBox().equals(this)) {
                 if (c.getconnecType().equals("Association")) {
-                    assocString += "\t" + "\t" + c.getSecondBox() + "\n";
+                    assocString += "          " + c.getSecondBox().getClassName() + "\n";
                 } else if (c.getconnecType().equals("Inheritance")) {
-                    inheritString += "extends " + c.getSecondBox();
+                    inheritString += " extends " + c.getSecondBox().getClassName();
                 } else if (c.getconnecType().equals("Composition")) {
-                    compString += "\t" + c.getSecondBox() + "\n";
+                    compString += "     " + c.getSecondBox().getClassName() + "\n";
                 }
             }
         }
         if (assocString != "") {
-            assocString = "\t" + "method() {" + assocString + "\t" + "}" + "\n";
+            assocString = "     " + "method() {" + "\n" + assocString + "     " + "}" + "\n";
         }
-        String boxString = "Class " + classname.getText() + inheritString + "{" + "\n";
+        String boxString = "Class " + classname.getText() + inheritString + " {" + "\n";
         boxString += compString;
         boxString += assocString;
-        boxString += "} \n";
+        boxString += "} \n\n";
         return boxString;
     }
 
