@@ -7,7 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
 
-public class DrawPanel extends JPanel implements Observer, MouseListener, MouseMotionListener {
+public class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
     Stack<ClassBox> stack = new Stack<ClassBox>();
 
     public DrawPanel() {
@@ -31,11 +31,6 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
 
     }
@@ -45,6 +40,7 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
         ClassBox box = new ClassBox(e.getX(), e.getY());
         stack.push(box);
         this.add(box);
+        Blackboard.getInstance().notifyObservers();
         super.repaint();
         super.revalidate();
     }
