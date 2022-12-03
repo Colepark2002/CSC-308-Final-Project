@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.util.Observable;
 
+
+/**
+ * Our Blackboard and Singleton class used to communicate between classes for the DrawPanel and TextPanel
+ * @author Cole Park
+ */
 public class Blackboard extends Observable
 {
     JTextArea text;

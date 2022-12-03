@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * This class acts as our view in a model view controller architecture to create our window and see the project
+ * @author Cole
+ */
 public class FinalProject extends JFrame {
     private static FinalProject win = null;
 

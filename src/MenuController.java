@@ -4,11 +4,15 @@ import java.awt.event.ActionListener;
 import java.util.Stack;
 
 /**
- *
+ * Works as our Controller for the Menu to handle actions when buttons are pressed in the menus
  * @author Cole Park
  */
 public class MenuController implements ActionListener
 {
+    /**
+     * Handles menu functionality and connection selections
+     * @param e action event
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
