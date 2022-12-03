@@ -9,14 +9,13 @@ import java.util.Stack;
  */
 public class MenuController implements ActionListener
 {
-    int n = 1;
     @Override
     public void actionPerformed(ActionEvent e)
     {
         switch(e.getActionCommand())
         {
             case "New":
-
+                FinalProject.start();
                 break;
 
             case "Save":
@@ -25,6 +24,7 @@ public class MenuController implements ActionListener
                 break;
 
             case "Load":
+                FinalProject.start();
                 Stack<ClassBox> s = FileHandler.load(JOptionPane.showInputDialog("Enter a File Name"));
                 Blackboard.getInstance().getDp().setStack(s);
                 for(ClassBox b : s)

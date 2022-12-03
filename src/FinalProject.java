@@ -2,8 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FinalProject extends JFrame {
+    private static FinalProject win = null;
+
     public static void main(String[] args) {
-        FinalProject win = new FinalProject();
+        start();
+    }
+
+    public static void start() {
+        if (win != null) {
+            win.setVisible(false);
+            win.dispose();
+        }
+        win = new FinalProject();
         win.setSize(500, 500);
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
