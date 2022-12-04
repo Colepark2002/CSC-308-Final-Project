@@ -47,7 +47,6 @@ public class ClassBox extends JPanel implements MouseListener, MouseMotionListen
     public void mouseClicked(MouseEvent e) {
         repaint();
         connectType = Blackboard.getInstance().getConnection();
-        System.out.println(connectType);
         connectionHandler.beginConnection(this, connectType);
         Blackboard.getInstance().getDp().repaint();
     }

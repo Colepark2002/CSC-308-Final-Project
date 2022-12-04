@@ -49,7 +49,6 @@ public class Blackboard extends Observable
 
     public void setConnection(String connection) {
         this.connection = connection;
-        System.out.println(connection);
     }
 
     public void notifyObservers()
