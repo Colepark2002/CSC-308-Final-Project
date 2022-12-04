@@ -7,6 +7,13 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
 
+/**
+ * Represents the rightside panel which ClassBoxes are drawn on
+ *
+ * @author Jacob Shapero
+ * @author Van Park
+ * @version 1.0
+ */
 public class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
     Stack<ClassBox> stack = new Stack<ClassBox>();
 
