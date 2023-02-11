@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.util.Observable;
 
+
+/**
+ * Our Blackboard and Singleton class used to communicate between classes for the DrawPanel and TextPanel
+ * @author Cole Park
+ */
 public class Blackboard extends Observable
 {
     JTextArea text;
@@ -44,7 +49,12 @@ public class Blackboard extends Observable
 
     public void setConnection(String connection) {
         this.connection = connection;
-        System.out.println(connection);
+    }
+
+    public void notifyObservers()
+    {
+        setChanged();
+        super.notifyObservers();
     }
 
 }

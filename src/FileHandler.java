@@ -1,7 +1,11 @@
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
+/**
+ * @author Bret Craig
+ */
 public class FileHandler {
 
     /**
@@ -17,7 +21,7 @@ public class FileHandler {
             out.writeObject(o);
             out.close();
             fileOut.close();
-            System.out.println("\nProject saved in" + fileName + "\n");
+            System.out.println("\nProject saved in " + fileName + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,13 +32,13 @@ public class FileHandler {
      * @param fileName
      * @return List
      */
-    static List<Object> load(String fileName) {
-        List<Object> list = null;
+    static Stack<ClassBox> load(String fileName) {
+        Stack<ClassBox> list = null;
         try {
             FileInputStream fileIn = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            list = (List<Object>) in.readObject();
-            System.out.println("\nProject loaded from project.txt");
+            list = (Stack<ClassBox>) in.readObject();
+            System.out.println("\nProject loaded from " + fileName);
             in.close();
             fileIn.close();
         } catch (ClassNotFoundException | IOException e) {

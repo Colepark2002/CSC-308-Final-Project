@@ -7,30 +7,34 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
 
-public class DrawPanel extends JPanel implements Observer, MouseListener, MouseMotionListener
-{
+/**
+ * Represents the rightside panel which ClassBoxes are drawn on
+ *
+ * @author Jacob Shapero
+ * @author Van Park
+ * @version 1.0
+ */
+public class DrawPanel extends JPanel implements MouseListener, MouseMotionListener {
     Stack<ClassBox> stack = new Stack<ClassBox>();
 
-    public DrawPanel(){
+    public DrawPanel() {
         this.setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
         ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
         connectionHandler.setDrawPanel(this);
     }
+
     /**
      * Draws the various images stored on the stack.
      */
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
-        for (ClassBox box : stack){
-             box.connectionHandler.drawConnections(g);
+        for (ClassBox box : stack) {
+            box.connectionHandler.drawConnections(g);
         }
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
+        Blackboard.getInstance().setDp(this);
     }
 
     @Override
@@ -40,9 +44,10 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
 
     @Override
     public void mousePressed(MouseEvent e) {
-        ClassBox box = new ClassBox(e.getX(),e.getY());
+        ClassBox box = new ClassBox(e.getX(), e.getY());
         stack.push(box);
         this.add(box);
+        Blackboard.getInstance().notifyObservers();
         super.repaint();
         super.revalidate();
     }
@@ -70,8 +75,12 @@ public class DrawPanel extends JPanel implements Observer, MouseListener, MouseM
 
     }
 
-    public Stack<ClassBox> getStack(){
+    public Stack<ClassBox> getStack() {
         return stack;
+    }
+
+    public void setStack(Stack<ClassBox> stack) {
+        this.stack = stack;
     }
 
 }

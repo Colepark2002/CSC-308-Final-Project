@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * The format for the relationship between connected classes.
  * @author Van Park
  * @version 1.0
  */
 
-public class connectionRelationship {
+public class connectionRelationship implements Serializable {
     ClassBox box1;
     ClassBox box2;
     String connecType;

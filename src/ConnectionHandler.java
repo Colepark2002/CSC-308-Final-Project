@@ -1,46 +1,48 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
 /**
  * The handler that deals with all of the connections made between classes.
+ * 
  * @author Van Park
  * @version 1.0
  */
 
-public class ConnectionHandler {
+public class ConnectionHandler implements Serializable {
 
     DrawPanel drawPanel;
     private static ConnectionHandler instance = null;
     public ClassBox connectionBox1 = null;
     public ClassBox connectionBox2 = null;
     ArrayList<connectionRelationship> connections = new ArrayList<connectionRelationship>();
+
     private ConnectionHandler() {
     }
 
     /**
      * Gets the appropriate side for the connection to come out of
+     * 
      * @param box1 the ClassBox that is making the connection
      * @param box2 the ClassBox that is getting connected
      * @return the appropriate side for the connection
      */
-    private String getSide(ClassBox box1, ClassBox box2){
+    private String getSide(ClassBox box1, ClassBox box2) {
         String side = "";
         int xdif = box1.getX() - box2.getX();
         int ydif = box1.getY() - box2.getY();
-        if (-85 < xdif && xdif < 85){
-            if (ydif > 0){
+        if (-85 < xdif && xdif < 85) {
+            if (ydif > 0) {
                 side = "Up";
             }
-            if (ydif < 0){
+            if (ydif < 0) {
                 side = "Down";
             }
-        }
-        else if (xdif < -85){
+        } else if (xdif < -85) {
             side = "Right";
-        }
-        else{
+        } else {
             side = "Left";
         }
         return side;
@@ -48,7 +50,7 @@ public class ConnectionHandler {
 
     public static ConnectionHandler getInstance() {
         if (instance == null) {
-            synchronized(ConnectionHandler.class) {
+            synchronized (ConnectionHandler.class) {
                 if (instance == null) {
                     instance = new ConnectionHandler();
                 }
@@ -57,23 +59,20 @@ public class ConnectionHandler {
         return instance;
     }
 
-    public void setDrawPanel(DrawPanel d){
+    public void setDrawPanel(DrawPanel d) {
         drawPanel = d;
     }
 
-    public void beginConnection(ClassBox box, String connectType){
-        if(connectionBox1 == null){
+    public void beginConnection(ClassBox box, String connectType) {
+        if (connectionBox1 == null) {
             connectionBox1 = box;
 
-        }
-        else if(connectionBox2 == null){
+        } else if (connectionBox2 == null) {
             connectionBox2 = box;
             String side = getSide(connectionBox1, connectionBox2);
             connections.add(new connectionRelationship(connectionBox1, connectionBox2, connectType, side));
-            for (connectionRelationship c : connections){
-                System.out.print(c.getFirstBox().getClassName() + " is connected to " + c.getSecondBox().getClassName() + ", ");
-            }
-            System.out.println();
+            Blackboard.getInstance().hasChanged();
+            Blackboard.getInstance().notifyObservers();
             connectionBox1 = null;
             connectionBox2 = null;
         }
@@ -82,22 +81,24 @@ public class ConnectionHandler {
     /**
      * Updates the connections when a box is moved.
      */
-    public void updateSides(){
-        for (connectionRelationship c : connections){
+    public void updateSides() {
+        for (connectionRelationship c : connections) {
             c.setSide(getSide(c.getFirstBox(), c.getSecondBox()));
         }
     }
 
     /**
      * Draws the association connection between classes
-     * @param g the graphics necessary to draw on the panel
-     * @param x1 x coordinate of the first ClassBox
-     * @param x2 x coordinate of the second ClassBox
-     * @param y1 y coordinate of the first ClassBox
-     * @param y2 y coordinate of the second ClassBox
-     * @param otherSide the side in which the connection is made for the second ClassBox
+     * 
+     * @param g         the graphics necessary to draw on the panel
+     * @param x1        x coordinate of the first ClassBox
+     * @param x2        x coordinate of the second ClassBox
+     * @param y1        y coordinate of the first ClassBox
+     * @param y2        y coordinate of the second ClassBox
+     * @param otherSide the side in which the connection is made for the second
+     *                  ClassBox
      */
-    public void drawArrowHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
+    public void drawArrowHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide) {
         switch (otherSide) {
             case "Up": {
                 Point p1 = new Point(x2 + 50, y2);
@@ -106,6 +107,8 @@ public class ConnectionHandler {
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
                 g.drawLine(x1 + 50, y1 + 25, x2 + 50, y2);
+                g.drawLine(x1, y1, x2 + 50, y2 - 20);
+                g.drawLine(x2 + 50, y2 - 20, x2 + 50, y2);
                 break;
             }
             case "Down": {
@@ -144,14 +147,16 @@ public class ConnectionHandler {
 
     /**
      * Draws the inheritance connection between classes
-     * @param g the graphics necessary to draw on the panel
-     * @param x1 x coordinate of the first ClassBox
-     * @param x2 x coordinate of the second ClassBox
-     * @param y1 y coordinate of the first ClassBox
-     * @param y2 y coordinate of the second ClassBox
-     * @param otherSide the side in which the connection is made for the second ClassBox
+     * 
+     * @param g         the graphics necessary to draw on the panel
+     * @param x1        x coordinate of the first ClassBox
+     * @param x2        x coordinate of the second ClassBox
+     * @param y1        y coordinate of the first ClassBox
+     * @param y2        y coordinate of the second ClassBox
+     * @param otherSide the side in which the connection is made for the second
+     *                  ClassBox
      */
-    public void drawTriangleHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide){
+    public void drawTriangleHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide) {
         Polygon arrowhead = new Polygon();
         switch (otherSide) {
             case "Up": {
@@ -234,9 +239,10 @@ public class ConnectionHandler {
                 break;
         }
     }
-    public void drawConnections(Graphics g){
+
+    public void drawConnections(Graphics g) {
         g.setColor(Color.BLACK);
-        for(connectionRelationship c: connections){
+        for (connectionRelationship c : connections) {
             String connectType = c.getconnecType();
             String selfSide = c.getSide();
             String otherSide = getSide(c.getSecondBox(), c.getFirstBox());

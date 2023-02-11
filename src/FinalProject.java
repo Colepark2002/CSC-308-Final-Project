@@ -1,18 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class FinalProject extends JFrame
-{
+
+/**
+ * This class acts as our view in a model view controller architecture to create our window and see the project
+ * @author Cole
+ */
+public class FinalProject extends JFrame {
+    private static FinalProject win = null;
+
     public static void main(String[] args) {
-        FinalProject win = new FinalProject();
-        win.setSize(500,500);
+        start();
+    }
+
+    public static void start() {
+        if (win != null) {
+            win.setVisible(false);
+            win.dispose();
+        }
+        win = new FinalProject();
+        win.setSize(500, 500);
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public FinalProject()
-    {
-        GridLayout grid = new GridLayout(1,2);
+    public FinalProject() {
+        GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
 
         JMenuBar mb = new JMenuBar();
