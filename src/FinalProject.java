@@ -4,15 +4,23 @@ import java.awt.*;
 
 /**
  * This class acts as our view in a model view controller architecture to create our window and see the project
- * @author Cole
+ * @author Cole Park
+ * @version 2.0
  */
 public class FinalProject extends JFrame {
     private static FinalProject win = null;
 
+    /**
+     * main method
+     * @param args
+     */
     public static void main(String[] args) {
         start();
     }
 
+    /**
+     * start function used to reset project when a new one is created
+     */
     public static void start() {
         if (win != null) {
             win.setVisible(false);
@@ -24,6 +32,9 @@ public class FinalProject extends JFrame {
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Project Constructor
+     */
     public FinalProject() {
         GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
@@ -31,46 +42,46 @@ public class FinalProject extends JFrame {
         JMenuBar mb = new JMenuBar();
         MenuController mc = new MenuController();
 
-        JMenu File = new JMenu("File");
-        JMenu Help = new JMenu("Help");
+        JMenu file = new JMenu("File");
+        JMenu help = new JMenu("Help");
         JMenu connection = new JMenu("Connections");
 
-        JMenuItem Load = new JMenuItem("Load");
-        JMenuItem Save = new JMenuItem("Save");
-        JMenuItem New = new JMenuItem("New");
-        Load.addActionListener(mc);
-        Save.addActionListener(mc);
-        New.addActionListener(mc);
+        JMenuItem load = new JMenuItem("Load");
+        JMenuItem save = new JMenuItem("Save");
+        JMenuItem newButton = new JMenuItem("New");
+        load.addActionListener(mc);
+        save.addActionListener(mc);
+        newButton.addActionListener(mc);
 
-        JMenuItem A1 = new JMenuItem("Cole P.");
-        JMenuItem A2 = new JMenuItem("Van P.");
-        JMenuItem A3 = new JMenuItem("Bret C.");
-        JMenuItem A4 = new JMenuItem("Lauren A.");
-        JMenuItem A5 = new JMenuItem("Jacob S.");
+        JMenuItem a1 = new JMenuItem("Cole P.");
+        JMenuItem a2 = new JMenuItem("Van P.");
+        JMenuItem a3 = new JMenuItem("Bret C.");
+        JMenuItem a4 = new JMenuItem("Lauren A.");
+        JMenuItem a5 = new JMenuItem("Jacob S.");
 
-        JMenuItem C1 = new JMenuItem("Association");
-        JMenuItem C2 = new JMenuItem("Inheritance");
-        JMenuItem C3 = new JMenuItem("Composition");
-        C1.addActionListener(mc);
-        C2.addActionListener(mc);
-        C3.addActionListener(mc);
+        JMenuItem c1 = new JMenuItem("Association");
+        JMenuItem c2 = new JMenuItem("Inheritance");
+        JMenuItem c3 = new JMenuItem("Composition");
+        c1.addActionListener(mc);
+        c2.addActionListener(mc);
+        c3.addActionListener(mc);
 
-        File.add(New);
-        File.add(Save);
-        File.add(Load);
+        file.add(newButton);
+        file.add(save);
+        file.add(load);
 
-        Help.add(A1);
-        Help.add(A2);
-        Help.add(A3);
-        Help.add(A4);
-        Help.add(A5);
+        help.add(a1);
+        help.add(a2);
+        help.add(a3);
+        help.add(a4);
+        help.add(a5);
 
-        connection.add(C1);
-        connection.add(C2);
-        connection.add(C3);
+        connection.add(c1);
+        connection.add(c2);
+        connection.add(c3);
 
-        mb.add(File);
-        mb.add(Help);
+        mb.add(file);
+        mb.add(help);
         mb.add(connection);
         setJMenuBar(mb);
 
