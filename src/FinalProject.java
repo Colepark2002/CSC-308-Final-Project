@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 /**
- * This class acts as our view in a model view controller architecture to create our window and see the project
+ * Main Class and GUI
  * @author Cole Park
  * @version 2.0
  */
@@ -12,7 +12,7 @@ public class FinalProject extends JFrame {
 
     /**
      * main method
-     * @param args
+     * @param args String[]
      */
     public static void main(String[] args) {
         start();
@@ -45,6 +45,7 @@ public class FinalProject extends JFrame {
         JMenu file = new JMenu("File");
         JMenu help = new JMenu("Help");
         JMenu connection = new JMenu("Connections");
+        JMenu proficiency = new JMenu("Proficiency");
 
         JMenuItem load = new JMenuItem("Load");
         JMenuItem save = new JMenuItem("Save");
@@ -83,14 +84,38 @@ public class FinalProject extends JFrame {
         mb.add(file);
         mb.add(help);
         mb.add(connection);
+        mb.add(proficiency);
         setJMenuBar(mb);
+
+        JPanel feedbackPanel = new JPanel();
+        JMenuBar fMenuBar = new JMenuBar();
+        JMenu check = new JMenu("Check");
+        JMenu hint = new JMenu("Hint");
+        JMenu submit = new JMenu("Submit");
+        TextArea text = new TextArea();
+
+        check.addActionListener(mc);
+        hint.addActionListener(mc);
+        submit.addActionListener(mc);
+        fMenuBar.add(check);
+        fMenuBar.add(hint);
+        fMenuBar.add(submit);
+        feedbackPanel.add(fMenuBar);
+        feedbackPanel.add(text);
 
         TextPanel tp = new TextPanel();
         DrawPanel dp = new DrawPanel();
+
+        BorderLayout border = new BorderLayout();
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(border);
+        rightPanel.add(dp, BorderLayout.CENTER);
+        rightPanel.add(feedbackPanel, BorderLayout.SOUTH);
+
         Blackboard.getInstance().setDp(dp);
         tp.setBackground(Color.DARK_GRAY);
         dp.setBackground(new Color(40, 100, 40));
         add(tp);
-        add(dp);
+        add(rightPanel);
     }
 }
