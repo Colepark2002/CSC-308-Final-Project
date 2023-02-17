@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.Observable;
+import java.util.Stack;
 
 
 /**
@@ -11,6 +12,7 @@ public class Blackboard extends Observable
     JTextArea text;
     DrawPanel dp;
     String connection = "Association";
+    Stack<ClassBox> stack = new Stack<ClassBox>();
 
     private static Blackboard instance = null;
 
@@ -55,6 +57,15 @@ public class Blackboard extends Observable
     {
         setChanged();
         super.notifyObservers();
+    }
+
+    public void setStack(Stack<ClassBox> stack) {
+        this.stack = stack;
+        this.notifyObservers();
+    }
+
+    public Stack<ClassBox> getStack() {
+        return stack;
     }
 
 }

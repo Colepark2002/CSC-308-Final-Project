@@ -23,7 +23,7 @@ public class MenuController implements ActionListener
                 break;
 
             case "Save":
-                FileHandler.save(Blackboard.getInstance().getDp().getStack(),
+                FileHandler.save(Blackboard.getInstance().getStack(),
                                 JOptionPane.showInputDialog("Enter a File Name"));
                 break;
 
