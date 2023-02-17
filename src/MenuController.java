@@ -30,12 +30,11 @@ public class MenuController implements ActionListener
             case "Load":
                 FinalProject.start();
                 Stack<ClassBox> s = FileHandler.load(JOptionPane.showInputDialog("Enter a File Name"));
-                Blackboard.getInstance().getDp().setStack(s);
+                Blackboard.getInstance().setStack(s);
                 for(ClassBox b : s)
                 {
                     //PLACEHOLDER
                 }
-                Blackboard.getInstance().getDp().repaint();
 
                 break;
 

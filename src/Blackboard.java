@@ -10,7 +10,6 @@ import java.util.Stack;
 public class Blackboard extends Observable
 {
     JTextArea text;
-    DrawPanel dp;
     String connection = "Association";
     Stack<ClassBox> stack = new Stack<ClassBox>();
 
@@ -36,13 +35,6 @@ public class Blackboard extends Observable
 
     public JTextArea getText() {
         return text;
-    }
-
-    public DrawPanel getDp() {
-        return dp;
-    }
-    public void setDp(DrawPanel dp) {
-        this.dp = dp;
     }
 
     public String getConnection() {
