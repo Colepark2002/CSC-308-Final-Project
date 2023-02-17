@@ -1,117 +1,171 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
- * Represents a class box to be placed on the DrawPanel
- * 
+ * Graphical representation of a class in UML format
  * @author Jacob Shapero
- * @version 1.0
+ * @author Javier Gonzalez Sanchez
+ * @version 32.3
  */
-public class ClassBox extends JPanel implements MouseListener, MouseMotionListener, Serializable {
-    JTextField classname;
-    int width = 100;
-    int height = 50;
-    int topLeftX, topLeftY;
+public class ClassBox {
+    protected String name;
+
+    protected int type;
+    private static final int TYPE_CLASS = 0;
+    private static final int TYPE_INTERFACE = 1;
+
+    private Point point;
+    private int height, width;
+    private ArrayList<connectionRelationship> connections;
+    private ArrayList<String> methods;
+    private ArrayList<String> variables;
+    private boolean isSelected;
+    private boolean isInterface;
+
     ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
-    String connectType = "Association";
 
-    public ClassBox(int mouseClickX, int mouseClickY) {
-        GridLayout grid = new GridLayout(2, 1);
-        this.setLayout(grid);
-        topLeftX = mouseClickX - (width / 2);
-        topLeftY = mouseClickY - (height / 2);
-        this.setBounds(topLeftX, topLeftY, width, height);
-        this.setBackground(Color.YELLOW);
-        classname = new JTextField(JOptionPane.showInputDialog("Enter a name"));
-        classname.setBackground(Color.yellow);
-        classname.setEditable(false);
-        classname.setHorizontalAlignment(JTextField.CENTER);
-        this.add(classname);
-        addMouseListener(this);
-        addMouseMotionListener(this);
+
+    /**
+     * getter for selection status
+     *
+     * @return
+     */
+    public boolean isSelected() {
+        return isSelected;
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    /**
+     * setter for selection status
+     *
+     * @param selected
+     */
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
-    public String getClassName() {
-        return classname.getText();
+    /**
+     * Checks if the passed coordinates are within the
+     * boundries of the Box
+     *
+     * @param x int x axis
+     * @param y int y axis
+     *
+     * @return if the passed coordinates are within the
+     * boundries of the Box
+     */
+    public boolean contains(int x, int y) {
+        if (x > point.getX() && x < point.getX() + width &&
+                y > point.getY() && y < point.getY() + height)
+            return true;
+        return false;
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        repaint();
-        connectType = Blackboard.getInstance().getConnection();
-        connectionHandler.beginConnection(this, connectType);
-        Blackboard.getInstance().getDp().repaint();
+    /**
+     * Initializes the Box instance with a name and coordinates
+     *
+     * @param name String
+     * @param x int
+     * @param y int
+     */
+    public ClassBox(String name, int x, int y) {
+
+        x = (x < 50) ? 50 : x - 50;
+        y = (y < 25) ? 25 : y - 25;
+        this.name = name;
+        this.point = new Point(x, y);
+        this.height = 50;
+        this.width = 95 + 7*(name.length());
+        this.variables = new ArrayList<>();
+        this.methods = new ArrayList<>();
+        this.connections = new ArrayList<>();
+        this.isInterface = isInterface;
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+    public boolean getInterface(){
+        return isInterface;
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        repaint();
-        connectionHandler.updateSides();
-        Blackboard.getInstance().getDp().repaint();
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        int ex = e.getX() - 50;
-        int ey = e.getY() - 25;
-        this.setBounds(topLeftX + 50 + ex, topLeftY + 25 + ey, width, height);
-        topLeftX = topLeftX + ex + 50;
-        topLeftY = topLeftY + ey + 25;
-        repaint();
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
-    @Override
-    public String toString() {
-        ArrayList<connectionRelationship> connections = connectionHandler.getInstance().connections;
-        String compString = "";
-        String assocString = "";
-        String inheritString = "";
-        for (connectionRelationship c : connections) {
-            if (c.getFirstBox().equals(this)) {
-                if (c.getconnecType().equals("Association")) {
-                    assocString += "          " + c.getSecondBox().getClassName() + "\n";
-                } else if (c.getconnecType().equals("Inheritance")) {
-                    inheritString += " extends " + c.getSecondBox().getClassName();
-                } else if (c.getconnecType().equals("Composition")) {
-                    compString += "     " + c.getSecondBox().getClassName() + "\n";
-                }
-            }
+    /**
+     * Draws the box on the passed Graphics panel
+     *
+     * @param g The Graphics panel
+     */
+    public void draw(Graphics g) {
+        g.setColor(Color.GRAY);
+        g.drawRect((int) getPoint().getX(), (int) getPoint().getY(), getWidth(), height);
+        if (!isSelected) {
+            g.setColor(Color.YELLOW);
+        } else {
+            g.setColor(Color.WHITE);
         }
-        if (assocString != "") {
-            assocString = "     " + "method() {" + "\n" + assocString + "     " + "}" + "\n";
+        g.fillRect((int) getPoint().getX(), (int) getPoint().getY(), getWidth(), height);
+        g.setColor(Color.BLACK);
+        int w = g.getFontMetrics().stringWidth(getName());
+        int xx = (int) getPoint().getX() + (getWidth() / 2) - w / 2;
+        int yy = (int) (getPoint().getY() + 20);
+        if(isInterface){
+            g.drawString("<<interface>>", (int) getPoint().getX() + (getWidth() / 2) - 50, yy - 10);
         }
-        String boxString = "Class " + classname.getText() + inheritString + " {" + "\n";
-        boxString += compString;
-        boxString += assocString;
-        boxString += "} \n\n";
-        return boxString;
+        g.drawString(getName(), xx, yy);
     }
 
+    /**
+     * Getter for box name
+     *
+     * @return String box name
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Setter for box name
+     *
+     * @param name
+     */
+    public void setName(String name) {
+    }
+
+    /**
+     * getter for the coordinates
+     *
+     * @return
+     */
+    public Point getPoint() {
+        return point;
+    }
+
+    /**
+     * Setter for the coordinates
+     *
+     * @param x
+     * @param y
+     */
+    public void setPoint(int x, int y) {
+        point = new Point(x - 50, y - 25);
+    }
+
+    /**
+     * Getter for the width of the box
+     *
+     * @return
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * Getter for the box connections
+     *
+     * @return ArrayList of box connections
+     */
+    public ArrayList<connectionRelationship> getConnections() {
+        return connections;
+    }
+
+    /**
+     * TODO
+     */
+    public void resize() {
+    }
 }

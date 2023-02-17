@@ -33,7 +33,7 @@ public class MenuController implements ActionListener
                 Blackboard.getInstance().getDp().setStack(s);
                 for(ClassBox b : s)
                 {
-                    Blackboard.getInstance().getDp().add(b);
+                    //PLACEHOLDER
                 }
                 Blackboard.getInstance().getDp().repaint();
 
