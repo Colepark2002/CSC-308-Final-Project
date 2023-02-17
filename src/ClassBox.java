@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 /**
  * Graphical representation of a class in UML format
+ * 
  * @author Jacob Shapero
  * @author Javier Gonzalez Sanchez
  * @version 32.3
@@ -23,7 +24,6 @@ public class ClassBox {
     private boolean isInterface;
 
     ConnectionHandler connectionHandler = new ConnectionHandler();
-
 
     /**
      * getter for selection status
@@ -51,7 +51,7 @@ public class ClassBox {
      * @param y int y axis
      *
      * @return if the passed coordinates are within the
-     * boundries of the Box
+     *         boundries of the Box
      */
     public boolean contains(int x, int y) {
         if (x > point.getX() && x < point.getX() + width &&
@@ -64,8 +64,8 @@ public class ClassBox {
      * Initializes the Box instance with a name and coordinates
      *
      * @param name String
-     * @param x int
-     * @param y int
+     * @param x    int
+     * @param y    int
      */
     public ClassBox(String name, int x, int y) {
 
@@ -74,14 +74,14 @@ public class ClassBox {
         this.name = name;
         this.point = new Point(x, y);
         this.height = 50;
-        this.width = 95 + 7*(name.length());
+        this.width = 95 + 7 * (name.length());
         this.variables = new ArrayList<>();
         this.methods = new ArrayList<>();
         this.connections = new ArrayList<>();
         this.isInterface = isInterface;
     }
 
-    public boolean getInterface(){
+    public boolean getInterface() {
         return isInterface;
     }
 
@@ -103,7 +103,7 @@ public class ClassBox {
         int w = g.getFontMetrics().stringWidth(getName());
         int xx = (int) getPoint().getX() + (getWidth() / 2) - w / 2;
         int yy = (int) (getPoint().getY() + 20);
-        if(isInterface){
+        if (isInterface) {
             g.drawString("<<interface>>", (int) getPoint().getX() + (getWidth() / 2) - 50, yy - 10);
         }
         g.drawString(getName(), xx, yy);
@@ -169,5 +169,36 @@ public class ClassBox {
     public void resize() {
     }
 
-    public int getHeight() {return height;}
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * Converts a ClassBox and connects to a string
+     */
+    public String toString() {
+
+        String compString = "";
+        String assocString = "";
+        String inheritString = "";
+        System.out.println(name);
+        for (connectionRelationship c : this.connectionHandler.getConnections()) {
+            System.out.println("in loop");
+            if (c.getconnecType().equals("Association")) {
+                assocString += "          " + c.getSecondBox().getName() + "\n";
+            } else if (c.getconnecType().equals("Inheritance")) {
+                inheritString += " extends " + c.getSecondBox().getName();
+            } else if (c.getconnecType().equals("Composition")) {
+                compString += "     " + c.getSecondBox().getName() + "\n";
+            }
+        }
+        if (assocString != "") {
+            assocString = "     " + "method() {" + "\n" + assocString + "     " + "}" + "\n";
+        }
+        String boxString = "Class " + name + inheritString + " {" + "\n";
+        boxString += compString;
+        boxString += assocString;
+        boxString += "} \n\n";
+        return boxString;
+    }
 }

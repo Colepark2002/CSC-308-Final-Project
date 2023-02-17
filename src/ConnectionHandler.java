@@ -32,7 +32,7 @@ public class ConnectionHandler implements Serializable {
         String side = "";
         int xdif = box1.getPoint().x - box2.getPoint().x;
         int ydif = box1.getPoint().y - box2.getPoint().y;
-        int xCenterAvg = (((box1.getWidth() / 2) + box2.getWidth())/2);
+        int xCenterAvg = (((box1.getWidth() / 2) + box2.getWidth()) / 2);
         if (-xCenterAvg < xdif && xdif < xCenterAvg) {
             if (ydif > 0) {
                 side = "Up";
@@ -67,7 +67,7 @@ public class ConnectionHandler implements Serializable {
         }
     }
 
-    public void resetConnection(){
+    public void resetConnection() {
         connectionBox1 = null;
     }
 
@@ -198,10 +198,12 @@ public class ConnectionHandler implements Serializable {
 
     /**
      * Draws the composition connection between classes
-     * @param g the graphics necessary to draw on the panel
-     * @param selfSide the side in which the connection is made for the first ClassBox
+     * 
+     * @param g        the graphics necessary to draw on the panel
+     * @param selfSide the side in which the connection is made for the first
+     *                 ClassBox
      */
-    public void drawDiamond(Graphics g, String selfSide, ClassBox c1, ClassBox c2){
+    public void drawDiamond(Graphics g, String selfSide, ClassBox c1, ClassBox c2) {
         Polygon diamond = new Polygon();
         int xCenter1 = c1.getWidth() / 2;
         int yCenter1 = c1.getHeight() / 2;
@@ -235,17 +237,17 @@ public class ConnectionHandler implements Serializable {
             case "Left":
                 diamond.addPoint(x1, y1 + yCenter1);
                 diamond.addPoint(x1 - 8, y1 + yCenter1 + 8);
-                diamond.addPoint(x1 -16, y1 + yCenter1);
+                diamond.addPoint(x1 - 16, y1 + yCenter1);
                 diamond.addPoint(x1 + -8, y1 + yCenter1 - 8);
                 g.fillPolygon(diamond);
-                g.drawLine(x1 -16, y1 + yCenter1, x2 + xCenter2, y2 + yCenter2);
+                g.drawLine(x1 - 16, y1 + yCenter1, x2 + xCenter2, y2 + yCenter2);
                 break;
 
             case "Right":
                 diamond.addPoint(x1 + (xCenter1 * 2), y1 + yCenter1);
                 diamond.addPoint(x1 + (xCenter1 * 2) + 8, y1 + yCenter1 + 8);
                 diamond.addPoint(x1 + (xCenter1 * 2) + 16, y1 + yCenter1);
-                diamond.addPoint(x1 + (xCenter1 * 2) +8, y1 + yCenter1 - 8);
+                diamond.addPoint(x1 + (xCenter1 * 2) + 8, y1 + yCenter1 - 8);
                 g.fillPolygon(diamond);
                 g.drawLine(x1 + (xCenter1 * 2) + 16, y1 + yCenter1, x2 + xCenter2, y2 + yCenter2);
                 break;
@@ -259,7 +261,7 @@ public class ConnectionHandler implements Serializable {
             String selfSide = c.getSide();
             String otherSide = getSide(c.getSecondBox(), c.getFirstBox());
 
-            switch(connectType) {
+            switch (connectType) {
                 case "Association":
                     drawArrowHead(g, otherSide, c.getFirstBox(), c.getSecondBox());
                     break;
@@ -271,5 +273,9 @@ public class ConnectionHandler implements Serializable {
             }
 
         }
+    }
+
+    public ArrayList<connectionRelationship> getConnections() {
+        return connections;
     }
 }
