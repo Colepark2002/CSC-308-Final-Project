@@ -22,7 +22,7 @@ public class ClassBox {
     private boolean isSelected;
     private boolean isInterface;
 
-    ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
+    ConnectionHandler connectionHandler = new ConnectionHandler();
 
 
     /**
@@ -168,4 +168,6 @@ public class ClassBox {
      */
     public void resize() {
     }
+
+    public int getHeight() {return height;}
 }
