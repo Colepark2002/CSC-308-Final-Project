@@ -15,6 +15,7 @@ import java.util.Stack;
 public class DrawPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
     Stack<ClassBox> stack = new Stack<ClassBox>();
     private ClassBox clickedBox;
+    private ClassBox previousSelection;
 
     private ClassBox checkCollisionWithBoxes(int x, int y) {
         for(ClassBox c : stack)
@@ -48,8 +49,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         this.setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
-        ConnectionHandler connectionHandler = ConnectionHandler.getInstance();
-        connectionHandler.setDrawPanel(this);
     }
 
     /**
@@ -58,6 +57,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(ClassBox c : stack){
+            c.connectionHandler.updateSides();
+            c.connectionHandler.drawConnections(g);
             c.draw(g);
         }
     }
@@ -72,15 +73,18 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         clickedBox = checkCollisionWithBoxes (e.getX(), e.getY());
         if (clickedBox==null) {
             createNewBox(e.getX(), e.getY());
-        } else {
+        }
+        else if (previousSelection == null) {
             clickedBox.setSelected(true);
+            clickedBox.connectionHandler.beginConnection(clickedBox, Blackboard.getInstance().getConnection());
+            previousSelection = clickedBox;
+        }
+        else {
+            previousSelection.connectionHandler.beginConnection(clickedBox, Blackboard.getInstance().getConnection());
+        }
             if (SwingUtilities.isRightMouseButton(e)){
                 showPopUpMenu (e.getX(), e.getY());
-            } else {
-                // something will happen here ...
-
             }
-        }
     }
 
     @Override
@@ -92,6 +96,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     @Override
     public void mouseDragged(MouseEvent e) {
         if(clickedBox != null){
+            clickedBox.connectionHandler.resetConnection();
+            previousSelection = null;
             clickedBox.setPoint(e.getX(), e.getY());
         }
         this.repaint();

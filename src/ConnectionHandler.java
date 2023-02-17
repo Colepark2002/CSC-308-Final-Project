@@ -14,12 +14,11 @@ import java.util.Stack;
 public class ConnectionHandler implements Serializable {
 
     DrawPanel drawPanel;
-    private static ConnectionHandler instance = null;
     public ClassBox connectionBox1 = null;
     public ClassBox connectionBox2 = null;
     ArrayList<connectionRelationship> connections = new ArrayList<connectionRelationship>();
 
-    private ConnectionHandler() {
+    public ConnectionHandler() {
     }
 
     /**
@@ -48,17 +47,6 @@ public class ConnectionHandler implements Serializable {
         return side;
     }
 
-    public static ConnectionHandler getInstance() {
-        if (instance == null) {
-            synchronized (ConnectionHandler.class) {
-                if (instance == null) {
-                    instance = new ConnectionHandler();
-                }
-            }
-        }
-        return instance;
-    }
-
     public void setDrawPanel(DrawPanel d) {
         drawPanel = d;
     }
@@ -76,6 +64,10 @@ public class ConnectionHandler implements Serializable {
             connectionBox1 = null;
             connectionBox2 = null;
         }
+    }
+
+    public void resetConnection(){
+        connectionBox1 = null;
     }
 
     /**
