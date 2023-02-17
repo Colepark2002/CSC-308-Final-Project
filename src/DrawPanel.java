@@ -10,10 +10,10 @@ import java.util.Stack;
  *
  * @author Jacob Shapero
  * @author Van Park
- * @version 1.0
+ * @version 1.1
  */
-public class DrawPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener {
-    Stack<ClassBox> stack = new Stack<ClassBox>();
+public class DrawPanel extends JPanel implements MouseListener, MouseMotionListener, ActionListener, Observer {
+    Stack<ClassBox> stack = new Stack<>();
     private ClassBox clickedBox;
     private ClassBox previousSelection;
 
@@ -49,6 +49,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         this.setLayout(null);
         addMouseListener(this);
         addMouseMotionListener(this);
+        Blackboard.getInstance().addObserver(this);
     }
 
     /**
@@ -127,4 +128,9 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     @Override
     public void mouseExited(MouseEvent e) {}
 
+    @Override
+    public void update(Observable o, Object arg) {
+        this.stack = Blackboard.getInstance().getStack();
+        this.repaint();
+    }
 }
