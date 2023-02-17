@@ -31,8 +31,8 @@ public class ConnectionHandler implements Serializable {
      */
     private String getSide(ClassBox box1, ClassBox box2) {
         String side = "";
-        int xdif = box1.getX() - box2.getX();
-        int ydif = box1.getY() - box2.getY();
+        int xdif = box1.getPoint().x - box2.getPoint().x;
+        int ydif = box1.getPoint().y - box2.getPoint().y;
         if (-85 < xdif && xdif < 85) {
             if (ydif > 0) {
                 side = "Up";
@@ -246,10 +246,10 @@ public class ConnectionHandler implements Serializable {
             String connectType = c.getconnecType();
             String selfSide = c.getSide();
             String otherSide = getSide(c.getSecondBox(), c.getFirstBox());
-            int x1 = c.getFirstBox().topLeftX;
-            int y1 = c.getFirstBox().topLeftY;
-            int x2 = c.getSecondBox().topLeftX;
-            int y2 = c.getSecondBox().topLeftY;
+            int x1 = c.getFirstBox().getPoint().x;
+            int y1 = c.getFirstBox().getPoint().y;
+            int x2 = c.getSecondBox().getPoint().x;
+            int y2 = c.getSecondBox().getPoint().y;
 
             switch(connectType) {
                 case "Association":
