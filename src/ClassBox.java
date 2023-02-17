@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Graphical representation of a class in UML format
  * 
  * @author Jacob Shapero
+ * @author Lauren Allen
  * @author Javier Gonzalez Sanchez
  * @version 32.3
  */
