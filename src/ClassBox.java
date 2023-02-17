@@ -1,6 +1,12 @@
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Graphical representation of a class in UML format
+ * @author Jacob Shapero
+ * @author Javier Gonzalez Sanchez
+ * @version 32.3
+ */
 public class ClassBox {
     protected String name;
 
