@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
 
 /**
- * Allows text to be displayed to screen describing the connections and relation between boxes in the DisplayPanel
+ * Allows text to be displayed to screen describing the connections and relation
+ * between boxes in the DisplayPanel
  *
  * @author Cole Park
  * @author Lauren Allen
