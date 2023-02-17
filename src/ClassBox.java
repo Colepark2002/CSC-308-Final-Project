@@ -168,4 +168,6 @@ public class ClassBox {
      */
     public void resize() {
     }
+
+    public int getHeight() {return height;}
 }

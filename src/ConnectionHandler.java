@@ -32,14 +32,15 @@ public class ConnectionHandler implements Serializable {
         String side = "";
         int xdif = box1.getPoint().x - box2.getPoint().x;
         int ydif = box1.getPoint().y - box2.getPoint().y;
-        if (-85 < xdif && xdif < 85) {
+        int xCenterAvg = (((box1.getWidth() / 2) + box2.getWidth())/2);
+        if (-xCenterAvg < xdif && xdif < xCenterAvg) {
             if (ydif > 0) {
                 side = "Up";
             }
             if (ydif < 0) {
                 side = "Down";
             }
-        } else if (xdif < -85) {
+        } else if (xdif < -xCenterAvg) {
             side = "Right";
         } else {
             side = "Left";
@@ -83,53 +84,57 @@ public class ConnectionHandler implements Serializable {
      * Draws the association connection between classes
      * 
      * @param g         the graphics necessary to draw on the panel
-     * @param x1        x coordinate of the first ClassBox
-     * @param x2        x coordinate of the second ClassBox
-     * @param y1        y coordinate of the first ClassBox
-     * @param y2        y coordinate of the second ClassBox
      * @param otherSide the side in which the connection is made for the second
      *                  ClassBox
      */
-    public void drawArrowHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide) {
+    public void drawArrowHead(Graphics g, String otherSide, ClassBox c1, ClassBox c2) {
+        int xCenter1 = c1.getWidth() / 2;
+        int yCenter1 = c1.getHeight() / 2;
+        int xCenter2 = c2.getWidth() / 2;
+        int yCenter2 = c2.getHeight() / 2;
+
+        int x1 = c1.getPoint().x;
+        int y1 = c1.getPoint().y;
+        int x2 = c2.getPoint().x;
+        int y2 = c2.getPoint().y;
+
         switch (otherSide) {
             case "Up": {
-                Point p1 = new Point(x2 + 50, y2);
-                Point p2 = new Point(x2 + 45, y2 - 10);
-                Point p3 = new Point(x2 + 55, y2 - 10);
+                Point p1 = new Point(x2 + xCenter2, y2);
+                Point p2 = new Point(x2 + xCenter2 - 5, y2 - 10);
+                Point p3 = new Point(x2 + xCenter2 + 5, y2 - 10);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1 + 50, y1 + 25, x2 + 50, y2);
-                g.drawLine(x1, y1, x2 + 50, y2 - 20);
-                g.drawLine(x2 + 50, y2 - 20, x2 + 50, y2);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + xCenter2, y2 - 10);
                 break;
             }
             case "Down": {
-                Point p1 = new Point(x2 + 50, y2 + 50);
-                Point p2 = new Point(x2 + 45, y2 + 60);
-                Point p3 = new Point(x2 + 55, y2 + 60);
+                Point p1 = new Point(x2 + xCenter2, y2 + (yCenter2 * 2));
+                Point p2 = new Point(x2 + xCenter2 - 5, y2 + (yCenter2 * 2) + 10);
+                Point p3 = new Point(x2 + xCenter2 + 5, y2 + (yCenter2 * 2) + 10);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1 + 50, y1 + 25, x2 + 50, y2 + 50);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + xCenter2, y2 + (yCenter2 * 2) + 10);
 
                 break;
             }
             case "Left": {
-                Point p1 = new Point(x2, y2 + 25);
-                Point p2 = new Point(x2 - 10, y2 + 20);
-                Point p3 = new Point(x2 - 10, y2 + 30);
+                Point p1 = new Point(x2, y2 + yCenter2);
+                Point p2 = new Point(x2 - 10, y2 + yCenter2 - 5);
+                Point p3 = new Point(x2 - 10, y2 + yCenter2 + 5);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1 + 50, y1 + 25, x2 - 10, y2 + 25);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 - 10, y2 + yCenter2);
 
                 break;
             }
             case "Right": {
-                Point p1 = new Point(x2 + 100, y2 + 25);
-                Point p2 = new Point(x2 + 110, y2 + 20);
-                Point p3 = new Point(x2 + 110, y2 + 30);
+                Point p1 = new Point(x2 + (xCenter2 * 2), y2 + yCenter2);
+                Point p2 = new Point(x2 + (xCenter2 * 2) + 10, y2 + yCenter2 - 5);
+                Point p3 = new Point(x2 + (xCenter2 * 2) + 10, y2 + yCenter2 + 5);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1 + 50, y1 + 25, x2 + 100, y2 + 25);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + (xCenter2 * 2) + 10, y2 + yCenter2);
 
                 break;
             }
@@ -141,43 +146,52 @@ public class ConnectionHandler implements Serializable {
      * Draws the inheritance connection between classes
      * 
      * @param g         the graphics necessary to draw on the panel
-     * @param x1        x coordinate of the first ClassBox
-     * @param x2        x coordinate of the second ClassBox
-     * @param y1        y coordinate of the first ClassBox
-     * @param y2        y coordinate of the second ClassBox
      * @param otherSide the side in which the connection is made for the second
      *                  ClassBox
      */
-    public void drawTriangleHead(Graphics g, int x1, int x2, int y1, int y2, String otherSide) {
+    public void drawTriangleHead(Graphics g, String otherSide, ClassBox c1, ClassBox c2) {
         Polygon arrowhead = new Polygon();
+        int xCenter1 = c1.getWidth() / 2;
+        int yCenter1 = c1.getHeight() / 2;
+        int xCenter2 = c2.getWidth() / 2;
+        int yCenter2 = c2.getHeight() / 2;
+
+        int x1 = c1.getPoint().x;
+        int y1 = c1.getPoint().y;
+        int x2 = c2.getPoint().x;
+        int y2 = c2.getPoint().y;
+
         switch (otherSide) {
             case "Up": {
-                arrowhead.addPoint(x2 + 50, y2);
-                arrowhead.addPoint(x2 + 45, y2 - 10);
-                arrowhead.addPoint(x2 + 55, y2 - 10);
+                arrowhead.addPoint(x2 + xCenter2, y2);
+                arrowhead.addPoint(x2 + xCenter2 - 5, y2 - 10);
+                arrowhead.addPoint(x2 + xCenter2 + 5, y2 - 10);
                 g.drawPolygon(arrowhead);
-                g.drawLine(x1 + 50, y1 + 25, x2 + 50, y2 - 10);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + xCenter2, y2 - 10);
+                break;
             }
             case "Down": {
-                arrowhead.addPoint(x2 + 50, y2 + 50);
-                arrowhead.addPoint(x2 + 45, y2 + 60);
-                arrowhead.addPoint(x2 + 55, y2 + 60);
+                arrowhead.addPoint(x2 + xCenter2, y2 + (yCenter2 * 2));
+                arrowhead.addPoint(x2 + xCenter2 - 5, y2 + (yCenter2 * 2) + 10);
+                arrowhead.addPoint(x2 + xCenter2 + 5, y2 + (yCenter2 * 2) + 10);
                 g.drawPolygon(arrowhead);
-                g.drawLine(x1 + 50, y1 + 25, x2 + 50, y2 + 60);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + xCenter2, y2 + (yCenter2 * 2) + 10);
+                break;
             }
             case "Left": {
-                arrowhead.addPoint(x2, y2 + 25);
-                arrowhead.addPoint(x2 - 10, y2 + 20);
-                arrowhead.addPoint(x2 - 10, y2 + 30);
+                arrowhead.addPoint(x2, y2 + yCenter2);
+                arrowhead.addPoint(x2 - 10, y2 + yCenter2 - 5);
+                arrowhead.addPoint(x2 - 10, y2 + yCenter2 + 5);
                 g.drawPolygon(arrowhead);
-                g.drawLine(x1 + 50, y1 + 25, x2 - 10, y2 + 25);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 - 10, y2 + yCenter2);
+                break;
             }
             case "Right": {
-                arrowhead.addPoint(x2 + 100, y2 + 25);
-                arrowhead.addPoint(x2 + 110, y2 + 20);
-                arrowhead.addPoint(x2 + 110, y2 + 30);
+                arrowhead.addPoint(x2 + (xCenter2 * 2), y2 + yCenter2);
+                arrowhead.addPoint(x2 + (xCenter2 * 2) + 10, y2 + yCenter2 - 5);
+                arrowhead.addPoint(x2 + (xCenter2 * 2) + 10, y2 + yCenter2 + 5);
                 g.drawPolygon(arrowhead);
-                g.drawLine(x1 + 50, y1 + 25, x2 + 100, y2 + 25);
+                g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + (xCenter2 * 2) + 10, y2 + yCenter2);
             }
         }
     }
@@ -185,49 +199,55 @@ public class ConnectionHandler implements Serializable {
     /**
      * Draws the composition connection between classes
      * @param g the graphics necessary to draw on the panel
-     * @param x1 x coordinate of the first ClassBox
-     * @param x2 x coordinate of the second ClassBox
-     * @param y1 y coordinate of the first ClassBox
-     * @param y2 y coordinate of the second ClassBox
      * @param selfSide the side in which the connection is made for the first ClassBox
      */
-    public void drawDiamond(Graphics g, int x1, int x2, int y1, int y2, String selfSide){
+    public void drawDiamond(Graphics g, String selfSide, ClassBox c1, ClassBox c2){
         Polygon diamond = new Polygon();
+        int xCenter1 = c1.getWidth() / 2;
+        int yCenter1 = c1.getHeight() / 2;
+        int xCenter2 = c2.getWidth() / 2;
+        int yCenter2 = c2.getHeight() / 2;
+
+        int x1 = c1.getPoint().x;
+        int y1 = c1.getPoint().y;
+        int x2 = c2.getPoint().x;
+        int y2 = c2.getPoint().y;
+
         switch (selfSide) {
             case "Up":
-                diamond.addPoint(x1 + 50, y1);
-                diamond.addPoint(x1 + 58, y1 - 8);
-                diamond.addPoint(x1 + 50, y1 - 16);
-                diamond.addPoint(x1 + 42, y1 - 8);
+                diamond.addPoint(x1 + xCenter1, y1);
+                diamond.addPoint(x1 + xCenter1 + 8, y1 - 8);
+                diamond.addPoint(x1 + xCenter1, y1 - 16);
+                diamond.addPoint(x1 + xCenter1 - 8, y1 - 8);
                 g.fillPolygon(diamond);
-                g.drawLine(x1 + 50, y1 - 16, x2 + 50, y2 + 25);
+                g.drawLine(x1 + xCenter1, y1 - 16, x2 + xCenter2, y2 + yCenter2);
                 break;
 
             case "Down":
-                diamond.addPoint(x1 + 50, y1 + 50);
-                diamond.addPoint(x1 + 58, y1 + 58);
-                diamond.addPoint(x1 + 50, y1 + 66);
-                diamond.addPoint(x1 + 42, y1 + 58);
+                diamond.addPoint(x1 + xCenter1, y1 + (yCenter1 * 2));
+                diamond.addPoint(x1 + xCenter1 + 8, y1 + (yCenter1 * 2) + 8);
+                diamond.addPoint(x1 + xCenter1, y1 + (yCenter1 * 2) + 16);
+                diamond.addPoint(x1 + xCenter1 - 8, y1 + (yCenter1 * 2) + 8);
                 g.fillPolygon(diamond);
-                g.drawLine(x1 + 50, y1 + 66, x2 + 50, y2 + 25);
+                g.drawLine(x1 + xCenter1, y1 + (yCenter1 * 2) + 16, x2 + xCenter2, y2 + yCenter2);
                 break;
 
             case "Left":
-                diamond.addPoint(x1, y1 + 25);
-                diamond.addPoint(x1 - 8, y1 + 33);
-                diamond.addPoint(x1 -16, y1 + 25);
-                diamond.addPoint(x1 + -8, y1 + 17);
+                diamond.addPoint(x1, y1 + yCenter1);
+                diamond.addPoint(x1 - 8, y1 + yCenter1 + 8);
+                diamond.addPoint(x1 -16, y1 + yCenter1);
+                diamond.addPoint(x1 + -8, y1 + yCenter1 - 8);
                 g.fillPolygon(diamond);
-                g.drawLine(x1 -16, y1 + 25, x2 + 50, y2 + 25);
+                g.drawLine(x1 -16, y1 + yCenter1, x2 + xCenter2, y2 + yCenter2);
                 break;
 
             case "Right":
-                diamond.addPoint(x1 + 100, y1 + 25);
-                diamond.addPoint(x1 + 108, y1 + 33);
-                diamond.addPoint(x1 + 116, y1 + 25);
-                diamond.addPoint(x1 + 108, y1 + 17);
+                diamond.addPoint(x1 + (xCenter1 * 2), y1 + yCenter1);
+                diamond.addPoint(x1 + (xCenter1 * 2) + 8, y1 + yCenter1 + 8);
+                diamond.addPoint(x1 + (xCenter1 * 2) + 16, y1 + yCenter1);
+                diamond.addPoint(x1 + (xCenter1 * 2) +8, y1 + yCenter1 - 8);
                 g.fillPolygon(diamond);
-                g.drawLine(x1 + 116, y1 + 25, x2 + 50, y2 + 25);
+                g.drawLine(x1 + (xCenter1 * 2) + 16, y1 + yCenter1, x2 + xCenter2, y2 + yCenter2);
                 break;
         }
     }
@@ -238,20 +258,16 @@ public class ConnectionHandler implements Serializable {
             String connectType = c.getconnecType();
             String selfSide = c.getSide();
             String otherSide = getSide(c.getSecondBox(), c.getFirstBox());
-            int x1 = c.getFirstBox().getPoint().x;
-            int y1 = c.getFirstBox().getPoint().y;
-            int x2 = c.getSecondBox().getPoint().x;
-            int y2 = c.getSecondBox().getPoint().y;
 
             switch(connectType) {
                 case "Association":
-                    drawArrowHead(g, x1, x2, y1, y2, otherSide);
+                    drawArrowHead(g, otherSide, c.getFirstBox(), c.getSecondBox());
                     break;
                 case "Inheritance":
-                    drawTriangleHead(g, x1, x2, y1, y2, otherSide);
+                    drawTriangleHead(g, otherSide, c.getFirstBox(), c.getSecondBox());
                     break;
                 case "Composition":
-                    drawDiamond(g, x1, x2, y1, y2, selfSide);
+                    drawDiamond(g, selfSide, c.getFirstBox(), c.getSecondBox());
             }
 
         }

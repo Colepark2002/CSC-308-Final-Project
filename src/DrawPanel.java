@@ -81,6 +81,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         else {
             previousSelection.connectionHandler.beginConnection(clickedBox, Blackboard.getInstance().getConnection());
+            previousSelection = null;
         }
             if (SwingUtilities.isRightMouseButton(e)){
                 showPopUpMenu (e.getX(), e.getY());
