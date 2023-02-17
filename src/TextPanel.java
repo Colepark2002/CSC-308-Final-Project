@@ -39,7 +39,7 @@ public class TextPanel extends JPanel implements Observer {
      * Updates text box with correct methods according to boxes in draw area
      */
     public void setTextArea() {
-        Stack<ClassBox> boxList = Blackboard.getInstance().getDp().getStack();
+        Stack<ClassBox> boxList = Blackboard.getInstance().getStack();
         String fullString = "";
         for (ClassBox box : boxList) {
             fullString += box.toString();

@@ -111,8 +111,6 @@ public class FinalProject extends JFrame {
         rightPanel.setLayout(border);
         rightPanel.add(dp, BorderLayout.CENTER);
         rightPanel.add(feedbackPanel, BorderLayout.SOUTH);
-
-        Blackboard.getInstance().setDp(dp);
         tp.setBackground(Color.DARK_GRAY);
         dp.setBackground(new Color(40, 100, 40));
         add(tp);

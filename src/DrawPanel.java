@@ -41,6 +41,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             stack.push(box);
         }
         this.repaint();
+        Blackboard.getInstance().setStack(this.getStack());
     }
 
     public DrawPanel() {
