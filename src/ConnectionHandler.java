@@ -123,21 +123,21 @@ public class ConnectionHandler implements Serializable {
             }
             case "Left": {
                 Point p1 = new Point(x2, y2 + 25);
-                Point p2 = new Point(x2 - 5, y2 + 20);
-                Point p3 = new Point(x2 - 5, y2 + 30);
+                Point p2 = new Point(x2 - 10, y2 + 20);
+                Point p3 = new Point(x2 - 10, y2 + 30);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1 + 50, y1 + 25, x2, y2 + 25);
+                g.drawLine(x1 + 50, y1 + 25, x2 - 10, y2 + 25);
 
                 break;
             }
             case "Right": {
                 Point p1 = new Point(x2 + 100, y2 + 25);
-                Point p2 = new Point(x2 + 105, y2 + 20);
-                Point p3 = new Point(x2 + 105, y2 + 30);
+                Point p2 = new Point(x2 + 110, y2 + 20);
+                Point p3 = new Point(x2 + 110, y2 + 30);
                 g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 g.drawLine(p1.x, p1.y, p3.x, p3.y);
-                g.drawLine(x1 + 50, y1 + 25, x2, y2 + 25);
+                g.drawLine(x1 + 50, y1 + 25, x2 + 100, y2 + 25);
 
                 break;
             }
