@@ -60,7 +60,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         for(ClassBox c : stack){
             c.draw(g);
         }
-        Blackboard.getInstance().setDp(this);
     }
 
     @Override
