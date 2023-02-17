@@ -19,7 +19,7 @@ public class MenuController implements ActionListener
         switch(e.getActionCommand())
         {
             case "New":
-                FinalProject.start();
+                Blackboard.getInstance().setStack(new Stack<>());
                 break;
 
             case "Save":
@@ -28,14 +28,8 @@ public class MenuController implements ActionListener
                 break;
 
             case "Load":
-                FinalProject.start();
                 Stack<ClassBox> s = FileHandler.load(JOptionPane.showInputDialog("Enter a File Name"));
                 Blackboard.getInstance().setStack(s);
-                for(ClassBox b : s)
-                {
-                    //PLACEHOLDER
-                }
-
                 break;
 
             case "Association":

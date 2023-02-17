@@ -11,7 +11,7 @@ public class Blackboard extends Observable
 {
     JTextArea text;
     String connection = "Association";
-    Stack<ClassBox> stack = new Stack<ClassBox>();
+    Stack<ClassBox> stack = new Stack<>();
 
     private static Blackboard instance = null;
 

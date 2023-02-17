@@ -8,25 +8,13 @@ import java.awt.*;
  * @version 2.0
  */
 public class FinalProject extends JFrame {
-    private static FinalProject win = null;
 
     /**
      * main method
      * @param args String[]
      */
     public static void main(String[] args) {
-        start();
-    }
-
-    /**
-     * start function used to reset project when a new one is created
-     */
-    public static void start() {
-        if (win != null) {
-            win.setVisible(false);
-            win.dispose();
-        }
-        win = new FinalProject();
+        FinalProject win = new FinalProject();
         win.setSize(500, 500);
         win.setVisible(true);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

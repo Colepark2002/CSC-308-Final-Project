@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * @author Javier Gonzalez Sanchez
  * @version 32.3
  */
-public class ClassBox {
+public class ClassBox implements Serializable {
     protected String name;
 
     protected int type;

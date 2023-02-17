@@ -12,12 +12,12 @@ import java.util.Stack;
  * @version 1.0
  */
 public class TextPanel extends JPanel implements Observer {
+
     JTextArea textArea;
 
     public TextPanel() {
         textArea = new JTextArea();
         setLayout(new BorderLayout());
-        JTextArea textArea = new JTextArea();
         Font f = new Font("Helvetica", Font.PLAIN, 20);
         textArea.setFont(f);
         JScrollPane scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -31,9 +31,7 @@ public class TextPanel extends JPanel implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        setTextArea();
-    }
+    public void update(Observable o, Object arg) { setTextArea(); }
 
     /**
      * Updates text box with correct methods according to boxes in draw area
