@@ -19,7 +19,6 @@ public class ClassBox implements Serializable {
 
     private Point point;
     private int height, width;
-    private ArrayList<connectionRelationship> connections;
     private ArrayList<String> methods;
     private ArrayList<String> variables;
     private boolean isSelected;
@@ -79,7 +78,6 @@ public class ClassBox implements Serializable {
         this.width = 95 + 7 * (name.length());
         this.variables = new ArrayList<>();
         this.methods = new ArrayList<>();
-        this.connections = new ArrayList<>();
         this.isInterface = isInterface;
     }
 
@@ -156,20 +154,6 @@ public class ClassBox implements Serializable {
         return width;
     }
 
-    /**
-     * Getter for the box connections
-     *
-     * @return ArrayList of box connections
-     */
-    public ArrayList<connectionRelationship> getConnections() {
-        return connections;
-    }
-
-    /**
-     * TODO
-     */
-    public void resize() {
-    }
 
     public int getHeight() {
         return height;
