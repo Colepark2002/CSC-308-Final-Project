@@ -154,7 +154,6 @@ public class ClassBox implements Serializable {
         return width;
     }
 
-
     public int getHeight() {
         return height;
     }
