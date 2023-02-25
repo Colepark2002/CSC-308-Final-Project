@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Graphical representation of a class in UML format
  * 
  * @author Jacob Shapero
+ * @author Lauren Allen
  * @author Javier Gonzalez Sanchez
  * @version 32.3
  */
@@ -18,7 +19,6 @@ public class ClassBox implements Serializable {
 
     private Point point;
     private int height, width;
-    private ArrayList<connectionRelationship> connections;
     private ArrayList<String> methods;
     private ArrayList<String> variables;
     private boolean isSelected;
@@ -78,7 +78,6 @@ public class ClassBox implements Serializable {
         this.width = 95 + 7 * (name.length());
         this.variables = new ArrayList<>();
         this.methods = new ArrayList<>();
-        this.connections = new ArrayList<>();
         this.isInterface = isInterface;
     }
 
@@ -155,21 +154,6 @@ public class ClassBox implements Serializable {
         return width;
     }
 
-    /**
-     * Getter for the box connections
-     *
-     * @return ArrayList of box connections
-     */
-    public ArrayList<connectionRelationship> getConnections() {
-        return connections;
-    }
-
-    /**
-     * TODO
-     */
-    public void resize() {
-    }
-
     public int getHeight() {
         return height;
     }
@@ -182,9 +166,7 @@ public class ClassBox implements Serializable {
         String compString = "";
         String assocString = "";
         String inheritString = "";
-        System.out.println(name);
         for (connectionRelationship c : this.connectionHandler.getConnections()) {
-            System.out.println("in loop");
             if (c.getconnecType().equals("Association")) {
                 assocString += "          " + c.getSecondBox().getName() + "\n";
             } else if (c.getconnecType().equals("Inheritance")) {

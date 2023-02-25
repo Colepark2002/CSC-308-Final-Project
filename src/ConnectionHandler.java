@@ -166,7 +166,7 @@ public class ConnectionHandler implements Serializable {
                 arrowhead.addPoint(x2 + xCenter2, y2);
                 arrowhead.addPoint(x2 + xCenter2 - 5, y2 - 10);
                 arrowhead.addPoint(x2 + xCenter2 + 5, y2 - 10);
-                g.drawPolygon(arrowhead);
+                g.fillPolygon(arrowhead);
                 g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + xCenter2, y2 - 10);
                 break;
             }
@@ -174,7 +174,7 @@ public class ConnectionHandler implements Serializable {
                 arrowhead.addPoint(x2 + xCenter2, y2 + (yCenter2 * 2));
                 arrowhead.addPoint(x2 + xCenter2 - 5, y2 + (yCenter2 * 2) + 10);
                 arrowhead.addPoint(x2 + xCenter2 + 5, y2 + (yCenter2 * 2) + 10);
-                g.drawPolygon(arrowhead);
+                g.fillPolygon(arrowhead);
                 g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + xCenter2, y2 + (yCenter2 * 2) + 10);
                 break;
             }
@@ -182,7 +182,7 @@ public class ConnectionHandler implements Serializable {
                 arrowhead.addPoint(x2, y2 + yCenter2);
                 arrowhead.addPoint(x2 - 10, y2 + yCenter2 - 5);
                 arrowhead.addPoint(x2 - 10, y2 + yCenter2 + 5);
-                g.drawPolygon(arrowhead);
+                g.fillPolygon(arrowhead);
                 g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 - 10, y2 + yCenter2);
                 break;
             }
@@ -190,7 +190,7 @@ public class ConnectionHandler implements Serializable {
                 arrowhead.addPoint(x2 + (xCenter2 * 2), y2 + yCenter2);
                 arrowhead.addPoint(x2 + (xCenter2 * 2) + 10, y2 + yCenter2 - 5);
                 arrowhead.addPoint(x2 + (xCenter2 * 2) + 10, y2 + yCenter2 + 5);
-                g.drawPolygon(arrowhead);
+                g.fillPolygon(arrowhead);
                 g.drawLine(x1 + xCenter1, y1 + yCenter1, x2 + (xCenter2 * 2) + 10, y2 + yCenter2);
             }
         }
