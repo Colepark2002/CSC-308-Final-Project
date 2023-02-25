@@ -23,6 +23,7 @@ public class ClassBox implements Serializable {
     private ArrayList<String> variables;
     private boolean isSelected;
     private boolean isInterface;
+    private final int varH = 30;
 
     ConnectionHandler connectionHandler = new ConnectionHandler();
 
@@ -99,6 +100,10 @@ public class ClassBox implements Serializable {
             g.setColor(Color.WHITE);
         }
         g.fillRect((int) getPoint().getX(), (int) getPoint().getY(), getWidth(), height);
+        g.setColor(Color.GRAY);
+        for (int i = 0; (i/varH) < variables.size(); i+= varH){
+            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + i + varH, getWidth() - 10, varH);
+        }
         g.setColor(Color.BLACK);
         int w = g.getFontMetrics().stringWidth(getName());
         int xx = (int) getPoint().getX() + (getWidth() / 2) - w / 2;
@@ -107,6 +112,15 @@ public class ClassBox implements Serializable {
             g.drawString("<<interface>>", (int) getPoint().getX() + (getWidth() / 2) - 50, yy - 10);
         }
         g.drawString(getName(), xx, yy);
+    }
+
+    public void addVar(String name){
+        variables.add(name);
+        height += varH;
+
+    }
+    public void addMethod(String name){
+        methods.add(name);
     }
 
     /**

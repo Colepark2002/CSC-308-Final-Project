@@ -28,11 +28,23 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         JPopupMenu pm = new JPopupMenu();
         JMenuItem l1 = new JMenuItem("delete");
         JMenuItem l2 = new JMenuItem("rename");
+        JMenuItem l3 = new JMenuItem("add var");
+        JMenuItem l4 = new JMenuItem("add method");
         pm.add(l1);
         pm.add(l2);
+        pm.add(l3);
+        pm.add(l4);
         l1.addActionListener(this);
         l2.addActionListener(this);
+        l3.addActionListener(this);
+        l4.addActionListener(this);
         pm.show(this, x, y);
+    }
+
+    private void varMenu(ClassBox box){
+        String varNam = JOptionPane.showInputDialog("Please input variable name");
+        box.addVar(varNam);
+        repaint();
     }
 
     private void createNewBox (int x, int y) {
@@ -108,7 +120,15 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("delete")) {
             //PLACEHOLDER
-        } else if (e.getActionCommand().equals("rename")) {
+        }
+        else if (e.getActionCommand().equals("rename")) {
+            //PLACEHOLDER
+        }
+        else if (e.getActionCommand().equals("add var")) {
+            //PLACEHOLDER
+            varMenu(clickedBox);
+        }
+        else if (e.getActionCommand().equals("add method")) {
             //PLACEHOLDER
         }
     }
