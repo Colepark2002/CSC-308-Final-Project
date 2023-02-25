@@ -3,27 +3,16 @@ import java.awt.*;
 
 
 /**
- * Main Class and GUI
+ * Tutor window GUI
  * @author Cole Park
- * @version 2.0
+ * @version 3.0
  */
-public class FinalProject extends JFrame {
-
-    /**
-     * main method
-     * @param args String[]
-     */
-    public static void main(String[] args) {
-        FinalProject win = new FinalProject();
-        win.setSize(500, 500);
-        win.setVisible(true);
-        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+public class TutorWindow extends JFrame {
 
     /**
      * Project Constructor
      */
-    public FinalProject() {
+    public TutorWindow() {
         GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
 
