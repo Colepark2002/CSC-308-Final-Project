@@ -7,16 +7,24 @@ import javax.swing.*;
  */
 public class Driver {
 
-    private static TutorWindow win;
+    private static LoginWindow loginWindow;
+    private static TutorWindow tutorWindow;
+
 
     /**
      * main method
      * @param args String[]
      */
     public static void main(String[] args) {
-        win = new TutorWindow();
-        win.setSize(500, 500);
-        win.setVisible(true);
-        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        loginWindow = new LoginWindow();
+//        loginWindow.setSize(500, 500);
+//        loginWindow.setVisible(true);
+//        loginWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        tutorWindow = new TutorWindow();
+        tutorWindow.setSize(500, 500);
+        tutorWindow.setVisible(true);
+        tutorWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
