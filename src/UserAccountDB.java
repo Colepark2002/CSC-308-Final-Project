@@ -1,4 +1,3 @@
-import java.util.*;
 import java.sql.*;
 
 /**
@@ -10,8 +9,38 @@ import java.sql.*;
 
 public class UserAccountDB {
 
-  public static void main() {
+  private static Connection conn;
 
+  public static void main() throws SQLException {
+
+    // UserAccountDB db = new UserAccountDB();
+
+    try {
+      connect();
+
+    } finally {
+      if (conn != null) {
+        System.out.println("Cannot Connect");
+        disconnect();
+
+      }
+    }
+  }
+
+  private static void connect() throws SQLException {
+
+    System.out.println("Connecting to database...");
+    String db_url = "jdbc:mysql://10.144.63.183:3306/mysqljdbc";
+    String db_user = "tutor_app";
+    String db_password = "tutor_connect";
+    conn = DriverManager.getConnection(db_url, db_user, db_password);
+    System.out.println("Connection vaild");
+  }
+
+  private static void disconnect() throws SQLException {
+
+    System.out.println("Closing database connection");
+    conn.close();
   }
 
   /**
@@ -19,17 +48,19 @@ public class UserAccountDB {
    */
   public boolean checkUserInfo(String givenUsername, String givenPassword) throws SQLException {
 
-    try (Connection conn = DriverManager.getConnection(System.getenv("JDBC_URL"),
-        System.getenv("JDBC_USER"),
-        System.getenv("JDBC_PW"))) {
+    String db_url = "jdbc:mysql://10.144.63.183:3306/mysqljdbc";
+    String db_user = "tutor_app";
+    String db_password = "tutor_connect";
 
-      String selectQuery = "SELECT Username, Password FROM user_accounts WHERE Username = givenUsername AND Password = givenPassword";
+    try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
+
+      String selectQuery = "SELECT Username, Password FROM accounts WHERE Username = givenUsername AND Password = givenPassword";
 
       try (Statement stmt = conn.createStatement()) {
         ResultSet result = stmt.executeQuery(selectQuery);
         while (result.next()) {
-          String resultUsername = result.getString(1);
-          String resultPassword = result.getString(2);
+          String resultUsername = result.getString(2);
+          String resultPassword = result.getString(3);
           if (givenUsername.equals(resultUsername) & givenPassword.equals(resultPassword)) {
             return true;
           }
@@ -44,15 +75,21 @@ public class UserAccountDB {
    * Inserts username and password into user_account
    */
   public void addUser(String username, String password) throws SQLException {
-    try (Connection conn = DriverManager.getConnection(System.getenv("JDBC_URL"),
-        System.getenv("JDBC_USER"),
-        System.getenv("JDBC_PW"))) {
 
-      String insertquery = "INSERT INTO user_accounts (Username, Password)";
+    String db_url = "jdbc:mysql://10.144.63.183:3306/mysqljdbc";
+    String db_user = "tutor_app";
+    String db_password = "tutor_connect";
+
+    try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
+
+      String insertquery = "INSERT INTO accounts VALUES (id, Username, Password, proficiency)";
 
       try (PreparedStatement pstmt = conn.prepareStatement(insertquery)) {
-        pstmt.setString(1, username);
-        pstmt.setString(2, password);
+        pstmt.setString(1, null);
+        pstmt.setString(2, username);
+        pstmt.setString(3, password);
+        pstmt.setInt(4, 0);
+
         pstmt.executeUpdate();
         System.out.println("Added user account");
       }
