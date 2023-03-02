@@ -47,6 +47,12 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         repaint();
     }
 
+    private void methodMenu(ClassBox box){
+        String methNam = JOptionPane.showInputDialog("Please input method name");
+        box.addMethod(methNam);
+        repaint();
+    }
+
     private void createNewBox (int x, int y) {
         String name = JOptionPane.showInputDialog("Please input name");
         if(name != null){
@@ -130,6 +136,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         else if (e.getActionCommand().equals("add method")) {
             //PLACEHOLDER
+            methodMenu(clickedBox);
         }
     }
 
