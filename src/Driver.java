@@ -16,15 +16,11 @@ public class Driver {
      * @param args String[]
      */
     public static void main(String[] args) {
-//        loginWindow = new LoginWindow();
-//        loginWindow.setSize(500, 500);
-//        loginWindow.setVisible(true);
-//        loginWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginWindow = new LoginWindow();
+    }
 
-
+    public static void login() {
+        loginWindow.setVisible(false);
         tutorWindow = new TutorWindow();
-        tutorWindow.setSize(500, 500);
-        tutorWindow.setVisible(true);
-        tutorWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

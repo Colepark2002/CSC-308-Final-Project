@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -92,5 +94,11 @@ public class TutorWindow extends JFrame {
         dp.setBackground(new Color(40, 100, 40));
         add(tp);
         add(rightPanel);
+
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
+
 }
