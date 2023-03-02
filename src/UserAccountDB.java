@@ -11,7 +11,7 @@ public class UserAccountDB {
 
   private static Connection conn;
 
-  public static void main() throws SQLException {
+  public static void main(String[] args) throws SQLException {
 
     // UserAccountDB db = new UserAccountDB();
 
@@ -59,8 +59,8 @@ public class UserAccountDB {
       try (Statement stmt = conn.createStatement()) {
         ResultSet result = stmt.executeQuery(selectQuery);
         while (result.next()) {
-          String resultUsername = result.getString(2);
-          String resultPassword = result.getString(3);
+          String resultUsername = result.getString(1);
+          String resultPassword = result.getString(2);
           if (givenUsername.equals(resultUsername) & givenPassword.equals(resultPassword)) {
             return true;
           }
