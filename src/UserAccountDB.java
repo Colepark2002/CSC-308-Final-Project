@@ -4,6 +4,7 @@ import java.sql.*;
  * Database to store user account information
  * 
  * @author Lauren Allen
+ * @author Cole Park
  * @version 1.0
  */
 
@@ -18,9 +19,11 @@ public class UserAccountDB {
     try {
       connect();
 
-    } finally {
+    } catch(SQLException e) {
+      System.out.println(e.getMessage());
+    } finally
+     {
       if (conn != null) {
-        System.out.println("Cannot Connect");
         disconnect();
 
       }
@@ -30,9 +33,9 @@ public class UserAccountDB {
   private static void connect() throws SQLException {
 
     System.out.println("Connecting to database...");
-    String db_url = "jdbc:mysql://10.144.63.183:3306/mysqljdbc";
-    String db_user = "tutor_app";
-    String db_password = "tutor_connect";
+    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
+    String db_user = "sql9602248";
+    String db_password = "xKH3V5Hh6f";
     conn = DriverManager.getConnection(db_url, db_user, db_password);
     System.out.println("Connection vaild");
   }
@@ -48,9 +51,9 @@ public class UserAccountDB {
    */
   public boolean checkUserLogin(String givenUsername, String givenPassword) throws SQLException {
 
-    String db_url = "jdbc:mysql://10.144.63.183:3306/mysqljdbc";
-    String db_user = "tutor_app";
-    String db_password = "tutor_connect";
+    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
+    String db_user = "sql9602248";
+    String db_password = "xKH3V5Hh6f";
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
@@ -76,9 +79,9 @@ public class UserAccountDB {
    */
   public void addUser(String username, String password) throws SQLException {
 
-    String db_url = "jdbc:mysql://10.144.63.183:3306/mysqljdbc";
-    String db_user = "tutor_app";
-    String db_password = "tutor_connect";
+    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
+    String db_user = "sql9602248";
+    String db_password = "xKH3V5Hh6f";
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
