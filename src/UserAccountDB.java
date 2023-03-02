@@ -46,7 +46,7 @@ public class UserAccountDB {
   /**
    * Verifies account login information exists and password is correct
    */
-  public boolean checkUserInfo(String givenUsername, String givenPassword) throws SQLException {
+  public boolean checkUserLogin(String givenUsername, String givenPassword) throws SQLException {
 
     String db_url = "jdbc:mysql://10.144.63.183:3306/mysqljdbc";
     String db_user = "tutor_app";
