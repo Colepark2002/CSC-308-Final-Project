@@ -9,14 +9,16 @@ import java.util.Stack;
 /**
  * Tutor window GUI
  * @author Cole Park
- * @version 3.0
+ * @author Bret Craig
+ * @version 3.1
  */
 public class TutorWindow extends JFrame {
 
     /**
      * Project Constructor
      */
-    public TutorWindow() {
+    public TutorWindow(String user) {
+        super("UML Tutor - " + user);
         GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
 
