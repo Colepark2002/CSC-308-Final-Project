@@ -23,6 +23,7 @@ public class ClassBox implements Serializable {
     private ArrayList<String> variables;
     private boolean isSelected;
     private boolean isInterface;
+    private final int varH = 20;
 
     ConnectionHandler connectionHandler = new ConnectionHandler();
 
@@ -99,6 +100,24 @@ public class ClassBox implements Serializable {
             g.setColor(Color.WHITE);
         }
         g.fillRect((int) getPoint().getX(), (int) getPoint().getY(), getWidth(), height);
+        int hChange = 0;
+        while((hChange / varH) < variables.size()){
+            g.setColor(Color.GRAY);
+            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5), getWidth() - 10, varH);
+            g.setColor(Color.white);
+            g.drawString(variables.get((hChange/varH)), (int)getPoint().getX() + 7, (int)getPoint().getY() + hChange + (varH + 20));
+            hChange += varH;
+        }
+        hChange += 5;
+        int i = 0;
+        while((i) < methods.size()){
+            g.setColor(Color.GRAY);
+            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5), getWidth() - 10, varH);
+            g.setColor(Color.white);
+            g.drawString(methods.get(i), (int)getPoint().getX() + 7, (int)getPoint().getY() + hChange + (varH + 20));
+            hChange += varH;
+            i += 1;
+        }
         g.setColor(Color.BLACK);
         int w = g.getFontMetrics().stringWidth(getName());
         int xx = (int) getPoint().getX() + (getWidth() / 2) - w / 2;
@@ -107,6 +126,16 @@ public class ClassBox implements Serializable {
             g.drawString("<<interface>>", (int) getPoint().getX() + (getWidth() / 2) - 50, yy - 10);
         }
         g.drawString(getName(), xx, yy);
+    }
+
+    public void addVar(String name){
+        variables.add(name);
+        height += varH;
+
+    }
+    public void addMethod(String name){
+        methods.add(name);
+        height += varH;
     }
 
     /**
@@ -154,6 +183,7 @@ public class ClassBox implements Serializable {
         return width;
     }
 
+
     public int getHeight() {
         return height;
     }
@@ -166,7 +196,9 @@ public class ClassBox implements Serializable {
         String compString = "";
         String assocString = "";
         String inheritString = "";
+        System.out.println(name);
         for (connectionRelationship c : this.connectionHandler.getConnections()) {
+            System.out.println("in loop");
             if (c.getconnecType().equals("Association")) {
                 assocString += "          " + c.getSecondBox().getName() + "\n";
             } else if (c.getconnecType().equals("Inheritance")) {
