@@ -70,9 +70,9 @@ public class TutorWindow extends JFrame {
 
         JPanel feedbackPanel = new JPanel();
         JMenuBar fMenuBar = new JMenuBar();
-        JMenu check = new JMenu("Check");
-        JMenu hint = new JMenu("Hint");
-        JMenu submit = new JMenu("Submit");
+        JButton check = new JButton("Check");
+        JButton hint = new JButton("Hint");
+        JButton submit = new JButton("Submit");
         TextArea text = new TextArea();
 
         FeedbackController fc = new FeedbackController();
@@ -85,6 +85,8 @@ public class TutorWindow extends JFrame {
         fMenuBar.add(submit);
         feedbackPanel.add(fMenuBar);
         feedbackPanel.add(text);
+
+
 
         TextPanel tp = new TextPanel();
         DrawPanel dp = new DrawPanel();
