@@ -1,29 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 /**
- * Main Class and GUI
+ * Tutor window GUI
  * @author Cole Park
- * @version 2.0
+ * @version 3.0
  */
-public class FinalProject extends JFrame {
-
-    /**
-     * main method
-     * @param args String[]
-     */
-    public static void main(String[] args) {
-        FinalProject win = new FinalProject();
-        win.setSize(500, 500);
-        win.setVisible(true);
-        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+public class TutorWindow extends JFrame {
 
     /**
      * Project Constructor
      */
-    public FinalProject() {
+    public TutorWindow() {
         GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
 
@@ -82,9 +73,11 @@ public class FinalProject extends JFrame {
         JMenu submit = new JMenu("Submit");
         TextArea text = new TextArea();
 
-        check.addActionListener(mc);
-        hint.addActionListener(mc);
-        submit.addActionListener(mc);
+        FeedbackController fc = new FeedbackController();
+
+        check.addActionListener(fc);
+        hint.addActionListener(fc);
+        submit.addActionListener(fc);
         fMenuBar.add(check);
         fMenuBar.add(hint);
         fMenuBar.add(submit);
@@ -103,5 +96,11 @@ public class FinalProject extends JFrame {
         dp.setBackground(new Color(40, 100, 40));
         add(tp);
         add(rightPanel);
+
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
+
 }
