@@ -103,18 +103,22 @@ public class ClassBox implements Serializable {
         int hChange = 0;
         while((hChange / varH) < variables.size()){
             g.setColor(Color.GRAY);
-            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5), getWidth() - 10, varH);
+            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5),
+                    getWidth() - 10, varH);
             g.setColor(Color.white);
-            g.drawString(variables.get((hChange/varH)), (int)getPoint().getX() + 7, (int)getPoint().getY() + hChange + (varH + 20));
+            g.drawString(variables.get((hChange/varH)), (int)getPoint().getX() + 7,
+                    (int)getPoint().getY() + hChange + (varH + 20));
             hChange += varH;
         }
         hChange += 5;
         int i = 0;
         while((i) < methods.size()){
             g.setColor(Color.GRAY);
-            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5), getWidth() - 10, varH);
+            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5),
+                    getWidth() - 10, varH);
             g.setColor(Color.white);
-            g.drawString(methods.get(i), (int)getPoint().getX() + 7, (int)getPoint().getY() + hChange + (varH + 20));
+            g.drawString(methods.get(i), (int)getPoint().getX() + 7,
+                    (int)getPoint().getY() + hChange + (varH + 20));
             hChange += varH;
             i += 1;
         }
@@ -152,8 +156,7 @@ public class ClassBox implements Serializable {
      *
      * @param name
      */
-    public void setName(String name) {
-    }
+    public void setName(String name) {this.name = name; }
 
     /**
      * getter for the coordinates

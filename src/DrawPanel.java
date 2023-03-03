@@ -41,18 +41,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         pm.show(this, x, y);
     }
 
-    private void varMenu(ClassBox box){
-        String varNam = JOptionPane.showInputDialog("Please input variable name");
-        box.addVar(varNam);
-        repaint();
-    }
-
-    private void methodMenu(ClassBox box){
-        String methNam = JOptionPane.showInputDialog("Please input method name");
-        box.addMethod(methNam);
-        repaint();
-    }
-
     private void createNewBox (int x, int y) {
         String name = JOptionPane.showInputDialog("Please input name");
         if(name != null){
@@ -128,15 +116,19 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             //PLACEHOLDER
         }
         else if (e.getActionCommand().equals("rename")) {
-            //PLACEHOLDER
+            String className = JOptionPane.showInputDialog("Please input the new class name");
+            clickedBox.setName(className);
         }
         else if (e.getActionCommand().equals("add var")) {
-            //PLACEHOLDER
-            varMenu(clickedBox);
+            String varName = JOptionPane.showInputDialog("Please input variable name");
+            clickedBox.addVar(varName);
+            repaint();
         }
         else if (e.getActionCommand().equals("add method")) {
-            //PLACEHOLDER
-            methodMenu(clickedBox);
+            String methName = JOptionPane.showInputDialog("Please input method name");
+            clickedBox.addMethod(methName);
+            repaint();
+
         }
     }
 
