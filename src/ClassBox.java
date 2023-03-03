@@ -196,9 +196,7 @@ public class ClassBox implements Serializable {
         String compString = "";
         String assocString = "";
         String inheritString = "";
-        System.out.println(name);
         for (connectionRelationship c : this.connectionHandler.getConnections()) {
-            System.out.println("in loop");
             if (c.getconnecType().equals("Association")) {
                 assocString += "          " + c.getSecondBox().getName() + "\n";
             } else if (c.getconnecType().equals("Inheritance")) {
