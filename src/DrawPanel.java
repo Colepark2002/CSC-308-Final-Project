@@ -126,7 +126,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("delete")) {
-            System.out.println(problemCompare());
             //PLACEHOLDER
         }
         else if (e.getActionCommand().equals("rename")) {
@@ -162,48 +161,4 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         this.stack = Blackboard.getInstance().getStack();
         this.repaint();
     }
-
-
-
-    public Problem SussyProblemCreator(){
-        Stack<ClassBox> probStack = new Stack<ClassBox>();
-        ArrayList<connectionRelationship> probConnections = new ArrayList<connectionRelationship>();
-
-        ClassBox probBox1 = new ClassBox("A", 0, 0);
-        ClassBox probBox2 = new ClassBox("B", 0, 0);
-        ClassBox probBox3 = new ClassBox("C", 0, 0);
-        ClassBox probBox4 = new ClassBox("D", 0, 0);
-
-        probStack.add(probBox1);
-        probStack.add(probBox2);
-        probStack.add(probBox3);
-        probStack.add(probBox4);
-
-        Problem testProblem = new Problem();
-        testProblem.initProblemStack(probStack);
-        testProblem.initProblemString("");
-
-        return testProblem;
-    }
-    public Boolean problemCompare(){
-        Problem x = SussyProblemCreator();
-        Boolean matching = true;
-        if(stack.size() != x.getUML().size()){
-            return false;
-        }
-        for(ClassBox p: stack){
-            boolean nameFound = false;
-            for(ClassBox pp: x.getUML()){
-                if (p.getName().equals(pp.getName())){
-                    nameFound = true;
-                }
-            }
-            matching = nameFound;
-        }
-        return matching;
-    }
-
-
-
-
 }
