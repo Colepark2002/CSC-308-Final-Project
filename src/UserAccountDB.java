@@ -12,33 +12,23 @@ public class UserAccountDB {
 
   private static Connection conn;
 
-  public static void main(String[] args) throws SQLException {
 
-    // UserAccountDB db = new UserAccountDB();
+  public void connect() throws SQLException {
+
 
     try {
-      connect();
+      System.out.println("Connecting to database...");
+      String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
+      String db_user = "sql9602248";
+      String db_password = "xKH3V5Hh6f";
+      conn = DriverManager.getConnection(db_url, db_user, db_password);
+      System.out.println("Connection valid");
 
     } catch(SQLException e) {
       System.out.println(e.getMessage());
-    } finally
-     {
-      if (conn != null) {
-        disconnect();
-
-      }
     }
   }
 
-  private static void connect() throws SQLException {
-
-    System.out.println("Connecting to database...");
-    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
-    String db_user = "sql9602248";
-    String db_password = "xKH3V5Hh6f";
-    conn = DriverManager.getConnection(db_url, db_user, db_password);
-    System.out.println("Connection vaild");
-  }
 
   private static void disconnect() throws SQLException {
 
@@ -57,27 +47,28 @@ public class UserAccountDB {
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
-      String selectQuery = "SELECT Username, Password FROM accounts WHERE Username = givenUsername AND Password = givenPassword";
+      String selectQuery = "SELECT Username, Password FROM users WHERE Username = ? AND Password = ?";
 
-      try (Statement stmt = conn.createStatement()) {
-        ResultSet result = stmt.executeQuery(selectQuery);
+      try (PreparedStatement ps = conn.prepareStatement(selectQuery)) {
+        ps.setString(1,givenUsername);
+        ps.setString(2,givenPassword);
+        ResultSet result = ps.executeQuery();
         while (result.next()) {
-          String resultUsername = result.getString(1);
-          String resultPassword = result.getString(2);
-          if (givenUsername.equals(resultUsername) & givenPassword.equals(resultPassword)) {
+          String resultUsername = result.getString("Username");
+          String resultPassword = result.getString("Password");
+          if (givenUsername.equals(resultUsername) && givenPassword.equals(resultPassword)) {
             return true;
           }
         }
         return false;
       }
     }
-
   }
 
   /**
    * Inserts username and password into user_account
    */
-  public void addUser(String username, String password) throws SQLException {
+  public boolean addUser(String username, String password) throws SQLException {
 
     String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
     String db_user = "sql9602248";
@@ -85,7 +76,7 @@ public class UserAccountDB {
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
-      String insertquery = "INSERT INTO accounts VALUES (id, Username, Password, proficiency)";
+      String insertquery = "INSERT INTO users VALUES (?, ?, ?, ?)";
 
       try (PreparedStatement pstmt = conn.prepareStatement(insertquery)) {
         pstmt.setString(1, null);
@@ -95,9 +86,11 @@ public class UserAccountDB {
 
         pstmt.executeUpdate();
         System.out.println("Added user account");
+      } catch(SQLException e){
+        System.out.println(e.getMessage());
+        return false;
       }
-      conn.commit();
+      return true;
     }
   }
-
 }

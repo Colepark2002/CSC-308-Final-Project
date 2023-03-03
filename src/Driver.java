@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.sql.SQLException;
 
 /**
  * Main class
@@ -15,8 +16,10 @@ public class Driver {
      * main method
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         loginWindow = new LoginWindow();
+        UserAccountDB db = new UserAccountDB();
+        Blackboard.getInstance().setDb(db);
     }
 
     public static void login() {

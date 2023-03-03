@@ -12,6 +12,7 @@ public class Blackboard extends Observable
     JTextArea text;
     String connection = "Association";
     Stack<ClassBox> stack = new Stack<>();
+    UserAccountDB db;
 
     private static Blackboard instance = null;
 
@@ -58,6 +59,16 @@ public class Blackboard extends Observable
 
     public Stack<ClassBox> getStack() {
         return stack;
+    }
+
+    public void setDb(UserAccountDB d)
+    {
+        db = d;
+    }
+
+    public UserAccountDB getDb()
+    {
+        return db;
     }
 
 }
