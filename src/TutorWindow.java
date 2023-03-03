@@ -73,9 +73,11 @@ public class TutorWindow extends JFrame {
         JMenu submit = new JMenu("Submit");
         TextArea text = new TextArea();
 
-        check.addActionListener(mc);
-        hint.addActionListener(mc);
-        submit.addActionListener(mc);
+        FeedbackController fc = new FeedbackController();
+
+        check.addActionListener(fc);
+        hint.addActionListener(fc);
+        submit.addActionListener(fc);
         fMenuBar.add(check);
         fMenuBar.add(hint);
         fMenuBar.add(submit);
