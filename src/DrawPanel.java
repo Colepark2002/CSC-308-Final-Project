@@ -128,7 +128,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("delete")) {
-            System.out.println(problemCompare());
             // PLACEHOLDER
         } else if (e.getActionCommand().equals("rename")) {
             // PLACEHOLDER
