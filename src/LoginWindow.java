@@ -61,7 +61,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     }
 
     /**
-     * Controls button submit and register button function.
+     * Controls submit and register button function.
      * @param e
      */
     @Override
@@ -71,13 +71,11 @@ public class LoginWindow extends JFrame implements ActionListener {
         switch(e.getActionCommand()) {
 
             case "Submit":
-                // To get username: usernameField.getText();
-                // To get password: passwordField.getText();
                 try {
 
                     if (Blackboard.getInstance().getDb().checkUserLogin(user, pass)) {
                         JOptionPane.showMessageDialog(null, "Login successful.");
-                        Driver.login();
+                        Driver.login(user);
                     } else {
                         JOptionPane.showMessageDialog(null, "Login failed, username or password incorrect.");
                     }
@@ -93,7 +91,7 @@ public class LoginWindow extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null, "Registration successful, please log in.");
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "Registration failed, Username already taken");
+                        JOptionPane.showMessageDialog(null, "Registration failed, username already taken");
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();

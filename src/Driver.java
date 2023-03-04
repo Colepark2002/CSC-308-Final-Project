@@ -5,7 +5,7 @@ import java.sql.SQLException;
  * Main class
  * 
  * @author Bret Craig
- * @version 1.0
+ * @version 1.2
  */
 public class Driver {
 
@@ -23,8 +23,8 @@ public class Driver {
         Blackboard.getInstance().setDb(db);
     }
 
-    public static void login() {
+    public static void login(String user) {
         loginWindow.setVisible(false);
-        tutorWindow = new TutorWindow();
+        tutorWindow = new TutorWindow(user);
     }
 }

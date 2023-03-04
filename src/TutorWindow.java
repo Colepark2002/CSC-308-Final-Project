@@ -9,14 +9,16 @@ import java.util.Stack;
 /**
  * Tutor window GUI
  * @author Cole Park
- * @version 3.0
+ * @author Bret Craig
+ * @version 3.1
  */
 public class TutorWindow extends JFrame {
 
     /**
      * Project Constructor
      */
-    public TutorWindow() {
+    public TutorWindow(String user) {
+        super("UML Tutor - " + user);
         GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
 
@@ -70,9 +72,9 @@ public class TutorWindow extends JFrame {
 
         JPanel feedbackPanel = new JPanel();
         JMenuBar fMenuBar = new JMenuBar();
-        JMenu check = new JMenu("Check");
-        JMenu hint = new JMenu("Hint");
-        JMenu submit = new JMenu("Submit");
+        JButton check = new JButton("Check");
+        JButton hint = new JButton("Hint");
+        JButton submit = new JButton("Submit");
         TextArea text = new TextArea();
 
         FeedbackController fc = new FeedbackController();
@@ -85,6 +87,8 @@ public class TutorWindow extends JFrame {
         fMenuBar.add(submit);
         feedbackPanel.add(fMenuBar);
         feedbackPanel.add(text);
+
+
 
         TextPanel tp = new TextPanel();
         DrawPanel dp = new DrawPanel();
