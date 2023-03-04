@@ -19,13 +19,13 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     private ClassBox previousSelection;
 
     private ClassBox checkCollisionWithBoxes(int x, int y) {
-        for(ClassBox c : stack)
+        for (ClassBox c : stack)
             if (c.contains(x, y))
                 return c;
         return null;
     }
 
-    private void showPopUpMenu (int x, int y) {
+    private void showPopUpMenu(int x, int y) {
         JPopupMenu pm = new JPopupMenu();
         JMenuItem l1 = new JMenuItem("delete");
         JMenuItem l2 = new JMenuItem("rename");
@@ -42,21 +42,23 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         pm.show(this, x, y);
     }
 
-    private void varMenu(ClassBox box){
+    private void varMenu(ClassBox box) {
         String varNam = JOptionPane.showInputDialog("Please input variable name");
         box.addVar(varNam);
         repaint();
+        Blackboard.getInstance().notifyObservers();
     }
 
-    private void methodMenu(ClassBox box){
+    private void methodMenu(ClassBox box) {
         String methNam = JOptionPane.showInputDialog("Please input method name");
         box.addMethod(methNam);
         repaint();
+        Blackboard.getInstance().notifyObservers();
     }
 
-    private void createNewBox (int x, int y) {
+    private void createNewBox(int x, int y) {
         String name = JOptionPane.showInputDialog("Please input name");
-        if(name != null){
+        if (name != null) {
             ClassBox box = new ClassBox(name, x, y);
             stack.push(box);
         }
@@ -76,7 +78,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(ClassBox c : stack){
+        for (ClassBox c : stack) {
             c.connectionHandler.updateSides();
             c.connectionHandler.drawConnections(g);
             c.draw(g);
@@ -90,33 +92,33 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        clickedBox = checkCollisionWithBoxes (e.getX(), e.getY());
-        if (clickedBox==null) {
+        clickedBox = checkCollisionWithBoxes(e.getX(), e.getY());
+        if (clickedBox == null) {
             createNewBox(e.getX(), e.getY());
-        }
-        else if (previousSelection == null) {
+        } else if (previousSelection == null) {
             clickedBox.setSelected(true);
             clickedBox.connectionHandler.beginConnection(clickedBox, Blackboard.getInstance().getConnection());
             previousSelection = clickedBox;
-        }
-        else {
+        } else {
             previousSelection.connectionHandler.beginConnection(clickedBox, Blackboard.getInstance().getConnection());
             previousSelection = null;
         }
-            if (SwingUtilities.isRightMouseButton(e)){
-                showPopUpMenu (e.getX(), e.getY());
-            }
+        if (SwingUtilities.isRightMouseButton(e)) {
+            showPopUpMenu(e.getX(), e.getY());
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (clickedBox!=null) {clickedBox.setSelected(false);
-            this.repaint();}
+        if (clickedBox != null) {
+            clickedBox.setSelected(false);
+            this.repaint();
+        }
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if(clickedBox != null){
+        if (clickedBox != null) {
             clickedBox.connectionHandler.resetConnection();
             previousSelection = null;
             clickedBox.setPoint(e.getX(), e.getY());
@@ -127,17 +129,14 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("delete")) {
             System.out.println(problemCompare());
-            //PLACEHOLDER
-        }
-        else if (e.getActionCommand().equals("rename")) {
-            //PLACEHOLDER
-        }
-        else if (e.getActionCommand().equals("add var")) {
-            //PLACEHOLDER
+            // PLACEHOLDER
+        } else if (e.getActionCommand().equals("rename")) {
+            // PLACEHOLDER
+        } else if (e.getActionCommand().equals("add var")) {
+            // PLACEHOLDER
             varMenu(clickedBox);
-        }
-        else if (e.getActionCommand().equals("add method")) {
-            //PLACEHOLDER
+        } else if (e.getActionCommand().equals("add method")) {
+            // PLACEHOLDER
             methodMenu(clickedBox);
         }
     }
@@ -151,11 +150,16 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {}
+    public void mouseMoved(MouseEvent e) {
+    }
+
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
+
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -163,9 +167,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         this.repaint();
     }
 
-
-
-    public Problem SussyProblemCreator(){
+    public Problem SussyProblemCreator() {
         Stack<ClassBox> probStack = new Stack<ClassBox>();
         ArrayList<connectionRelationship> probConnections = new ArrayList<connectionRelationship>();
 
@@ -185,16 +187,17 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
 
         return testProblem;
     }
-    public Boolean problemCompare(){
+
+    public Boolean problemCompare() {
         Problem x = SussyProblemCreator();
         Boolean matching = true;
-        if(stack.size() != x.getUML().size()){
+        if (stack.size() != x.getUML().size()) {
             return false;
         }
-        for(ClassBox p: stack){
+        for (ClassBox p : stack) {
             boolean nameFound = false;
-            for(ClassBox pp: x.getUML()){
-                if (p.getName().equals(pp.getName())){
+            for (ClassBox pp : x.getUML()) {
+                if (p.getName().equals(pp.getName())) {
                     nameFound = true;
                 }
             }
@@ -202,8 +205,5 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         return matching;
     }
-
-
-
 
 }

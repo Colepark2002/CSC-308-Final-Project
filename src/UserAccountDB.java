@@ -12,9 +12,7 @@ public class UserAccountDB {
 
   private static Connection conn;
 
-
   public void connect() throws SQLException {
-
 
     try {
       System.out.println("Connecting to database...");
@@ -24,11 +22,10 @@ public class UserAccountDB {
       conn = DriverManager.getConnection(db_url, db_user, db_password);
       System.out.println("Connection valid");
 
-    } catch(SQLException e) {
+    } catch (SQLException e) {
       System.out.println(e.getMessage());
     }
   }
-
 
   private static void disconnect() throws SQLException {
 
@@ -50,8 +47,8 @@ public class UserAccountDB {
       String selectQuery = "SELECT Username, Password FROM users WHERE Username = ? AND Password = ?";
 
       try (PreparedStatement ps = conn.prepareStatement(selectQuery)) {
-        ps.setString(1,givenUsername);
-        ps.setString(2,givenPassword);
+        ps.setString(1, givenUsername);
+        ps.setString(2, givenPassword);
         ResultSet result = ps.executeQuery();
         while (result.next()) {
           String resultUsername = result.getString("Username");
@@ -86,7 +83,7 @@ public class UserAccountDB {
 
         pstmt.executeUpdate();
         System.out.println("Added user account");
-      } catch(SQLException e){
+      } catch (SQLException e) {
         System.out.println(e.getMessage());
         return false;
       }
