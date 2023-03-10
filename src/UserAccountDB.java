@@ -90,4 +90,51 @@ public class UserAccountDB {
       return true;
     }
   }
+
+  /**
+   * Gets proficiency of a given user
+   */
+  public Integer getProficiency(String username) throws SQLException {
+
+    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
+    String db_user = "sql9602248";
+    String db_password = "xKH3V5Hh6f";
+
+    try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
+
+      String selectQuery = "SELECT Proficiency FROM users WHERE Username = ?";
+
+      try (PreparedStatement ps = conn.prepareStatement(selectQuery)) {
+        ps.setString(1, username);
+        ResultSet result = ps.executeQuery();
+        return result.getInt("Proficiency");
+      }
+    }
+  }
+
+  /**
+   * Sets proficiency of a given user
+   */
+  public void setProficiency(String username, Integer proficiency) throws SQLException {
+
+    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
+    String db_user = "sql9602248";
+    String db_password = "xKH3V5Hh6f";
+
+    try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
+
+      String updateQuery = "UPDATE table SET proficiency = ?, WHERE username = ?";
+
+      try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+        pstmt.setInt(1, proficiency);
+        pstmt.setString(2, username);
+
+        pstmt.executeUpdate();
+        System.out.println("Added user account");
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+      }
+    }
+  }
+
 }
