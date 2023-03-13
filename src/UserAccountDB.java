@@ -16,9 +16,9 @@ public class UserAccountDB {
 
     try {
       System.out.println("Connecting to database...");
-      String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
-      String db_user = "sql9602248";
-      String db_password = "xKH3V5Hh6f";
+      String db_url = "jdbc:mysql://us-east.connect.psdb.cloud/tutor_database?sslMode=VERIFY_IDENTITY";
+      String db_user = "iclc7hopn03jo4dnefaq";
+      String db_password = "pscale_pw_hV1NQ465waoiY2mUeitXKOhSr6XrytNU13LIGiTBiuc";
       conn = DriverManager.getConnection(db_url, db_user, db_password);
       System.out.println("Connection valid");
 
@@ -38,9 +38,9 @@ public class UserAccountDB {
    */
   public boolean checkUserLogin(String givenUsername, String givenPassword) throws SQLException {
 
-    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
-    String db_user = "sql9602248";
-    String db_password = "xKH3V5Hh6f";
+    String db_url = "jdbc:mysql://us-east.connect.psdb.cloud/tutor_database?sslMode=VERIFY_IDENTITY";
+    String db_user = "iclc7hopn03jo4dnefaq";
+    String db_password = "pscale_pw_hV1NQ465waoiY2mUeitXKOhSr6XrytNU13LIGiTBiuc";
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
@@ -67,9 +67,9 @@ public class UserAccountDB {
    */
   public boolean addUser(String username, String password) throws SQLException {
 
-    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
-    String db_user = "sql9602248";
-    String db_password = "xKH3V5Hh6f";
+    String db_url = "jdbc:mysql://us-east.connect.psdb.cloud/tutor_database?sslMode=VERIFY_IDENTITY";
+    String db_user = "iclc7hopn03jo4dnefaq";
+    String db_password = "pscale_pw_hV1NQ465waoiY2mUeitXKOhSr6XrytNU13LIGiTBiuc";
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
@@ -96,9 +96,9 @@ public class UserAccountDB {
    */
   public Integer getProficiency(String username) throws SQLException {
 
-    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
-    String db_user = "sql9602248";
-    String db_password = "xKH3V5Hh6f";
+    String db_url = "jdbc:mysql://us-east.connect.psdb.cloud/tutor_database?sslMode=VERIFY_IDENTITY";
+    String db_user = "iclc7hopn03jo4dnefaq";
+    String db_password = "pscale_pw_hV1NQ465waoiY2mUeitXKOhSr6XrytNU13LIGiTBiuc";
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
@@ -117,9 +117,9 @@ public class UserAccountDB {
    */
   public void setProficiency(String username, Integer proficiency) throws SQLException {
 
-    String db_url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9602248";
-    String db_user = "sql9602248";
-    String db_password = "xKH3V5Hh6f";
+    String db_url = "jdbc:mysql://us-east.connect.psdb.cloud/tutor_database?sslMode=VERIFY_IDENTITY";
+    String db_user = "iclc7hopn03jo4dnefaq";
+    String db_password = "pscale_pw_hV1NQ465waoiY2mUeitXKOhSr6XrytNU13LIGiTBiuc";
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
