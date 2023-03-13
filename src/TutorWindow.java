@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Stack;
 
-
 /**
  * Tutor window GUI
+ * 
  * @author Cole Park
  * @author Bret Craig
  * @version 3.1
@@ -24,9 +24,11 @@ public class TutorWindow extends JFrame {
 
         JMenuBar mb = new JMenuBar();
         MenuController mc = new MenuController();
+        ProblemController pc = new ProblemController();
 
         JMenu file = new JMenu("File");
         JMenu help = new JMenu("Help");
+        JMenu problems = new JMenu("Problems");
         JMenu connection = new JMenu("Connections");
         JMenu proficiency = new JMenu("Proficiency");
 
@@ -60,12 +62,25 @@ public class TutorWindow extends JFrame {
         help.add(a4);
         help.add(a5);
 
+        JMenuItem p1 = new JMenuItem("Problem One");
+        JMenuItem p2 = new JMenuItem("Problem Two");
+        JMenuItem p3 = new JMenuItem("Problem Three");
+
+        problems.add(p1);
+        problems.add(p2);
+        problems.add(p3);
+
+        p1.addActionListener(pc);
+        p2.addActionListener(pc);
+        p3.addActionListener(pc);
+
         connection.add(c1);
         connection.add(c2);
         connection.add(c3);
 
         mb.add(file);
         mb.add(help);
+        mb.add(problems);
         mb.add(connection);
         mb.add(proficiency);
         setJMenuBar(mb);
@@ -87,8 +102,6 @@ public class TutorWindow extends JFrame {
         fMenuBar.add(submit);
         feedbackPanel.add(fMenuBar);
         feedbackPanel.add(text);
-
-
 
         TextPanel tp = new TextPanel();
         DrawPanel dp = new DrawPanel();
