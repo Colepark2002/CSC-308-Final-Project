@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -5,6 +7,7 @@ import java.util.Stack;
 
 /**
  * @author Bret Craig
+ * @version 1.99
  */
 public class FileHandler {
 
@@ -28,23 +31,44 @@ public class FileHandler {
     }
 
     /**
-     * Deserializes the given file and loads data to list.
+     * Deserializes the given file and loads UML data
      * @param fileName
      * @return List
      */
-    static Stack<ClassBox> load(String fileName) {
+    static Stack<ClassBox> loadUML(String fileName) {
         Stack<ClassBox> list = null;
         try {
             FileInputStream fileIn = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             list = (Stack<ClassBox>) in.readObject();
-            System.out.println("\nProject loaded from " + fileName);
+            System.out.println("\nUML Problem loaded" + fileName);
             in.close();
             fileIn.close();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
         return list;
+
+    }
+
+    /**
+     * Deserializes the given file and loads code data
+     * @param fileName
+     * @return List
+     */
+    static String loadCode(String fileName) {
+        String code = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(fileName);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            code = (String) in.readObject();
+            System.out.println("\nCode problem loaded:" + fileName);
+            in.close();
+            fileIn.close();
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+        return code;
 
     }
 
