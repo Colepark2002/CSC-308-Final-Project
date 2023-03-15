@@ -11,7 +11,7 @@ public class Parser {
     public void init(Vector<Token> tokens) {
         String className;
         while(current < tokens.size()) {
-            if (tokens.get(current).getWord().equals("class")) {
+            if (tokens.get(current).getWord().equals("Class")) {
                 className = tokens.get(current + 1).getWord();
                 current += 2;
                 if (!classes.contains(className)) {

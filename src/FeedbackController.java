@@ -9,6 +9,7 @@ public class FeedbackController implements ActionListener {
      * Handles menu functionality and connection selections
      * @param e action event
      */
+    private int attempts = 0;
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -20,10 +21,29 @@ public class FeedbackController implements ActionListener {
 
             case "Hint":
                 // to be implemented
+                String toString = "";
+                for (ClassBox b : Blackboard.getInstance().getStack()){
+                    toString += b.toString();
+                }
+                Lexer l = new Lexer(toString);
+                l.run();
+                Parser p = new Parser();
+                p.init(l.getTokens());
+
+                System.out.println("Classes: " + p.getClasses());
+                System.out.println("Methods: " + p.getMethods());
+                System.out.println("Variables: " + p.getVariables());
+
                 break;
 
             case "Check":
                 // to be implemented
+                attempts++;
+                String checkString = "";
+                for (ClassBox b : Blackboard.getInstance().getStack()){
+                    checkString += b.toString();
+                }
+                System.out.println(checkString);
                 break;
 
             default:

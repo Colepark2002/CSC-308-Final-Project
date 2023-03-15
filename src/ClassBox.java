@@ -215,12 +215,10 @@ public class ClassBox implements Serializable {
         String mstring = "";
         String vstring = "";
         for (String method : methods) {
-            System.out.println("meth");
             mstring += "     " + method + "()" + "{" + "\n" + "     " + "}" + "\n";
         }
         for (String var : variables) {
-            System.out.println("var");
-            vstring += "     " + var + "\n";
+            vstring += "     " + var + ";\n";
         }
         boxString += vstring;
         boxString += mstring;

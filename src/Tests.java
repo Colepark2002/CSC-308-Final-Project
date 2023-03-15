@@ -79,11 +79,13 @@ public class Tests {
     void ParserClassesTests(){
         Lexer t = new Lexer("""
                 class Student extends Person{
-                    public int var;
+                    var;
                 }
                 class Person{
                 }
                 class Lauren extends Coder{
+                }
+                class Coder{
                 }""");
         t.run();
         Parser p = new Parser();
@@ -101,9 +103,9 @@ public class Tests {
     void ParserVariablesTests(){
         Lexer t = new Lexer("""
                 class Student extends Person{
-                    private int var;
-                    private int[] books;
-                    private boolean correct;
+                    var;
+                    books;
+                    correct;
                 }""");
         t.run();
         Parser p = new Parser();
