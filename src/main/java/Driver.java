@@ -1,7 +1,4 @@
-package main.java;
 
-import javax.swing.*;
-import java.sql.SQLException;
 
 /**
  * Main class
