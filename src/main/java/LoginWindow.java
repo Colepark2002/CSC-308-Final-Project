@@ -1,4 +1,3 @@
-package main.java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,6 +79,7 @@ public class LoginWindow extends JFrame implements ActionListener {
                     if (Blackboard.getInstance().getDb().checkUserLogin(user, pass)) {
                         JOptionPane.showMessageDialog(null, "Login successful.");
                         Driver.login(user);
+                        Blackboard.getInstance().setUser(user);
                     } else {
                         JOptionPane.showMessageDialog(null, "Login failed, username or password incorrect.");
                     }

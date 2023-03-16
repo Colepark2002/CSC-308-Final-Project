@@ -1,7 +1,9 @@
-package main.java;
 
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -29,6 +31,15 @@ public class FeedbackController implements ActionListener {
             case "Check":
                 // to be implemented
                 break;
+
+            case "Get Proficiency":
+                int prof = 0;
+                try {
+                    prof = Blackboard.getInstance().getDb().getProficiency(Blackboard.getInstance().getUser());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(null,"Your Proficiency is: " + prof);
 
             default:
                 break;
@@ -58,6 +69,7 @@ public class FeedbackController implements ActionListener {
 
     public Boolean problemCompare() {
         Problem x = SampleProblemCreator();
+        Blackboard.getInstance().setProblem(x);
         Boolean matching = true;
         if (Blackboard.getInstance().getStack().size() != x.getUML().size()) {
             return false;
