@@ -31,7 +31,6 @@ public class DBTests {
   }
 
   private static void disconnect() throws SQLException {
-
     System.out.println("Closing database connection");
     conn.rollback();
     conn.close();
@@ -55,16 +54,15 @@ public class DBTests {
     disconnect();
   }
 
-  // @Test
-  // void addUserTest() {
-  // UserAccountDB db = new UserAccountDB();
-  // connect();
-  // db.addUser("addedUser", "temp");
-  // Boolean result = db.checkUserLogin("addedUser", "temp");
-  // Assertions.assertEquals(true, result);
-  // disconnect();
-
-  // }
+  @Test
+  void addUserTest() {
+    UserAccountDB db = new UserAccountDB();
+    connect();
+    db.addUser("addedUser", "temp");
+    Boolean result = db.checkUserLogin("addedUser", "temp");
+    Assertions.assertEquals(true, result);
+    disconnect();
+  }
 
   @Test
   void getProfTest1() {
