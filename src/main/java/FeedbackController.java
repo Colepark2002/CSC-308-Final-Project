@@ -1,4 +1,4 @@
-
+package main.java;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,15 +8,18 @@ import java.util.Stack;
 public class FeedbackController implements ActionListener {
     /**
      * Handles menu functionality and connection selections
+     * 
      * @param e action event
      */
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        switch(e.getActionCommand())
-        {
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
             case "Submit":
-                if(problemCompare()){System.out.println("Correct");} else{System.out.println("Incorrect");}
+                if (problemCompare()) {
+                    System.out.println("Correct");
+                } else {
+                    System.out.println("Incorrect");
+                }
                 break;
 
             case "Hint":
@@ -32,8 +35,7 @@ public class FeedbackController implements ActionListener {
         }
     }
 
-
-    public Problem SampleProblemCreator(){
+    public Problem SampleProblemCreator() {
         Stack<ClassBox> probStack = new Stack<ClassBox>();
         ArrayList<connectionRelationship> probConnections = new ArrayList<connectionRelationship>();
 
@@ -53,16 +55,17 @@ public class FeedbackController implements ActionListener {
 
         return testProblem;
     }
-    public Boolean problemCompare(){
+
+    public Boolean problemCompare() {
         Problem x = SampleProblemCreator();
         Boolean matching = true;
-        if(Blackboard.getInstance().getStack().size() != x.getUML().size()){
+        if (Blackboard.getInstance().getStack().size() != x.getUML().size()) {
             return false;
         }
-        for(ClassBox p: Blackboard.getInstance().getStack()){
+        for (ClassBox p : Blackboard.getInstance().getStack()) {
             boolean nameFound = false;
-            for(ClassBox pp: x.getUML()){
-                if (p.getName().equals(pp.getName())){
+            for (ClassBox pp : x.getUML()) {
+                if (p.getName().equals(pp.getName())) {
                     nameFound = true;
                 }
             }

@@ -1,4 +1,4 @@
-
+package main.java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +34,9 @@ public class TextPanel extends JPanel implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) { setTextArea(); }
+    public void update(Observable o, Object arg) {
+        setTextArea();
+    }
 
     /**
      * Updates text box with correct methods according to boxes in draw area

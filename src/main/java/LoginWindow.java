@@ -1,4 +1,4 @@
-
+package main.java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 /**
  * Login window GUI
+ * 
  * @author Bret Craig
  * @author Cole Park
  * @version 1.1
@@ -64,13 +65,14 @@ public class LoginWindow extends JFrame implements ActionListener {
 
     /**
      * Controls submit and register button function.
+     * 
      * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         String user = usernameField.getText();
         String pass = passwordField.getText();
-        switch(e.getActionCommand()) {
+        switch (e.getActionCommand()) {
 
             case "Submit":
                 try {
@@ -89,10 +91,9 @@ public class LoginWindow extends JFrame implements ActionListener {
 
             case "Register":
                 try {
-                    if (Blackboard.getInstance().getDb().addUser(user,pass)) {
+                    if (Blackboard.getInstance().getDb().addUser(user, pass)) {
                         JOptionPane.showMessageDialog(null, "Registration successful, please log in.");
-                    }
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Registration failed, username already taken");
                     }
                 } catch (SQLException throwables) {

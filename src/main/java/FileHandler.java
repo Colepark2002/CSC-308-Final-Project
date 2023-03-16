@@ -1,4 +1,4 @@
-
+package main.java;
 
 import java.io.*;
 import java.util.Stack;
@@ -11,10 +11,11 @@ public class FileHandler {
 
     /**
      * Serializes given list of boxes to given file name.
+     * 
      * @param o
      * @param fileName
      */
-     static void save(Object o, String fileName) {
+    static void save(Object o, String fileName) {
         try {
             File f = new File(fileName);
             FileOutputStream fileOut = new FileOutputStream(fileName);
@@ -30,6 +31,7 @@ public class FileHandler {
 
     /**
      * Deserializes the given file and loads UML data
+     * 
      * @param fileName
      * @return List
      */
@@ -51,6 +53,7 @@ public class FileHandler {
 
     /**
      * Deserializes the given file and loads code data
+     * 
      * @param fileName
      * @return List
      */
