@@ -1,6 +1,7 @@
 
 import javax.swing.*;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.Stack;
 
 /**
@@ -11,21 +12,22 @@ public class FileHandler {
 
     /**
      * Serializes given list of boxes to given file name.
-     * 
-     * @param problem
+     *
      * @param fileName
      */
-    static void saveProblem(Problem problem, String fileName) {
+    static void saveProblem(String fileName) {
         try {
+            Problem p = new Problem();
+            p.setStack(Blackboard.getInstance().getStack());
             int prof = Integer.parseInt(JOptionPane.showInputDialog("Enter Problem Proficiency:"));
-            problem.setProficiency(prof);
+            p.setProficiency(prof);
             File f = new File(fileName);
             FileOutputStream fileOut = new FileOutputStream(fileName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(problem);
+            out.writeObject(p);
             out.close();
             fileOut.close();
-            System.out.println("\nProject saved in " + fileName + "\n");
+            System.out.println("\nProblem saved in " + fileName + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,8 +39,10 @@ public class FileHandler {
      * @param fileName
      * @return List
      */
-    static Problem loadProblem(String fileName) {
+    static Problem loadProblem(String fileName) throws SQLException {
         Problem problem = null;
+        String user = Blackboard.getInstance().getUser();
+        int proficiency = Blackboard.getInstance().getDb().getProficiency(user);
         try {
             FileInputStream fileIn = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);

@@ -3,6 +3,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Stack;
 
 /**
@@ -26,12 +27,16 @@ public class MenuController implements ActionListener {
                 break;
 
             case "Save":
-                FileHandler.saveProblem(Blackboard.getInstance().getProblem(),
-                        JOptionPane.showInputDialog("Enter a File Name"));
+                FileHandler.saveProblem(JOptionPane.showInputDialog("Enter a File Name"));
                 break;
 
             case "Load":
-                Problem p = FileHandler.loadProblem(JOptionPane.showInputDialog("Enter a File Name"));
+                Problem p = null;
+                try {
+                    p = FileHandler.loadProblem(JOptionPane.showInputDialog("Enter a File Name"));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 Blackboard.getInstance().setProblem(p);
                 break;
 

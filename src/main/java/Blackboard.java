@@ -15,7 +15,7 @@ public class Blackboard extends Observable {
     String connection = "Association";
     Stack<ClassBox> stack = new Stack<>();
     UserAccountDB db;
-    Problem problem;
+    Problem problem = new Problem();
     String user;
 
     private static Blackboard instance = null;
@@ -74,6 +74,7 @@ public class Blackboard extends Observable {
 
     public void setProblem(Problem problem) {
         this.problem = problem;
+        notifyObservers();
     }
 
     public String getUser() {

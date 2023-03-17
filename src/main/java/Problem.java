@@ -21,6 +21,10 @@ public class Problem implements Serializable {
     public Stack<ClassBox> getUML() {
         return stack;
     }
+    public void setStack(Stack<ClassBox> b)
+    {
+        stack = b;
+    }
 
     public String getCode() {
         return problemString;
