@@ -1,5 +1,6 @@
 package main.java;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.Stack;
 
@@ -12,15 +13,17 @@ public class FileHandler {
     /**
      * Serializes given list of boxes to given file name.
      * 
-     * @param o
+     * @param problem
      * @param fileName
      */
-    static void save(Object o, String fileName) {
+    static void saveProblem(Problem problem, String fileName) {
         try {
+            int prof = Integer.parseInt(JOptionPane.showInputDialog("Enter Problem Proficiency:"));
+            problem.setProficiency(prof);
             File f = new File(fileName);
             FileOutputStream fileOut = new FileOutputStream(fileName);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(o);
+            out.writeObject(problem);
             out.close();
             fileOut.close();
             System.out.println("\nProject saved in " + fileName + "\n");
@@ -35,42 +38,19 @@ public class FileHandler {
      * @param fileName
      * @return List
      */
-    static Stack<ClassBox> loadUML(String fileName) {
-        Stack<ClassBox> list = null;
+    static Problem loadProblem(String fileName) {
+        Problem problem = null;
         try {
             FileInputStream fileIn = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            list = (Stack<ClassBox>) in.readObject();
-            System.out.println("\nUML Problem loaded" + fileName);
+            problem = (Problem) in.readObject();
+            System.out.println("\nProblem loaded" + fileName);
             in.close();
             fileIn.close();
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-        return list;
-
-    }
-
-    /**
-     * Deserializes the given file and loads code data
-     * 
-     * @param fileName
-     * @return List
-     */
-    static String loadCode(String fileName) {
-        String code = null;
-        try {
-            FileInputStream fileIn = new FileInputStream(fileName);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            code = (String) in.readObject();
-            System.out.println("\nCode problem loaded:" + fileName);
-            in.close();
-            fileIn.close();
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-        }
-        return code;
-
+        return problem;
     }
 
 }

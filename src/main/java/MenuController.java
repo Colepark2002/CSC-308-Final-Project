@@ -25,14 +25,13 @@ public class MenuController implements ActionListener {
                 break;
 
             case "Save":
-                FileHandler.save(Blackboard.getInstance().getStack(),
+                FileHandler.saveProblem(Blackboard.getInstance().getProblem(),
                         JOptionPane.showInputDialog("Enter a File Name"));
                 break;
 
             case "Load":
-                // Stack<ClassBox> s = FileHandler.load(JOptionPane.showInputDialog("Enter a
-                // File Name"));
-                // Blackboard.getInstance().setStack(s);
+                Problem p = FileHandler.loadProblem(JOptionPane.showInputDialog("Enter a File Name"));
+                Blackboard.getInstance().setProblem(p);
                 break;
 
             case "Association":

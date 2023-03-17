@@ -9,7 +9,7 @@ package main.java;
 public class Driver {
 
     private static LoginWindow loginWindow;
-    private static TutorWindow tutorWindow;
+
 
     /**
      * main method
@@ -24,6 +24,6 @@ public class Driver {
 
     public static void login(String user) {
         loginWindow.setVisible(false);
-        tutorWindow = new TutorWindow(user);
+        TutorWindow tutorWindow = new TutorWindow(user);
     }
 }

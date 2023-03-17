@@ -1,8 +1,9 @@
 package main.java;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public class Problem {
+public class Problem implements Serializable {
     Stack<ClassBox> stack;
     String problemString;
     int proficiency;
@@ -10,6 +11,7 @@ public class Problem {
     public Problem() {
         stack = new Stack<ClassBox>();
         problemString = "";
+        proficiency = 0;
     }
 
     public Stack<ClassBox> getUML() {
