@@ -29,11 +29,47 @@ public class FeedbackController implements ActionListener {
                 Problem x = Blackboard.getInstance().getProblem();
                 if(problemCompare(x)){
                     txtArea.setText("CORRECT");
+                    String user = Blackboard.getInstance().getUser();
+                    try {
+                        int currProf = Blackboard.getInstance().getDb().getProficiency(user);
+                        if (currProf <= Blackboard.getInstance().getProblem().getProficiency()) {
+                            Blackboard.getInstance().getDb().setProficiency(user, currProf+1);
+                        }
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
                 else
                     txtArea.setText("INCORRECT");
+                break;
 
             case "Hint":
+                Stack<ClassBox> stack = Blackboard.getInstance().getStack();
+                String res = "";
+                for (ClassBox box : stack) {
+                    res += box.toString();
+                }
+                Lexer personal = new Lexer(res);
+                personal.run();
+                Parser p = new Parser();
+                p.init(personal.getTokens());
+
+                Stack<ClassBox> problemStack = Blackboard.getInstance().getProblem().getUML();
+                String probString = "";
+                for (ClassBox box : problemStack) {
+                    probString += box.toString();
+                }
+                Lexer problem = new Lexer(probString);
+                problem.run();
+                Parser p2 = new Parser();
+                p2.init(problem.getTokens());
+
+                String hint = """
+                        Classes Missing: %d
+                        Methods Missing: %d
+                        Variables Missing: %d
+                        """.formatted(p2.numClasses() - p.numClasses(),p2.numMethods() - p.numMethods(), p2.numVars() - p.numVars());
+                txtArea.setText(hint);
 
                 break;
 
@@ -54,6 +90,10 @@ public class FeedbackController implements ActionListener {
                     throwables.printStackTrace();
                 }
                 JOptionPane.showMessageDialog(null,"Your Proficiency is: " + prof);
+                break;
+            case "Clear":
+                Blackboard.getInstance().setStack(new Stack<ClassBox>());
+                break;
 
             default:
                 break;

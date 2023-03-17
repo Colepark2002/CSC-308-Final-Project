@@ -92,6 +92,7 @@ public class TutorWindow extends JFrame {
         JButton check = new JButton("Check");
         JButton hint = new JButton("Hint");
         JButton submit = new JButton("Submit");
+        JButton clear = new JButton("Clear");
         TextArea text = new TextArea();
 
         FeedbackController fc = new FeedbackController(text);
@@ -99,10 +100,12 @@ public class TutorWindow extends JFrame {
         check.addActionListener(fc);
         hint.addActionListener(fc);
         submit.addActionListener(fc);
+        clear.addActionListener(fc);
         getProficiency.addActionListener(fc);
         fMenuBar.add(check);
         fMenuBar.add(hint);
         fMenuBar.add(submit);
+        fMenuBar.add(clear);
         feedbackPanel.add(fMenuBar);
         feedbackPanel.add(text);
 
