@@ -1,6 +1,7 @@
 
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -14,23 +15,35 @@ public class FeedbackController implements ActionListener {
      * 
      * @param e action event
      */
+    private TextArea txtArea;
+    public FeedbackController(TextArea area){
+        Font f = new Font("Helvetica", Font.PLAIN, 20);
+        area.setFont(f);
+        txtArea = area;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Submit":
                 Problem x = Blackboard.getInstance().getProblem();
                 if(problemCompare(x)){
-                    System.out.println("CORRECT");
+                    txtArea.setText("CORRECT");
                 }
                 else
-                    System.out.println("INCORRECT");
+                    txtArea.setText("INCORRECT");
 
             case "Hint":
-                // to be implemented
+
                 break;
 
             case "Check":
-                // to be implemented
+                Stack<ClassBox> boxList = Blackboard.getInstance().getStack();
+                String fullString = "";
+                for (ClassBox box : boxList) {
+                    fullString += box.toString();
+                }
+                txtArea.setText(fullString);
                 break;
 
             case "Get Proficiency":
