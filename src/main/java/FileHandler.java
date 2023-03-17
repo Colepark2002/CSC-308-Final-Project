@@ -41,8 +41,8 @@ public class FileHandler {
      */
     static Problem loadProblem(String fileName) throws SQLException {
         Problem problem = null;
-        //String user = Blackboard.getInstance().getUser();
-        //int proficiency = Blackboard.getInstance().getDb().getProficiency(user);
+        String user = Blackboard.getInstance().getUser();
+        int proficiency = Blackboard.getInstance().getDb().getProficiency(user);
         try {
             FileInputStream fileIn = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
