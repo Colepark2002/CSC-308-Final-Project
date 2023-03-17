@@ -84,4 +84,9 @@ public class Blackboard extends Observable {
     public void setUser(String user) {
         this.user = user;
     }
+
+    public void setNew() {
+        this.setStack(new Stack<>());
+        this.setProblem(new Problem());
+    }
 }
