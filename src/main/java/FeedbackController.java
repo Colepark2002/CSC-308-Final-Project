@@ -64,7 +64,14 @@ public class FeedbackController implements ActionListener {
             return false;
         }
 
-        //this bit checks for variables
+        if(!variableCheck(x) || !methodCheck(x) || !connecCheck(x)){
+            return false;
+        }
+        
+        return true;
+    }
+    public Boolean variableCheck(Problem x){
+        Stack<ClassBox> unseen2 =(Stack)x.getUML().clone();
         for (ClassBox p : Blackboard.getInstance().getStack()){
             for(ClassBox pp : unseen2){
                 if(p.getName().equals(pp.getName())){
@@ -75,8 +82,11 @@ public class FeedbackController implements ActionListener {
                 }
             }
         }
-
-        //this bit checks for methods
+        return true;
+    }
+    
+    public Boolean methodCheck(Problem x){
+        Stack<ClassBox> unseen2 =(Stack)x.getUML().clone();
         for (ClassBox p : Blackboard.getInstance().getStack()){
             for(ClassBox pp : unseen2){
                 if(p.getName().equals(pp.getName())){
@@ -87,8 +97,11 @@ public class FeedbackController implements ActionListener {
                 }
             }
         }
-
-        //this bit checks for methods
+        return true;
+    }
+    
+    public Boolean connecCheck(Problem x){
+        Stack<ClassBox> unseen2 =(Stack)x.getUML().clone();
         for (ClassBox p : Blackboard.getInstance().getStack()){
             for(ClassBox pp : unseen2){
                 if(p.getName().equals(pp.getName())){
@@ -110,7 +123,6 @@ public class FeedbackController implements ActionListener {
                 }
             }
         }
-
         return true;
     }
 }
