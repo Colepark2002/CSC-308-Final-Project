@@ -18,9 +18,9 @@ public class Driver {
      */
     public static void main(String[] args) {
         TutorWindow tutorWindow = new TutorWindow("asjbda");
-        //loginWindow = new LoginWindow();
-        //UserAccountDB db = new UserAccountDB();
-        //Blackboard.getInstance().setDb(db);
+        loginWindow = new LoginWindow();
+        UserAccountDB db = new UserAccountDB();
+        Blackboard.getInstance().setDb(db);
     }
 
     public static void login(String user) {
