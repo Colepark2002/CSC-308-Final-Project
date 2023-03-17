@@ -17,7 +17,7 @@ public class StringTests {
     ClassBox cBox = new ClassBox("test", 0, 0);
     cBox.addVar("variable");
     String result = cBox.toString();
-    String expected = "Class test {" + "\n" + "     variable" + "\n" + "} \n\n";
+    String expected = "Class test {" + "\n" + "     variable" + ";\n" + "} \n\n";
     Assertions.assertEquals(expected, result);
   }
 
@@ -36,7 +36,7 @@ public class StringTests {
     cBox.addVar("variable");
     cBox.addMethod("tempMethod");
     String result = cBox.toString();
-    String expected = "Class test {" + "\n" + "     variable" + "\n" + "     tempMethod" + "()" + "{" + "\n" + "     "
+    String expected = "Class test {" + "\n" + "     variable" + ";\n" + "     tempMethod" + "()" + "{" + "\n" + "     "
         + "}" + "\n" + "} \n\n";
     Assertions.assertEquals(expected, result);
   }
