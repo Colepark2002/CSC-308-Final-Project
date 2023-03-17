@@ -1,6 +1,6 @@
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Stack;
@@ -33,13 +33,15 @@ public class TextPanel extends JPanel implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) { setTextArea(); }
+    public void update(Observable o, Object arg) {
+        setTextArea();
+    }
 
     /**
      * Updates text box with correct methods according to boxes in draw area
      */
     public void setTextArea() {
-        Stack<ClassBox> boxList = Blackboard.getInstance().getStack();
+        Stack<ClassBox> boxList = Blackboard.getInstance().getProblem().getUML();
         String fullString = "";
         for (ClassBox box : boxList) {
             fullString += box.toString();

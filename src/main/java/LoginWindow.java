@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,7 @@ import java.sql.SQLException;
 
 /**
  * Login window GUI
+ * 
  * @author Bret Craig
  * @author Cole Park
  * @version 1.1
@@ -61,23 +63,23 @@ public class LoginWindow extends JFrame implements ActionListener {
     }
 
     /**
-     * Controls button submit and register button function.
+     * Controls submit and register button function.
+     * 
      * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         String user = usernameField.getText();
         String pass = passwordField.getText();
-        switch(e.getActionCommand()) {
+        switch (e.getActionCommand()) {
 
             case "Submit":
-                // To get username: usernameField.getText();
-                // To get password: passwordField.getText();
                 try {
 
                     if (Blackboard.getInstance().getDb().checkUserLogin(user, pass)) {
                         JOptionPane.showMessageDialog(null, "Login successful.");
-                        Driver.login();
+                        Driver.login(user);
+                        Blackboard.getInstance().setUser(user);
                     } else {
                         JOptionPane.showMessageDialog(null, "Login failed, username or password incorrect.");
                     }
@@ -89,11 +91,10 @@ public class LoginWindow extends JFrame implements ActionListener {
 
             case "Register":
                 try {
-                    if (Blackboard.getInstance().getDb().addUser(user,pass)) {
+                    if (Blackboard.getInstance().getDb().addUser(user, pass)) {
                         JOptionPane.showMessageDialog(null, "Registration successful, please log in.");
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Registration failed, Username already taken");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Registration failed, username already taken");
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();

@@ -1,29 +1,30 @@
-import javax.swing.*;
-import java.sql.SQLException;
+
 
 /**
  * Main class
+ * 
  * @author Bret Craig
- * @version 1.0
+ * @version 1.3
  */
 public class Driver {
 
     private static LoginWindow loginWindow;
-    private static TutorWindow tutorWindow;
 
 
     /**
      * main method
+     * 
      * @param args String[]
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        TutorWindow tutorWindow = new TutorWindow("asjbda");
         loginWindow = new LoginWindow();
         UserAccountDB db = new UserAccountDB();
         Blackboard.getInstance().setDb(db);
     }
 
-    public static void login() {
+    public static void login(String user) {
         loginWindow.setVisible(false);
-        tutorWindow = new TutorWindow();
+        TutorWindow tutorWindow = new TutorWindow(user);
     }
 }

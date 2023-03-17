@@ -1,8 +1,8 @@
+
+
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Stack;
 
 /**
  * The handler that deals with all of the connections made between classes.
@@ -56,7 +56,7 @@ public class ConnectionHandler implements Serializable {
         if (connectionBox1 == null) {
             connectionBox1 = box;
 
-        } else if (connectionBox2 == null) {
+        } else if (connectionBox2 == null && connectionBox1 != box) {
             connectionBox2 = box;
             String side = getSide(connectionBox1, connectionBox2);
             connections.add(new connectionRelationship(connectionBox1, connectionBox2, connectType, side));

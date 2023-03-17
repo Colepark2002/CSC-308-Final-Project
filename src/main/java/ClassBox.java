@@ -1,3 +1,5 @@
+
+
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -101,20 +103,23 @@ public class ClassBox implements Serializable {
         }
         g.fillRect((int) getPoint().getX(), (int) getPoint().getY(), getWidth(), height);
         int hChange = 0;
-        while((hChange / varH) < variables.size()){
+        while ((hChange / varH) < variables.size()) {
             g.setColor(Color.GRAY);
-            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5), getWidth() - 10, varH);
+            g.fillRect((int) getPoint().getX() + 5, (int) getPoint().getY() + hChange + (varH + 5), getWidth() - 10,
+                    varH);
             g.setColor(Color.white);
-            g.drawString(variables.get((hChange/varH)), (int)getPoint().getX() + 7, (int)getPoint().getY() + hChange + (varH + 20));
+            g.drawString(variables.get((hChange / varH)), (int) getPoint().getX() + 7,
+                    (int) getPoint().getY() + hChange + (varH + 20));
             hChange += varH;
         }
         hChange += 5;
         int i = 0;
-        while((i) < methods.size()){
+        while ((i) < methods.size()) {
             g.setColor(Color.GRAY);
-            g.fillRect((int)getPoint().getX() + 5, (int)getPoint().getY() + hChange + (varH + 5), getWidth() - 10, varH);
+            g.fillRect((int) getPoint().getX() + 5, (int) getPoint().getY() + hChange + (varH + 5), getWidth() - 10,
+                    varH);
             g.setColor(Color.white);
-            g.drawString(methods.get(i), (int)getPoint().getX() + 7, (int)getPoint().getY() + hChange + (varH + 20));
+            g.drawString(methods.get(i), (int) getPoint().getX() + 7, (int) getPoint().getY() + hChange + (varH + 20));
             hChange += varH;
             i += 1;
         }
@@ -128,12 +133,13 @@ public class ClassBox implements Serializable {
         g.drawString(getName(), xx, yy);
     }
 
-    public void addVar(String name){
+    public void addVar(String name) {
         variables.add(name);
         height += varH;
 
     }
-    public void addMethod(String name){
+
+    public void addMethod(String name) {
         methods.add(name);
         height += varH;
     }
@@ -183,10 +189,17 @@ public class ClassBox implements Serializable {
         return width;
     }
 
-
     public int getHeight() {
         return height;
     }
+
+    public ArrayList<String> getVariables() {
+        return variables;
+    }
+    public ArrayList<String> getMethods() {
+        return methods;
+    }
+
 
     /**
      * Converts a ClassBox and connects to a string
@@ -209,6 +222,18 @@ public class ClassBox implements Serializable {
             assocString = "     " + "method() {" + "\n" + assocString + "     " + "}" + "\n";
         }
         String boxString = "Class " + name + inheritString + " {" + "\n";
+        String mstring = "";
+        String vstring = "";
+        for (String method : methods) {
+            System.out.println("meth");
+            mstring += "     " + method + "()" + "{" + "\n" + "     " + "}" + "\n";
+        }
+        for (String var : variables) {
+            System.out.println("var");
+            vstring += "     " + var + "\n";
+        }
+        boxString += vstring;
+        boxString += mstring;
         boxString += compString;
         boxString += assocString;
         boxString += "} \n\n";

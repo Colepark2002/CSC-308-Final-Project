@@ -1,30 +1,32 @@
+
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Stack;
-
 
 /**
  * Tutor window GUI
+ * 
  * @author Cole Park
- * @version 3.0
+ * @author Bret Craig
+ * @version 3.1
  */
 public class TutorWindow extends JFrame {
 
     /**
      * Project Constructor
      */
-    public TutorWindow() {
+    public TutorWindow(String user) {
+        super("UML Tutor - " + user);
         GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
 
         JMenuBar mb = new JMenuBar();
         MenuController mc = new MenuController();
+        ProblemController pc = new ProblemController();
 
         JMenu file = new JMenu("File");
         JMenu help = new JMenu("Help");
+        JMenu problems = new JMenu("Problems");
         JMenu connection = new JMenu("Connections");
         JMenu proficiency = new JMenu("Proficiency");
 
@@ -48,6 +50,10 @@ public class TutorWindow extends JFrame {
         c2.addActionListener(mc);
         c3.addActionListener(mc);
 
+        JMenuItem getProficiency = new JMenuItem("Get Proficiency");
+        proficiency.add(getProficiency);
+
+
         file.add(newButton);
         file.add(save);
         file.add(load);
@@ -58,12 +64,25 @@ public class TutorWindow extends JFrame {
         help.add(a4);
         help.add(a5);
 
+        JMenuItem p1 = new JMenuItem("Problem One");
+        JMenuItem p2 = new JMenuItem("Problem Two");
+        JMenuItem p3 = new JMenuItem("Problem Three");
+
+        problems.add(p1);
+        problems.add(p2);
+        problems.add(p3);
+
+        p1.addActionListener(pc);
+        p2.addActionListener(pc);
+        p3.addActionListener(pc);
+
         connection.add(c1);
         connection.add(c2);
         connection.add(c3);
 
         mb.add(file);
         mb.add(help);
+        mb.add(problems);
         mb.add(connection);
         mb.add(proficiency);
         setJMenuBar(mb);
@@ -80,13 +99,12 @@ public class TutorWindow extends JFrame {
         check.addActionListener(fc);
         hint.addActionListener(fc);
         submit.addActionListener(fc);
+        getProficiency.addActionListener(fc);
         fMenuBar.add(check);
         fMenuBar.add(hint);
         fMenuBar.add(submit);
         feedbackPanel.add(fMenuBar);
         feedbackPanel.add(text);
-
-
 
         TextPanel tp = new TextPanel();
         DrawPanel dp = new DrawPanel();

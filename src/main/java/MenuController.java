@@ -1,36 +1,43 @@
+
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.Stack;
 
 /**
- * Works as our Controller for the Menu to handle actions when buttons are pressed in the menus
+ * Works as our Controller for the Menu to handle actions when buttons are
+ * pressed in the menus
+ * 
  * @author Cole Park
+ * @author Bret Craig
  */
-public class MenuController implements ActionListener
-{
+public class MenuController implements ActionListener {
     /**
      * Handles menu functionality and connection selections
+     * 
      * @param e action event
      */
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        switch(e.getActionCommand())
-        {
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
             case "New":
-                Blackboard.getInstance().setStack(new Stack<>());
+                Blackboard.getInstance().setNew();
                 break;
 
             case "Save":
-                FileHandler.save(Blackboard.getInstance().getStack(),
-                                JOptionPane.showInputDialog("Enter a File Name"));
+                FileHandler.saveProblem(JOptionPane.showInputDialog("Enter a File Name"));
                 break;
 
             case "Load":
-                Stack<ClassBox> s = FileHandler.load(JOptionPane.showInputDialog("Enter a File Name"));
-                Blackboard.getInstance().setStack(s);
+                Problem p = null;
+                try {
+                    p = FileHandler.loadProblem(JOptionPane.showInputDialog("Enter a File Name"));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                Blackboard.getInstance().setProblem(p);
                 break;
 
             case "Association":
@@ -44,7 +51,6 @@ public class MenuController implements ActionListener
             case "Composition":
                 Blackboard.getInstance().setConnection("Composition");
                 break;
-
 
             default:
                 break;
