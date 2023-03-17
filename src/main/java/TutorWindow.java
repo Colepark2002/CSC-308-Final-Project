@@ -1,4 +1,4 @@
-package main.java;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,6 +50,10 @@ public class TutorWindow extends JFrame {
         c2.addActionListener(mc);
         c3.addActionListener(mc);
 
+        JMenuItem getProficiency = new JMenuItem("Get Proficiency");
+        proficiency.add(getProficiency);
+
+
         file.add(newButton);
         file.add(save);
         file.add(load);
@@ -95,6 +99,7 @@ public class TutorWindow extends JFrame {
         check.addActionListener(fc);
         hint.addActionListener(fc);
         submit.addActionListener(fc);
+        getProficiency.addActionListener(fc);
         fMenuBar.add(check);
         fMenuBar.add(hint);
         fMenuBar.add(submit);

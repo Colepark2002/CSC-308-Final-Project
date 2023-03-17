@@ -1,4 +1,3 @@
-package main.java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +41,7 @@ public class TextPanel extends JPanel implements Observer {
      * Updates text box with correct methods according to boxes in draw area
      */
     public void setTextArea() {
-        Stack<ClassBox> boxList = Blackboard.getInstance().getStack();
+        Stack<ClassBox> boxList = Blackboard.getInstance().getProblem().getUML();
         String fullString = "";
         for (ClassBox box : boxList) {
             fullString += box.toString();

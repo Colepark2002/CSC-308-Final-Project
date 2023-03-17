@@ -1,4 +1,3 @@
-package main.java;
 
 import java.sql.*;
 
@@ -104,12 +103,14 @@ public class UserAccountDB {
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
-      String selectQuery = "SELECT Proficiency FROM users WHERE Username = ?";
+      String selectQuery = "SELECT Proficiency FROM users WHERE username = ?;";
 
       try (PreparedStatement ps = conn.prepareStatement(selectQuery)) {
         ps.setString(1, username);
         ResultSet result = ps.executeQuery();
-        return result.getInt("Proficiency");
+        result.next();
+        int res = result.getInt(1);
+        return res;
       }
     }
   }
@@ -125,7 +126,7 @@ public class UserAccountDB {
 
     try (Connection conn = DriverManager.getConnection(db_url, db_user, db_password)) {
 
-      String updateQuery = "UPDATE table SET proficiency = ?, WHERE username = ?";
+      String updateQuery = "UPDATE users SET proficiency = ? WHERE username = ?";
 
       try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
         pstmt.setInt(1, proficiency);

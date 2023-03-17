@@ -1,4 +1,4 @@
-package main.java;
+
 
 import javax.swing.*;
 import java.util.Observable;
@@ -16,6 +16,7 @@ public class Blackboard extends Observable {
     Stack<ClassBox> stack = new Stack<>();
     UserAccountDB db;
     Problem problem;
+    String user;
 
     private static Blackboard instance = null;
 
@@ -75,4 +76,11 @@ public class Blackboard extends Observable {
         this.problem = problem;
     }
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }

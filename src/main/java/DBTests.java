@@ -1,9 +1,7 @@
-package test;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import main.java.UserAccountDB;
+//import main.java.UserAccountDB;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,7 +35,7 @@ public class DBTests {
   }
 
   @Test
-  void checkInvalidUserTest() {
+  void checkInvalidUserTest() throws SQLException {
     UserAccountDB db = new UserAccountDB();
     connect();
     Boolean result = db.checkUserLogin("DNE", "test");
@@ -46,7 +44,7 @@ public class DBTests {
   }
 
   @Test
-  void checkValidUserTest() {
+  void checkValidUserTest() throws SQLException {
     UserAccountDB db = new UserAccountDB();
     connect();
     Boolean result = db.checkUserLogin("testUser", "1234");
@@ -55,7 +53,7 @@ public class DBTests {
   }
 
   @Test
-  void addUserTest() {
+  void addUserTest() throws SQLException {
     UserAccountDB db = new UserAccountDB();
     connect();
     db.addUser("addedUser", "temp");
@@ -65,16 +63,17 @@ public class DBTests {
   }
 
   @Test
-  void getProfTest1() {
+  void getProfTest1() throws SQLException {
     UserAccountDB db = new UserAccountDB();
     connect();
     Integer result = db.getProficiency("testUser");
+    System.out.println(result);
     Assertions.assertEquals(0, result);
     disconnect();
   }
 
   @Test
-  void getProfTest2() {
+  void getProfTest2() throws SQLException {
     UserAccountDB db = new UserAccountDB();
     connect();
     Integer result = db.getProficiency("lallen");
@@ -83,7 +82,7 @@ public class DBTests {
   }
 
   @Test
-  void setProfTest() {
+  void setProfTest() throws SQLException {
     UserAccountDB db = new UserAccountDB();
     connect();
     db.setProficiency("lallen", 555);
