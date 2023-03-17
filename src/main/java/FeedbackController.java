@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
 public class FeedbackController implements ActionListener {
@@ -17,7 +18,12 @@ public class FeedbackController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Submit":
-                break;
+                Problem x = Blackboard.getInstance().getProblem();
+                if(problemCompare(x)){
+                    System.out.println("CORRECT");
+                }
+                else
+                    System.out.println("INCORRECT");
 
             case "Hint":
                 // to be implemented
@@ -41,42 +47,70 @@ public class FeedbackController implements ActionListener {
         }
     }
 
-    public Problem SampleProblemCreator() {
-        Stack<ClassBox> probStack = new Stack<ClassBox>();
-        ArrayList<connectionRelationship> probConnections = new ArrayList<connectionRelationship>();
-
-        ClassBox probBox1 = new ClassBox("A", 0, 0);
-        ClassBox probBox2 = new ClassBox("B", 0, 0);
-        ClassBox probBox3 = new ClassBox("C", 0, 0);
-        ClassBox probBox4 = new ClassBox("D", 0, 0);
-
-        probStack.add(probBox1);
-        probStack.add(probBox2);
-        probStack.add(probBox3);
-        probStack.add(probBox4);
-
-        Problem testProblem = new Problem();
-        testProblem.initProblemStack(probStack);
-        testProblem.initProblemString("");
-
-        return testProblem;
-    }
-
-    public Boolean problemCompare() {
-        Problem x = SampleProblemCreator();
-        Boolean matching = true;
+    //RETURNS TRUE IF CORRECT, RETURN FALSE IF INCORRECT
+    public Boolean problemCompare(Problem x) {
+        //400 line method incoming 😎
         if (Blackboard.getInstance().getStack().size() != x.getUML().size()) {
             return false;
         }
+        Stack<ClassBox> unseen = (Stack)x.getUML().clone();
+        Stack<ClassBox> unseen2 =(Stack)x.getUML().clone();
+
+        //this bit checks for classes
         for (ClassBox p : Blackboard.getInstance().getStack()) {
-            boolean nameFound = false;
-            for (ClassBox pp : x.getUML()) {
-                if (p.getName().equals(pp.getName())) {
-                    nameFound = true;
+            unseen.removeIf(pp -> p.getName().equals(pp.getName()));
+        }
+        if(unseen.size() > 0){
+            return false;
+        }
+
+        //this bit checks for variables
+        for (ClassBox p : Blackboard.getInstance().getStack()){
+            for(ClassBox pp : unseen2){
+                if(p.getName().equals(pp.getName())){
+                    if(!(p.getVariables().equals(pp.getVariables()))){
+                        System.out.println("VARIABLES DON'T MATCH");
+                        return false;
+                    }
                 }
             }
-            matching = nameFound;
         }
-        return matching;
+
+        //this bit checks for methods
+        for (ClassBox p : Blackboard.getInstance().getStack()){
+            for(ClassBox pp : unseen2){
+                if(p.getName().equals(pp.getName())){
+                    if(!(p.getMethods().equals(pp.getMethods()))){
+                        System.out.println("METHODS DON'T MATCH");
+                        return false;
+                    }
+                }
+            }
+        }
+
+        //this bit checks for methods
+        for (ClassBox p : Blackboard.getInstance().getStack()){
+            for(ClassBox pp : unseen2){
+                if(p.getName().equals(pp.getName())){
+                    ArrayList<connectionRelationship> pC = p.connectionHandler.getConnections();
+                    ArrayList<connectionRelationship> ppC = pp.connectionHandler.getConnections();
+                    //LAMBDA POGCHAMP
+                    Collections.sort(pC,(p1, p2)->{return p1.connecType.compareTo(p2.connecType);});
+                    Collections.sort(ppC,(p1, p2)->{return p1.connecType.compareTo(p2.connecType);});
+                    if(pC.size() != ppC.size()){
+                        System.out.println("CONNECTIONS ARE PROPER BOGGED");
+                        return false;
+                    }
+                    for(int i = 0; i < pC.size(); i++){
+                        if(!(pC.get(i).box1.getName().equals(ppC.get(i).box1.getName()) && pC.get(i).box2.getName().equals(ppC.get(i).box2.getName())
+                        && pC.get(i).getconnecType().equals(ppC.get(i).getconnecType()))){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }

@@ -193,6 +193,14 @@ public class ClassBox implements Serializable {
         return height;
     }
 
+    public ArrayList<String> getVariables() {
+        return variables;
+    }
+    public ArrayList<String> getMethods() {
+        return methods;
+    }
+
+
     /**
      * Converts a ClassBox and connects to a string
      */
