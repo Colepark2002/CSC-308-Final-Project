@@ -69,4 +69,19 @@ public class Parser {
     public ArrayList<String> getVariables(){
         return variables;
     }
+
+    public int numClasses()
+    {
+        return classes.size();
+    }
+
+    public int numMethods()
+    {
+        return methods.size();
+    }
+
+    public int numVars()
+    {
+        return variables.size();
+    }
 }

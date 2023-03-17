@@ -215,7 +215,7 @@ public class ClassBox implements Serializable {
             } else if (c.getconnecType().equals("Inheritance")) {
                 inheritString += " extends " + c.getSecondBox().getName();
             } else if (c.getconnecType().equals("Composition")) {
-                compString += "     " + c.getSecondBox().getName() + "\n";
+                compString += "     " + c.getSecondBox().getName() + ";\n";
             }
         }
         if (assocString != "") {
@@ -228,7 +228,7 @@ public class ClassBox implements Serializable {
             mstring += "     " + method + "()" + "{" + "\n" + "     " + "}" + "\n";
         }
         for (String var : variables) {
-            vstring += "     " + var + "\n";
+            vstring += "     " + var + ";\n";
         }
         boxString += vstring;
         boxString += mstring;
