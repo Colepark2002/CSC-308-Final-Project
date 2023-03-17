@@ -94,7 +94,7 @@ public class TutorWindow extends JFrame {
         JButton submit = new JButton("Submit");
         TextArea text = new TextArea();
 
-        FeedbackController fc = new FeedbackController();
+        FeedbackController fc = new FeedbackController(text);
 
         check.addActionListener(fc);
         hint.addActionListener(fc);
