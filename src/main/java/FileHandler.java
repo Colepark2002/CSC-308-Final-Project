@@ -5,7 +5,7 @@ import java.util.Stack;
 
 /**
  * @author Bret Craig
- * @version 1.99
+ * @version 2.0
  */
 public class FileHandler {
 

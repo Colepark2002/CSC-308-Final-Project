@@ -10,6 +10,7 @@ import java.util.Stack;
  * pressed in the menus
  * 
  * @author Cole Park
+ * @author Bret Craig
  */
 public class MenuController implements ActionListener {
     /**

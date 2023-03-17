@@ -4,7 +4,7 @@
  * Main class
  * 
  * @author Bret Craig
- * @version 1.2
+ * @version 1.3
  */
 public class Driver {
 
