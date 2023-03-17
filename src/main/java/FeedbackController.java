@@ -17,11 +17,6 @@ public class FeedbackController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Submit":
-                if (problemCompare()) {
-                    System.out.println("Correct");
-                } else {
-                    System.out.println("Incorrect");
-                }
                 break;
 
             case "Hint":
@@ -69,7 +64,6 @@ public class FeedbackController implements ActionListener {
 
     public Boolean problemCompare() {
         Problem x = SampleProblemCreator();
-        Blackboard.getInstance().setProblem(x);
         Boolean matching = true;
         if (Blackboard.getInstance().getStack().size() != x.getUML().size()) {
             return false;
