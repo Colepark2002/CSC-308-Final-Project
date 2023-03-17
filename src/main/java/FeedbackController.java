@@ -45,20 +45,14 @@ public class FeedbackController implements ActionListener {
 
             case "Hint":
                 Stack<ClassBox> stack = Blackboard.getInstance().getStack();
-                String res = "";
-                for (ClassBox box : stack) {
-                    res += box.toString();
-                }
+                String res = getStackString(stack);
                 Lexer personal = new Lexer(res);
                 personal.run();
                 Parser p = new Parser();
                 p.init(personal.getTokens());
 
                 Stack<ClassBox> problemStack = Blackboard.getInstance().getProblem().getUML();
-                String probString = "";
-                for (ClassBox box : problemStack) {
-                    probString += box.toString();
-                }
+                String probString = getStackString(problemStack);
                 Lexer problem = new Lexer(probString);
                 problem.run();
                 Parser p2 = new Parser();
@@ -75,10 +69,7 @@ public class FeedbackController implements ActionListener {
 
             case "Check":
                 Stack<ClassBox> boxList = Blackboard.getInstance().getStack();
-                String fullString = "";
-                for (ClassBox box : boxList) {
-                    fullString += box.toString();
-                }
+                String fullString = getStackString(boxList);
                 txtArea.setText(fullString);
                 break;
 
@@ -98,6 +89,14 @@ public class FeedbackController implements ActionListener {
             default:
                 break;
         }
+    }
+
+    public String getStackString(Stack<ClassBox> stack){
+        String res = "";
+        for (ClassBox box : stack) {
+            res += box.toString();
+        }
+        return res;
     }
 
     //RETURNS TRUE IF CORRECT, RETURN FALSE IF INCORRECT
@@ -164,7 +163,7 @@ public class FeedbackController implements ActionListener {
                     Collections.sort(pC,(p1, p2)->{return p1.connecType.compareTo(p2.connecType);});
                     Collections.sort(ppC,(p1, p2)->{return p1.connecType.compareTo(p2.connecType);});
                     if(pC.size() != ppC.size()){
-                        System.out.println("CONNECTIONS ARE PROPER BOGGED");
+                        System.out.println("CONNECTIONS DON'T MATCH");
                         return false;
                     }
                     for(int i = 0; i < pC.size(); i++){
