@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Stack;
 
 /**
+ * Handles saving and loading problems to and from files
+ *
  * @author Bret Craig
  * @version 2.1
  */

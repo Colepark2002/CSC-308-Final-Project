@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * 
  * @author Bret Craig
  * @author Cole Park
- * @version 1.1
+ * @version 1.2
  */
 public class LoginWindow extends JFrame implements ActionListener {
 
@@ -18,6 +18,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     private JTextField passwordField;
     private JButton submitButton;
     private JButton registerButton;
+    private JButton analyticsButton;
 
     /**
      * Login Constructor
@@ -38,6 +39,8 @@ public class LoginWindow extends JFrame implements ActionListener {
         submitButton.addActionListener(this);
         registerButton = new JButton("Register");
         registerButton.addActionListener(this);
+        analyticsButton = new JButton("Analytics");
+        analyticsButton.addActionListener(this);
 
         setLayout(new BorderLayout());
 
@@ -48,22 +51,23 @@ public class LoginWindow extends JFrame implements ActionListener {
         inputPanel.add(passwordLabel);
         inputPanel.add(passwordField);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
+        JPanel buttonPanel = new JPanel(new GridLayout(3, 1));
         buttonPanel.setBackground(new Color(132, 169, 140));
         buttonPanel.add(submitButton);
         buttonPanel.add(registerButton);
+        buttonPanel.add(analyticsButton);
 
         add(inputPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        setSize(300, 175);
+        setSize(300, 210);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
     /**
-     * Controls submit and register button function.
+     * Controls button function.
      * 
      * @param e
      */
@@ -86,7 +90,6 @@ public class LoginWindow extends JFrame implements ActionListener {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-
                 break;
 
             case "Register":
@@ -96,6 +99,15 @@ public class LoginWindow extends JFrame implements ActionListener {
                     } else {
                         JOptionPane.showMessageDialog(null, "Registration failed, username already taken");
                     }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+
+
+            case "Analytics":
+                try {
+                    Driver.analytics();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
