@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Tests {
+public class LexerParserTests {
 
     @Test
     void LexerTestEmpty(){
@@ -78,14 +78,14 @@ public class Tests {
     @Test
     void ParserClassesTests(){
         Lexer t = new Lexer("""
-                class Student extends Person{
+                Class Student extends Person{
                     var;
                 }
-                class Person{
+                Class Person{
                 }
-                class Lauren extends Coder{
+                Class Lauren extends Coder{
                 }
-                class Coder{
+                Class Coder{
                 }""");
         t.run();
         Parser p = new Parser();
@@ -102,7 +102,7 @@ public class Tests {
     @Test
     void ParserVariablesTests(){
         Lexer t = new Lexer("""
-                class Student extends Person{
+                Class Student extends Person{
                     var;
                     books;
                     correct;
@@ -121,7 +121,7 @@ public class Tests {
     @Test
     void ParserMethodsTests(){
         Lexer t = new Lexer("""
-                class Student extends Person{
+                Class Student extends Person{
                     private int var;
                     public static void main(String args[]){
                     }
