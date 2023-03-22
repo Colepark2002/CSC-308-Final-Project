@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
+/**
+ * This class acts as a way for the user to interact with the UI and get appropriate response on the backend
+ * @author Cole Park
+ * @author Jacob Shapero
+ * @version 2.0
+ */
 public class FeedbackController implements ActionListener {
-    /**
-     * Handles menu functionality and connection selections
-     * 
-     * @param e action event
-     */
+
     private TextArea txtArea;
     public FeedbackController(TextArea area){
         Font f = new Font("Helvetica", Font.PLAIN, 20);
@@ -22,6 +24,10 @@ public class FeedbackController implements ActionListener {
         txtArea = area;
     }
 
+    /**
+     * This is our controller for feedback related UI elements
+     * @param e ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -91,6 +97,11 @@ public class FeedbackController implements ActionListener {
         }
     }
 
+    /**
+     * This methods acts as a way of interpreting a Stack of ClassBoxes as a string of code for ease of use
+     * @param stack a stack of ClassBoxes
+     * @return String representing the list of Boxes
+     */
     public String getStackString(Stack<ClassBox> stack){
         String res = "";
         for (ClassBox box : stack) {

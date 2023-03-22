@@ -36,6 +36,8 @@ public class UserAccountDB {
 
   /**
    * Verifies account login information exists and password is correct
+   * @param givenUsername String for the username to be inserted
+   * @param givenPassword String for the password to be inserted
    */
   public boolean checkUserLogin(String givenUsername, String givenPassword) throws SQLException {
 
@@ -65,6 +67,8 @@ public class UserAccountDB {
 
   /**
    * Inserts username and password into user_account
+   * @param username String of the users login username
+   * @param password String of the users login password
    */
   public boolean addUser(String username, String password) throws SQLException {
 
@@ -94,6 +98,7 @@ public class UserAccountDB {
 
   /**
    * Gets proficiency of a given user
+   * @param username String of the users login username
    */
   public Integer getProficiency(String username) throws SQLException {
 
@@ -117,6 +122,8 @@ public class UserAccountDB {
 
   /**
    * Sets proficiency of a given user
+   * @param username String of the users login username
+   * @param proficiency Integer for a users proficiency
    */
   public void setProficiency(String username, Integer proficiency) throws SQLException {
 

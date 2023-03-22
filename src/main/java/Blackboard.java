@@ -9,6 +9,7 @@ import java.util.Stack;
  * the DrawPanel and TextPanel
  * 
  * @author Cole Park
+ * @version 2.0
  */
 public class Blackboard extends Observable {
     JTextArea text;

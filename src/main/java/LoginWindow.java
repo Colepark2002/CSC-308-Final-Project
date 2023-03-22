@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * 
  * @author Bret Craig
  * @author Cole Park
- * @version 1.2
+ * @version 2.0
  */
 public class LoginWindow extends JFrame implements ActionListener {
 
@@ -69,7 +69,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     /**
      * Controls button function.
      * 
-     * @param e
+     * @param e ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent e) {
