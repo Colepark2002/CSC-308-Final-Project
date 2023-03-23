@@ -14,6 +14,10 @@ import java.sql.*;
  */
 public class AnalyticsWindow extends JFrame {
 
+    /**
+     * Constructor
+     * @throws SQLException
+     */
     public AnalyticsWindow() throws SQLException {
         super("Analytics");
         this.add(createChart());
@@ -23,6 +27,11 @@ public class AnalyticsWindow extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Pulls user proficiency data from the database to build a pie chart.
+     * @return Pie Chart Panel
+     * @throws SQLException
+     */
     private ChartPanel createChart() throws SQLException {
         String db_url = "jdbc:mysql://us-east.connect.psdb.cloud/tutor_database?sslMode=VERIFY_IDENTITY";
         String db_user = "iclc7hopn03jo4dnefaq";
