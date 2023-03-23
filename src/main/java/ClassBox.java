@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * 
  * @author Jacob Shapero
  * @author Lauren Allen
- * @author Javier Gonzalez Sanchez
  * @author Van Park
  * @version 32.3
  */

@@ -1,5 +1,8 @@
 
-
+/**
+ * @author Provided by provided by professor
+ * @version 1.0
+ */
 public class Token {
 
   private String word;

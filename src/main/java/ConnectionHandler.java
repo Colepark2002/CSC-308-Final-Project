@@ -52,11 +52,6 @@ public class ConnectionHandler implements Serializable {
         drawPanel = d;
     }
 
-    /**
-     * Creates connections between classBoxes
-     * @param box The classBox that has been selected on the DrawPanel
-     * @param connectType The type of connection for the connection being made
-     */
     public void beginConnection(ClassBox box, String connectType) {
         if (connectionBox1 == null) {
             connectionBox1 = box;

@@ -1,5 +1,9 @@
 import java.util.Vector;
 
+/**
+ * @author Provided by provided by professor
+ * @version 1.0
+ */
 public class Lexer {
  
   private String text;

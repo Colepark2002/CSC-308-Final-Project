@@ -110,7 +110,12 @@ public class FeedbackController implements ActionListener {
         return res;
     }
 
-    //RETURNS TRUE IF CORRECT, RETURN FALSE IF INCORRECT
+    /**
+     * This method compares a problem to the current blackboard problem
+     * @param x a problem
+     * @return Boolean, representing that problem x is
+     * equal to the blackboard problem if true, false otherwise.
+     */
     public Boolean problemCompare(Problem x) {
         //400 line method incoming 😎
         if (Blackboard.getInstance().getStack().size() != x.getUML().size()) {
@@ -133,6 +138,13 @@ public class FeedbackController implements ActionListener {
         
         return true;
     }
+    /**
+     * This method compares a problem's variables to the current
+     * blackboard problem's variables.
+     * @param x a problem
+     * @return Boolean, representing that problem x's variables are
+     * equal to the blackboard problem's variables if true, false otherwise.
+     */
     public Boolean variableCheck(Problem x){
         Stack<ClassBox> unseen2 =(Stack)x.getUML().clone();
         for (ClassBox p : Blackboard.getInstance().getStack()){
@@ -147,7 +159,13 @@ public class FeedbackController implements ActionListener {
         }
         return true;
     }
-    
+    /**
+     * This method compares a problem's methods to the current
+     * blackboard problem's methods.
+     * @param x a problem
+     * @return Boolean, representing that problem x's methods are
+     * equal to the blackboard problem's methods if true, false otherwise.
+     */
     public Boolean methodCheck(Problem x){
         Stack<ClassBox> unseen2 =(Stack)x.getUML().clone();
         for (ClassBox p : Blackboard.getInstance().getStack()){
@@ -162,7 +180,13 @@ public class FeedbackController implements ActionListener {
         }
         return true;
     }
-    
+    /**
+     * This method compares a problem's connections to the current
+     * blackboard problem's connections.
+     * @param x a problem
+     * @return Boolean, representing that problem x's connections are
+     * equal to the blackboard problem's connections if true, false otherwise.
+     */
     public Boolean connecCheck(Problem x){
         Stack<ClassBox> unseen2 =(Stack)x.getUML().clone();
         for (ClassBox p : Blackboard.getInstance().getStack()){
