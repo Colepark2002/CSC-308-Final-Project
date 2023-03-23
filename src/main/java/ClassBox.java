@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * @author Jacob Shapero
  * @author Lauren Allen
  * @author Javier Gonzalez Sanchez
+ * @author Van Park
  * @version 32.3
  */
 public class ClassBox implements Serializable {
@@ -133,12 +134,20 @@ public class ClassBox implements Serializable {
         g.drawString(getName(), xx, yy);
     }
 
+    /**
+     * Adds the string to the classes variables and updates the height of the box
+     * @param name
+     */
     public void addVar(String name) {
         variables.add(name);
         height += varH;
 
     }
 
+    /**
+     * Adds the string to the classes methods and updates the height of the box
+     * @param name
+     */
     public void addMethod(String name) {
         methods.add(name);
         height += varH;

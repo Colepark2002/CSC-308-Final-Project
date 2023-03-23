@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.Vector;
-// Made by Jacob Shapero, Bret Craig, Van Park
+
+/**
+ * Custom Parser for the toString of the UML tutor
+ *
+ * @author Van Park
+ * @version 1.0
+ */
 
 public class Parser {
     int current = 0;
@@ -8,6 +14,10 @@ public class Parser {
     ArrayList<String> methods = new ArrayList<>();
     ArrayList<String> variables = new ArrayList<>();
 
+    /**
+     * Takes the vector of tokens and parses them into classes, methods, and variables
+     * @param tokens the vector of tokens obtained from the lexer
+     */
     public void init(Vector<Token> tokens) {
         String className;
         while(current < tokens.size()) {
@@ -34,6 +44,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes the vector of tokens and parses specifically the methods and variables.
+     * @param tokens the vector of tokens obtained from the lexer
+     */
     public void methodsAndVariables(Vector<Token> tokens){
         int numOpening = 0;
         int numClosing = 0;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * The handler that deals with all of the connections made between classes.
  * 
  * @author Van Park
- * @version 1.0
+ * @version 2.0
  */
 
 public class ConnectionHandler implements Serializable {
@@ -254,6 +254,10 @@ public class ConnectionHandler implements Serializable {
         }
     }
 
+    /**
+     * Draws all of the connections that the classBox has
+     * @param g the graphics panel
+     */
     public void drawConnections(Graphics g) {
         g.setColor(Color.BLACK);
         for (connectionRelationship c : connections) {
